@@ -1,19 +1,18 @@
-﻿package ru.job4j.calculate;
+package ru.job4j.calculate;
 
 /**
-* Calculate
+*  Calculate решение задачи
 *  @author Aleksey Prozorov (kejamwork@mail.ru)
 *  @since 12.11.2018
 *  @version 1
 */
 class Calculate{
 	
-	/**
+/**
 * Конструктор, вывод строки в консоль
 * @param arg - arg
 */
-
-public static void main(String[] args){
-	System.out.println("Hello job4j!!!");
-}
+    public static void main(String[] args){
+	    System.out.println("Hello job4j!!!");
+    }
 }
