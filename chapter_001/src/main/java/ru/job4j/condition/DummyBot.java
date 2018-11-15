@@ -14,9 +14,11 @@ public class DummyBot {
     public String answer(String question) {
         String rsl = "Это ставит меня в тупик. Спросите другой вопрос.";
         if ("Привет, Бот.".equals(question)) {
-            System.out.print(rsl = "Привет, умник.");
+            rsl = "Привет, умник.";
+            System.out.print(rsl);
         } else if ("Пока.".equals(question)) {
-            System.out.print(rsl = "До скорой встречи.");
+            rsl = "До скорой встречи.";
+            System.out.print(rsl);
         }
         return rsl;
     }
