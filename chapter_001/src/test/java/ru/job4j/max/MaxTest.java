@@ -14,6 +14,7 @@ public class MaxTest {
         assertThat(result,is(2));
     }
 
+
     @Test
     public void whenMaxValue() {
         Max maxim = new Max();
