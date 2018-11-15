@@ -23,7 +23,21 @@ public class MaxTest {
 
 
     @Test
-    public void whenMaxValue() {
+    public void whenFirstMax() {
+        Max maxim = new Max();
+        int result = maxim.max(3, 2, 1);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void whenSecondMax() {
+        Max maxim = new Max();
+        int result = maxim.max(1, 3, 2);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void whenThirdMax() {
         Max maxim = new Max();
         int result = maxim.max(1, 2, 3);
         assertThat(result, is(3));
