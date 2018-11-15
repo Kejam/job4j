@@ -24,7 +24,6 @@ public class Max {
      * @return результат.
      */
     public int max(int first, int second, int third) {
-        int result = max(third,(max(first,second)));
-        return result;
+        return max(third, (max(first, second)));
     }
 }
