@@ -6,7 +6,7 @@ package ru.job4j.loop;
  */
 public class Board {
     /**
-     *
+     * Строим доску n на m.
      * @param width Ширина доски.
      * @param height Высота доски.
      * @return return.
