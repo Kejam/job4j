@@ -5,6 +5,11 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class MatrixCheck {
+    /**
+     * Проверяет диагонали.
+     * @param data
+     * @return
+     */
     public boolean mono(boolean[][] data) {
         boolean result = true;
         for (int i = 0; i < data.length; i++) {
