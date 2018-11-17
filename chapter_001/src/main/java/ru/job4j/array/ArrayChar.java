@@ -17,14 +17,15 @@ public class ArrayChar {
      * @return если слово начинается с префикса
      */
     public boolean startWith(String prefix) {
+        boolean result = true;
         char[] value = prefix.toCharArray();
-        int check = 0;
         for (int i = 0; i < prefix.length(); i++) {
-            if (data[i] == value[i]) {
-                check++;
+            if (data[i] != value[i]) {
+                result = false;
+                break;
             }
         }
-        return check == value.length;
+        return result;
 
     }
 }
