@@ -15,18 +15,14 @@ public class ArrayDuplicate {
      * @return
      */
     public String[] remove(String[] array) {
-        for (int i = 0; i < array.length; i++) {
-            String chek = array[i];
-            for (int j = 1; j < array.length - 1; j++) {
-                if (chek == array[j]) {
-                    String swapValue = array[j];
-                    array[j] = array[array.length - 1];
-                    array[array.length - 1] = swapValue;
-                    array = Arrays.copyOf(array, array.length - 1);
-                    break;
+        int unique = array.length;
+        for (int i = 0; i < unique; i++) {
+            for (int j = i + 1; j < unique; j++) {
+                if (array[i].equals(array[j])) {
+                    array[j--] = array[--unique];
                 }
             }
         }
-        return array;
+        return Arrays.copyOf(array, unique);
     }
 }
