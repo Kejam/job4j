@@ -30,4 +30,12 @@ public class SquareTest {
         int[] expect = new int[] {1, 4};
         assertThat(rst, is(expect));
     }
+    @Test
+    public void whenBound0Then0() {
+        int bound = 0;
+        Square square = new Square();
+        int[] rst = square.calculate(bound);
+        int[] expect = new int[] {};
+        assertThat(rst, is(expect));
+    }
 }
