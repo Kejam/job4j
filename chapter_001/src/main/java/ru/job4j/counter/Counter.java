@@ -1,5 +1,4 @@
 package ru.job4j.counter;
-
 /**
  * @author Aleksey Prozorov (kejamwork@mail.ru)
  * @version $Id$
@@ -7,7 +6,6 @@ package ru.job4j.counter;
  */
 public class Counter {
     private int result;
-
     /**
      * @return Возвращает сложения четных чиселю.
      */

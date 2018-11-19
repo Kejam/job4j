@@ -1,5 +1,4 @@
 package ru.job4j.calculate;
-
 /**
  *  Calculate решение задачи
  *  @author Aleksey Prozorov (kejamwork@mail.ru)
@@ -7,7 +6,6 @@ package ru.job4j.calculate;
  *  @version 1
  */
 public class Calculate {
-
     /**
      * Конструктор, вывод строки в консоль
      * @param args - args
