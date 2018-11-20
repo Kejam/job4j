@@ -8,7 +8,7 @@ public class ArrayTest {
     @Test
     public void whenTwoArrayMerge() {
         int[] arrayOne = {1, 2, 3, 4, 5};
-        int[] arrayTwo = {3, 7, 9, 11, 15};
+        int[] arrayTwo = {4, 7, 9, 11, 15};
         Array array = new Array();
         int[] actual = array.mergeTwoArray(arrayOne, arrayTwo);
         int[] expect = {1, 2, 3, 4, 4, 5, 7, 9, 11, 15};
