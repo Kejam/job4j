@@ -1,9 +1,5 @@
-package test.java.ru.job4j.profession;
+package ru.job4j.profession;
 
-import main.java.ru.job4j.profession.Doctor;
-import main.java.ru.job4j.profession.Engineer;
-import main.java.ru.job4j.profession.Pacient;
-import main.java.ru.job4j.profession.Teacher;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -12,9 +8,9 @@ public class ProfessionTest {
     @Test
     public void whenPacientHasHeadacheThenHeadeache() {
         Doctor doctor = new Doctor("Alex");
-        Pacient pacient = new Pacient("Alex","19","Headache");
+        Pacient pacient = new Pacient("Alex", "19", "Headache");
         String actual = "Headache";
-        String expect = doctor.Diagnose(pacient);
+        String expect = doctor.diagnose(pacient);
         assertThat(actual, is(expect));
     }
     @Test

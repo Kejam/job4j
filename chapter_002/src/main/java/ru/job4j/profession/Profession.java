@@ -1,4 +1,4 @@
-package main.java.ru.job4j.profession;
+package ru.job4j.profession;
 /**
  *  Calculate решение задачи
  *  @author Aleksey Prozorov (kejamwork@mail.ru)
@@ -11,7 +11,7 @@ public class Profession {
      * Конструктор с именеме.
      * @param name
      */
-    public Profession(String name){
+    public Profession(String name) {
         this.name = name;
     }
     /**

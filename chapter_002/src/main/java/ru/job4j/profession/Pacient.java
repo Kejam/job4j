@@ -1,4 +1,4 @@
-package main.java.ru.job4j.profession;
+package ru.job4j.profession;
 /**
  *  Calculate решение задачи
  *  @author Aleksey Prozorov (kejamwork@mail.ru)
@@ -15,7 +15,7 @@ public class Pacient {
      * @param age
      * @param diagnose
      */
-    public Pacient(String name, String age, String diagnose){
+    public Pacient(String name, String age, String diagnose) {
         this.name = name;
         this.age = age;
         this.diagnose = diagnose;

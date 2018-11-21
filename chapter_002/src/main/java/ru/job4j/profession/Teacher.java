@@ -1,4 +1,4 @@
-package main.java.ru.job4j.profession;
+package ru.job4j.profession;
 
 public class Teacher extends Profession {
     /**

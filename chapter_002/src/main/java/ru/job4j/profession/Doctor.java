@@ -1,4 +1,4 @@
-package main.java.ru.job4j.profession;
+package ru.job4j.profession;
 /**
  *  Calculate решение задачи
  *  @author Aleksey Prozorov (kejamwork@mail.ru)
@@ -18,7 +18,7 @@ public class Doctor extends Profession {
      * @param pacient Объект пациент.
      * @return Болезнь пациента.
      */
-    public String Diagnose(Pacient pacient) {
+    public String diagnose(Pacient pacient) {
         return pacient.getDiagnose();
     }
 }
