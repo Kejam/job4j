@@ -42,6 +42,7 @@ public class Tracker {
         for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
+                item.setId(this.generateId());
                 break;
             }
         }
@@ -99,6 +100,6 @@ public class Tracker {
                 item = items[i];
             }
         }
-        return (item.getId().equals(null)) ? null : item;
+        return item.getId().equals(null) ? null : item;
     }
 }
