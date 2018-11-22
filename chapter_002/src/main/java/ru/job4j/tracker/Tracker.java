@@ -39,7 +39,7 @@ public class Tracker {
      * @param item
      */
     public void replace(String id, Item item) {
-        for (int i = 0; i <= position; i++) {
+        for (int i = 0; i < position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
                 item.setId(id);

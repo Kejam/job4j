@@ -83,7 +83,6 @@ public class StartUI {
         String id = this.input.answer("Введите id заявки :");
         Item item = new Item(name, desc, System.currentTimeMillis());
         this.tracker.replace(id, item);
-
     }
     /**
      * Show all tasks.
@@ -110,7 +109,12 @@ public class StartUI {
     private void findById() {
         System.out.println("------------ Поиск заявки по id --------------");
         String id = this.input.answer("Введите id заявки :");
-        System.out.println(this.tracker.findById(id));
+        Item item = this.tracker.findById(id);
+        if (item.equals(null)) {
+            System.out.println("Not found");
+        } else {
+            System.out.println(item);
+        }
     }
     /**
      * Find by name.
@@ -118,6 +122,14 @@ public class StartUI {
     private  void  findByName() {
         System.out.println("------------ Поиск заявки по id --------------");
         String name = this.input.answer("Введите name заявки :");
+        Item[] item = this.tracker.findByName(name);
+        if (item.equals(name)) {
+            System.out.println("Not found");
+        } else {
+            for (Item item1: item) {
+                System.out.println(item1);
+            }
+        }
     }
     /**
      * Start app.
