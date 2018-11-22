@@ -29,6 +29,31 @@ public class StrartUITest {
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
     @Test
+    public void whenDeleteThen() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Input input = new StubInput(new String[]{"3", item.getId(), "Заявка удалена", "6"});
+        new StartUI(input, tracker).init();
+        String[] expect = {};
+        assertThat(tracker.findAll(), is(expect));
+    }
+    @Test
+    public void whenFindByIdThen() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findById(item.getId()), is(item));
+    }
+    @Test
+    public void whenFindByNameThen() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
+    }
+    @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("alex", "help me", System.currentTimeMillis()));
