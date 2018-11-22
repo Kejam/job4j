@@ -27,4 +27,29 @@ public class TrackerTest {
         // Проверяем, что заявка с таким id имеет новые имя test2.
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
+    @Test
+    public void whenDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("test1", "testDescription", 123L);
+        tracker.add(item);
+        tracker.delete(item.getId());
+        String[] expect = {};
+        assertThat(tracker.findAll(), is(expect));
+    }
+    @Test
+    public void whenReplaceItem() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("test1", "testDescription", 123L);
+        tracker.add(item);
+        Item itemNew = new Item("test2", "testDescription", 123L);
+        tracker.replace(item.getId(), itemNew);
+        assertThat(tracker.findById(item.getId()).getName(), is("test2"));
+    }
+    @Test
+    public  void whenFindByName() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("test1", "testDescription", 123L);
+        tracker.add(item);
+        assertThat(tracker.findByName("test1"), is(item));
+    }
 }

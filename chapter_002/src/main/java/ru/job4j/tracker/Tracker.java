@@ -42,23 +42,21 @@ public class Tracker {
         for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
-                item.setId(this.generateId());
+                item.setId(id);
                 break;
             }
         }
     }
-    /** Delete item.
-     * dsfsd
+
+    /**
+     * Delete item.
      * @param id
-     * @param item
      */
-    public void delete(String id, Item item) {
-        for (int i = 0; i <= position; i++) {
-            if (items[i].equals(item)) {
-                item = items[0];
-                items[0] = items[i];
-                items[i] = item;
-                System.arraycopy(items, 1, items, 0, position);
+    public void delete(String id) {
+        for (int i = 0; i < this.position; i++) {
+            if (items[i].getId().equals(id)) {
+                System.arraycopy(items, i + 1, items, i, this.items.length - i - 1);
+                this.position--;
                 break;
             }
         }
@@ -78,14 +76,14 @@ public class Tracker {
      * @return
      */
     public Item[] findByName(String key) {
-        Item[] copyItem =  new Item[100];
+        Item[] copyItem =  new Item[position];
         int count = 0;
-        for (int i = 0; i <= position; i++) {
+        for (int i = 0; i < position; i++) {
             if (items[i].getName().equals(key)) {
                 copyItem[count++] = items[i];
             }
         }
-        copyItem = Arrays.copyOf(copyItem, 99 - count);
+        copyItem = Arrays.copyOf(copyItem, position);
         return copyItem;
     }
     /**
@@ -94,12 +92,12 @@ public class Tracker {
      * @return
      */
     public Item findById(String id) {
-        Item item = new Item();
-        for (int i = 0; i <= position; i++) {
+        Item item = null;
+        for (int i = 0; i < position; i++) {
             if (items[i].getId().equals(id)) {
                 item = items[i];
             }
         }
-        return item.getId().equals(null) ? null : item;
+        return item;
     }
 }

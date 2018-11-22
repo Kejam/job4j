@@ -15,7 +15,7 @@ public class StrartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        Item item = tracker.add(new Item("test name", "desc",System.currentTimeMillis()));
+        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", "test replace", item.getDesc(), item.getId(), "заменили заявку", "6"});
         // создаём StartUI и вызываем метод init()

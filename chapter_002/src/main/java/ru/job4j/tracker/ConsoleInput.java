@@ -5,13 +5,13 @@ package ru.job4j.tracker;
  */
 import java.util.Scanner;
 public class ConsoleInput implements Input {
+    private Scanner scanner = new Scanner(System.in);
     /**
      * Input value.
      * @param answer
      * @return
      */
     public String answer(String answer) {
-        Scanner scanner = new Scanner(System.in);
         answer = scanner.nextLine();
         return answer;
     }
