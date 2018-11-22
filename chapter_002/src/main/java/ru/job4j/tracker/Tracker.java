@@ -39,7 +39,7 @@ public class Tracker {
      * @param item
      */
     public void replace(String id, Item item) {
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
                 break;
@@ -52,7 +52,7 @@ public class Tracker {
      * @param item
      */
     public void delete(String id, Item item) {
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i <= position; i++) {
             if (items[i].equals(item)) {
                 item = items[0];
                 items[0] = items[i];
@@ -79,7 +79,7 @@ public class Tracker {
     public Item[] findByName(String key) {
         Item[] copyItem =  new Item[100];
         int count = 0;
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i <= position; i++) {
             if (items[i].getName().equals(key)) {
                 copyItem[count++] = items[i];
             }
@@ -94,11 +94,11 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item item = new Item();
-        for (int i = 0; i < position; i++) {
+        for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(id)) {
                 item = items[i];
             }
         }
-        return (item.equals(null)) ? null : item;
+        return (item.getId().equals(null)) ? null : item;
     }
 }
