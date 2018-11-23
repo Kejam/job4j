@@ -12,6 +12,7 @@ public class ConsoleInput implements Input {
      * @return
      */
     public String answer(String answer) {
+        System.out.println(answer);
         answer = scanner.nextLine();
         return answer;
     }
