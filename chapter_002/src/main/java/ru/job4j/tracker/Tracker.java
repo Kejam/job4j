@@ -38,28 +38,34 @@ public class Tracker {
      * @param id
      * @param item
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int i = 0; i < position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
                 item.setId(id);
+                result = true;
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Delete item.
      * @param id
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int i = 0; i < this.position; i++) {
             if (items[i].getId().equals(id)) {
                 System.arraycopy(items, i + 1, items, i, this.items.length - i - 1);
                 this.position--;
+                result = true;
                 break;
             }
         }
+        return result;
     }
     /**
      * Return all items.
@@ -83,7 +89,7 @@ public class Tracker {
                 copyItem[count++] = items[i];
             }
         }
-        copyItem = Arrays.copyOf(copyItem, position);
+        copyItem = Arrays.copyOf(copyItem, count);
         return copyItem;
     }
     /**

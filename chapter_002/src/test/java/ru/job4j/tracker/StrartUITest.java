@@ -20,7 +20,7 @@ public class StrartUITest {
         // создаём Tracker
         Tracker tracker = new Tracker();
         //Напрямую добавляем заявку
-        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", "test replace", item.getDesc(), item.getId(), "заменили заявку", "6"});
         // создаём StartUI и вызываем метод init()
@@ -31,7 +31,7 @@ public class StrartUITest {
     @Test
     public void whenDeleteThen() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"3", item.getId(), "Заявка удалена", "6"});
         new StartUI(input, tracker).init();
         String[] expect = {};
@@ -40,7 +40,7 @@ public class StrartUITest {
     @Test
     public void whenFindByIdThen() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"4", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
@@ -48,7 +48,7 @@ public class StrartUITest {
     @Test
     public void whenFindByNameThen() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("test name", "desc", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"5", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
@@ -56,7 +56,7 @@ public class StrartUITest {
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("alex", "help me"));
         tracker.delete(item.getId());
         String[] expect = {};
         assertThat(tracker.findAll(), is(expect));
@@ -64,14 +64,14 @@ public class StrartUITest {
     @Test
     public void whenFindByIdItem() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("alex", "help me"));
         Item actual = tracker.findById(item.getId());
         assertThat(actual, is(item));
     }
     @Test
     public void whenFindByNameItem() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me", System.currentTimeMillis()));
+        Item item = tracker.add(new Item("alex", "help me"));
         Item[] actual = tracker.findByName(item.getName());
         assertThat(actual, arrayContainingInAnyOrder(item));
     }
