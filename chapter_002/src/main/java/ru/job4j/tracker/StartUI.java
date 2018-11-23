@@ -7,9 +7,10 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-public class StartUI {
+public class StartUI  {
     private final Input input;
     private final Tracker tracker;
+    private int[] rangeValue = {0,1,2,3,4,5,6};
     /**
      * Default constructor.
      * @param input
@@ -31,7 +32,7 @@ public class StartUI {
         }
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.answer("Select:")));
+            menu.select(input.answer("Answer:", rangeValue));
         } while (!"y".equals(this.input.answer("Exit?(y): ")));
     }
     public static void main(String[] args) {

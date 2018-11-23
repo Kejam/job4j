@@ -12,6 +12,26 @@ public class Item {
     private String desc;
     private String id;
     private long time;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return time == item.time &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(desc, item.desc) &&
+                Objects.equals(id, item.id) &&
+                Arrays.equals(comments, item.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, desc, id, time);
+        result = 31 * result + Arrays.hashCode(comments);
+        return result;
+    }
+
     /**
      *
      * @param name

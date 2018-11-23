@@ -3,6 +3,9 @@ package ru.job4j.tracker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Objects;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,6 +23,7 @@ public class StrartUITestAfterBefore {
         this.tracker.delete(item.getId());
         System.out.println("execute after method");
     }
+
     @Test
     public void whenUpdateAfterThen() {
         this.input = new StubInput(new String[]{"2", "Kate", "I can help you", item.getId(), "заменили заявку", "6"});

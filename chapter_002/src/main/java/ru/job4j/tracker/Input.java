@@ -6,8 +6,14 @@ package ru.job4j.tracker;
 public interface Input {
     /**
      * Input value.
-     * @param answer
+     * @param question
      * @return
      */
-    String answer(String answer);
+    String answer(String question);
+    /**
+     * @param question
+     * @param range
+     * @return
+     */
+    int answer(String question, int[] range);
 }

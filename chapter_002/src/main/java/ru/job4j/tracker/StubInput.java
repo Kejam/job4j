@@ -35,4 +35,9 @@ public class StubInput implements Input {
     public String answer(String question) {
         return this.value[this.position++];
     }
+
+    @Override
+    public int answer(String question, int[] range) {
+        return 0;
+    }
 }
