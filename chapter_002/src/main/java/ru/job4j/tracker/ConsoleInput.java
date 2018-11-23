@@ -19,15 +19,15 @@ public class ConsoleInput implements Input {
     @Override
     public int answer(String question, int[] range) throws MenuOutException, NumberFormatException {
         System.out.println(question);
-        boolean invalid = true;
+        boolean validate = false;
         int key = Integer.valueOf(scanner.nextLine());
         for (int rang: range) {
             if (rang == key) {
-                invalid = false;
+                validate = true;
                 break;
             }
         }
-        if (invalid) {
+        if (validate) {
             return key;
         } else {
             throw new MenuOutException("Out of menu range");

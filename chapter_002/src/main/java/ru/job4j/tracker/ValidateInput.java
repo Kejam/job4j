@@ -3,7 +3,10 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class ValidateInput extends ConsoleInput {
-    private Scanner scanner;
+    @Override
+    public String answer(String question) {
+        return super.answer(question);
+    }
     @Override
     public int answer(String question, int[] range){
         boolean invalid = true;
