@@ -11,7 +11,7 @@ public class StrartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();     // создаём Tracker
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
+        Input input = new StubInput(new String[]{"1", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
@@ -22,7 +22,7 @@ public class StrartUITest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"2", "test replace", item.getDesc(), item.getId(), "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"3", "test replace", item.getDesc(), item.getId(), "заменили заявку", "6"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -32,7 +32,7 @@ public class StrartUITest {
     public void whenDeleteThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "Заявка удалена", "6"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "Заявка удалена", "6"});
         new StartUI(input, tracker).init();
         String[] expect = {};
         assertThat(tracker.findAll(), is(expect));
@@ -41,7 +41,7 @@ public class StrartUITest {
     public void whenFindByIdThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
@@ -49,7 +49,7 @@ public class StrartUITest {
     public void whenFindByNameThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"6", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
     }

@@ -29,7 +29,7 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if (validate != true) {
+        if (!validate) {
             throw new MenuOutException("Out of menu range");
         }
         return key;

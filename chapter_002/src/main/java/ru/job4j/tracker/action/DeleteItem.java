@@ -1,16 +1,14 @@
 package ru.job4j.tracker.action;
 
+import ru.job4j.tracker.BaseAction;
 import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.UserAction;
 
-public class DeleteItem implements UserAction {
-    @Override
-    public int key() {
-        return 3;
+public class DeleteItem extends BaseAction {
+    public DeleteItem(int key, String name) {
+        super(key, name);
     }
-
-    @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------ Delete item --------------");
         String id = input.answer("Please, provide item id");
@@ -20,10 +18,5 @@ public class DeleteItem implements UserAction {
         } else {
             System.out.println("Not found item ");
         }
-    }
-
-    @Override
-    public String info() {
-        return "3. Delete Item.";
     }
 }
