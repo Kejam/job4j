@@ -11,9 +11,11 @@ public class ConsoleInput implements Input {
      * @param question
      * @return
      */
+    @Override
     public String answer(String question) {
         System.out.println(question);
-        return question = scanner.nextLine();
+        question = scanner.nextLine();
+        return question;
     }
 
     @Override

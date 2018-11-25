@@ -10,7 +10,7 @@ import java.util.List;
 public class StartUI  {
     private final Input input;
     private final Tracker tracker;
-    private int[] rangeValue = {0,1,2,3,4,5,6};
+    private int[] rangeValue = {0, 1, 2, 3, 4, 5, 6};
     /**
      * Default constructor.
      * @param input
@@ -36,6 +36,11 @@ public class StartUI  {
         } while (!"y".equals(this.input.answer("Exit?(y): ")));
     }
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(
+                new ValidateInput(
+                        new ConsoleInput()
+                ),
+                new Tracker()
+        ).init();
     }
 }
