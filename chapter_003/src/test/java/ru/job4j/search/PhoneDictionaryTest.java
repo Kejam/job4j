@@ -1,4 +1,4 @@
-package ru.job4j.seacrh;
+package ru.job4j.search;
 
 import org.junit.Test;
 import ru.job4j.search.*;
