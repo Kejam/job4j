@@ -8,8 +8,10 @@ public abstract class Fugire implements Figure {
     protected Fugire(Cell position) {
         this.position = position;
     }
-    public abstract Cell[] way(Cell source, Cell dest) throw ImposibleMoveException {
-        if()
-    }
-    Figure copy(Cell dest);
+    //public abstract Cell[] way(Cell source, Cell dest) throw ImposibleMoveException {
+       // if()
+   // }
+    //Figure Figure.copy(Cell dest) {
+
+   //}
 }
