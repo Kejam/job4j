@@ -2,20 +2,13 @@ package ru.job4j.list;
 
 import java.util.Objects;
 
-public class User {
+public class User implements Comparable<User> {
     private String name;
+    private String age;
 
-    public User(String name) {
+    public User(String name, String age) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "User{"
-                + "name='"
-                + name
-                + '\''
-                + '}';
+        this.age = age;
     }
 
     @Override
@@ -27,11 +20,27 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(name, user.name);
+        return age == user.age && Objects.equals(name, user.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='"
+                + name
+                + '\''
+                + ", age="
+                + age
+                + '}';
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.age.compareTo(o.age);
     }
 }
