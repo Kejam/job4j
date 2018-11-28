@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Item {
     private String name;
     private String desc;
-    private String id;
+    private int id = -1;
     private long time;
 
     @Override
@@ -45,12 +45,11 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.time = System.currentTimeMillis();
+        id++;
     }
     /**
      *
      */
-    public Item() {
-    }
     private String[] comments;
     public String getName() {
         return name;
@@ -76,10 +75,10 @@ public class Item {
     public void setComments(String[] comments) {
         this.comments = comments;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     @Override

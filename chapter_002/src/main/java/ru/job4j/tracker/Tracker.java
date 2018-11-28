@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 /** @author Aleksey Prozorov (kejamkwork@mail.ru)
  * @version $Id$
@@ -9,87 +11,56 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private final List<Item> items = new ArrayList<Item>();
     /**
      * Метод реализаущий добавление заявки в хранилище.
      * @param item новая заявка.
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
-    }
-    /**
-     * Метод генерирует уникальный ключ для заявки.
-     * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
-     * @return Уникальный ключ.
-     */
-    private String generateId() {
-        Random random = new Random();
-        String id = String.valueOf(random.nextInt(100));
-        return id;
     }
     /**
      * Replace item.
      * @param id
      * @param item
      */
-    public boolean replace(String id, Item item) {
+    public boolean replace(int id, Item item) {
         boolean result = false;
-        for (int i = 0; i < position; i++) {
-            if (items[i].getId().equals(id)) {
-                items[i] = item;
-                item.setId(id);
-                result = true;
-                break;
-            }
+        items.set(id, item);
+        if (items.contains(item)) {
+            result = true;
         }
         return result;
     }
-
     /**
      * Delete item.
      * @param id
      */
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         boolean result = false;
-        for (int i = 0; i < this.position; i++) {
-            if (items[i].getId().equals(id)) {
-                System.arraycopy(items, i + 1, items, i, this.items.length - i - 1);
-                this.position--;
-                result = true;
-                break;
-            }
-        }
+        items.remove(id);
         return result;
     }
     /**
      * Return all items.
      * @return
      */
-    public Item[] findAll() {
-        Item[] copyItem = new Item[position + 1];
-        copyItem = Arrays.copyOf(items, position);
-        return copyItem;
+    public List<Item> findAll() {
+        return items;
     }
     /**
      * Find by name.
      * @param key
      * @return
      */
-    public Item[] findByName(String key) {
-        Item[] copyItem =  new Item[position];
-        int count = 0;
-        for (int i = 0; i < position; i++) {
-            if (items[i].getName().equals(key)) {
-                copyItem[count++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> copyItem =  new ArrayList<Item>();
+        for (Item item1: items) {
+            if (item1.toString().contains(key)) {
+                copyItem.add(item1);
             }
         }
-        copyItem = Arrays.copyOf(copyItem, count);
         return copyItem;
     }
     /**
@@ -97,13 +68,8 @@ public class Tracker {
      * @param id
      * @return
      */
-    public Item findById(String id) {
-        Item item = null;
-        for (int i = 0; i < position; i++) {
-            if (items[i].getId().equals(id)) {
-                item = items[i];
-            }
-        }
+    public Item findById(int id) {
+        Item item = items.get(id);
         return item;
     }
 }

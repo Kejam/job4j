@@ -11,9 +11,9 @@ public class StrartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();     // создаём Tracker
-        Input input = new StubInput(new String[]{"1", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.findById(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
@@ -22,7 +22,7 @@ public class StrartUITest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "desc"));
         //создаём StubInput с последовательностью действий(производим замену заявки)
-        Input input = new StubInput(new String[]{"3", "test replace", item.getDesc(), item.getId(), "заменили заявку", "6"});
+        Input input = new StubInput(new String[]{"2", "test replace", item.getDesc(), String.valueOf(item.getId()), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -32,16 +32,15 @@ public class StrartUITest {
     public void whenDeleteThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"4", item.getId(), "Заявка удалена", "6"});
+        Input input = new StubInput(new String[]{"3", String.valueOf(item.getId()), "y"});
         new StartUI(input, tracker).init();
-        String[] expect = {};
-        assertThat(tracker.findAll(), is(expect));
+        assertThat(tracker.findAll(), is(String.format("<[]>")));
     }
     @Test
     public void whenFindByIdThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"5", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"5", String.valueOf(item.getId()), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
@@ -49,31 +48,8 @@ public class StrartUITest {
     public void whenFindByNameThen() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"6", item.getId(), "6"});
+        Input input = new StubInput(new String[]{"5", "test", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findByName(item.getName()), arrayContainingInAnyOrder(item));
+        assertThat(tracker.findAll().toArray(), arrayContainingInAnyOrder(item));
     }
-    @Test
-    public void whenDeleteItem() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me"));
-        tracker.delete(item.getId());
-        String[] expect = {};
-        assertThat(tracker.findAll(), is(expect));
-    }
-    @Test
-    public void whenFindByIdItem() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me"));
-        Item actual = tracker.findById(item.getId());
-        assertThat(actual, is(item));
-    }
-    @Test
-    public void whenFindByNameItem() {
-        Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("alex", "help me"));
-        Item[] actual = tracker.findByName(item.getName());
-        assertThat(actual, arrayContainingInAnyOrder(item));
-    }
-
 }

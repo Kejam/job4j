@@ -8,7 +8,7 @@ public class FindByID extends BaseAction {
     }
     @Override
     public void execute(Input input, Tracker tracker) {
-        String id = input.answer("Please, provide item id:");
+        int id = Integer.valueOf(input.answer("Please, provide item id:"));
         Item item = tracker.findById(id);
         if (item.equals(null)) {
             System.out.println("Not found item by id " + id);
