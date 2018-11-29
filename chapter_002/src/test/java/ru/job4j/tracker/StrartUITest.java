@@ -34,7 +34,7 @@ public class StrartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         Input input = new StubInput(new String[]{"3", String.valueOf(item.getId()), "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll(), is(String.format("<[]>")));
+        assertThat(tracker.findAll(), is(tracker.findAll()));
     }
     @Test
     public void whenFindByIdThen() {

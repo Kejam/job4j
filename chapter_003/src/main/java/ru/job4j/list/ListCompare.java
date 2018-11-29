@@ -12,7 +12,7 @@ public class ListCompare implements Comparator<String> {
             value = cL.length - cR.length;
         }
         if (cL.length < cR.length) {
-            value = cR.length - cL.length ;
+            value = cR.length - cL.length;
         }
         return value;
     }
