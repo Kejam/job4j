@@ -12,7 +12,7 @@ public class DeleteItem extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------ Delete item --------------");
         int id = Integer.valueOf(input.answer("Please, provide item id:"));
-        boolean result = tracker.delete(id);
+        boolean result = tracker.delete(String.valueOf(id));
         if (result) {
             System.out.println("Item delete");
         } else {

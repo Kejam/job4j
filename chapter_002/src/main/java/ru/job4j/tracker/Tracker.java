@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 /** @author Aleksey Prozorov (kejamkwork@mail.ru)
@@ -18,6 +17,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         this.items.add(item);
+        item.setId(generateId());
         return item;
     }
     /**
@@ -25,10 +25,10 @@ public class Tracker {
      * @param id
      * @param item
      */
-    public boolean replace(int id, Item item) {
+    public boolean replace(String id, Item item) {
         boolean result = false;
-        if (!(items.get(id).equals(null))) {
-            items.set(id, item);
+        if (!(items.get(Integer.valueOf(id)).equals(null))) {
+            items.set(Integer.valueOf(id), item);
             result = true;
         }
         return result;
@@ -37,9 +37,9 @@ public class Tracker {
      * Delete item.
      * @param id
      */
-    public boolean delete(int id) {
+    public boolean delete(String id) {
         boolean result = false;
-        if (!(items.get(id).equals(null))) {
+        if (!(items.get(Integer.valueOf(id)).equals(null))) {
             items.remove(id);
             result = true;
         }
@@ -71,13 +71,13 @@ public class Tracker {
      * @param id
      * @return
      */
-    public Item findById(int id) {
-        Item item = items.get(id);
+    public Item findById(String id) {
+        Item item = items.get(Integer.valueOf(id));
         return item;
     }
-    private int generateId() {
+    private String generateId() {
         Random random = new Random();
-        int id = random.nextInt(100);
+        String id = String.valueOf(System.currentTimeMillis() + random.nextInt(100));
         return  id;
     }
 }

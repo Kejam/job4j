@@ -11,7 +11,7 @@ public class EditItem extends BaseAction {
         String name = input.answer("Please, provide item name:");
         String desc = input.answer("Please, provide item description:");
         int id = Integer.valueOf(input.answer("Please, provide item id:"));
-        tracker.replace(id, new Item(name, desc));
+        tracker.replace(String.valueOf(id), new Item(name, desc));
 
     }
 
