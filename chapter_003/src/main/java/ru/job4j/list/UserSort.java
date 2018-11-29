@@ -14,7 +14,7 @@ public class UserSort {
     }
     public List<User> sortNameLength(List<User> list) {
         List<User> sort = list;
-        sort.sort();
+       // sort.sort();
         return sort;
     }
     public List<User> sortByAllFields (List<User> list) {

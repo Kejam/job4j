@@ -4,43 +4,45 @@ import java.util.Objects;
 
 public class User implements Comparable<User> {
     private String name;
-    private String age;
+    private String id;
+    private String city;
 
-    public User(String name, String age) {
+    public String getId() {
+        return id;
+    }
+
+    public User(String name, String id, String city) {
         this.name = name;
-        this.age = age;
+        this.id = id;
+        this.city = city;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(name, user.name);
+        return Objects.equals(name, user.name) &&
+                Objects.equals(id, user.id) &&
+                Objects.equals(city, user.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age);
+        return Objects.hash(name, id, city);
     }
 
     @Override
     public String toString() {
-        return "User{"
-                + "name='"
-                + name
-                + '\''
-                + ", age="
-                + age
-                + '}';
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age='" + id + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 
     @Override
     public int compareTo(User o) {
-        return this.age.compareTo(o.age);
+        return this.id.compareTo(o.id);
     }
 }
