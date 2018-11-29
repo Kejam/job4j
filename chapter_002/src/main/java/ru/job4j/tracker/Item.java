@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Item {
     private String name;
     private String desc;
-    private int id = -1;
+    private int id;
     private long time;
 
     @Override
@@ -45,7 +45,6 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.time = System.currentTimeMillis();
-        id++;
     }
     /**
      *
