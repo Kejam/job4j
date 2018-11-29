@@ -39,10 +39,26 @@ public class Bank {
     }
     public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean result = false;
-
+        Account account = getActualAccount(srcPassport, srcRequisite);
+        Account account1 = getActualAccount(destPassport, dstRequisite);
+        if (account.getValue() >= amount) {
+            account.setValue((int) (account.getValue() - amount));
+            account1.setValue((int) (account.getValue() + amount));
+            result = true;
+        }
         return result;
     }
     private Account getActualAccount(String passport, String requisite) {
-
+        Account account = null;
+        for (Map.Entry<User, List<Account>> desired : this.bankAccounts.entrySet()) {
+            for (Account account1 : desired.getValue()) {
+                if (account1.toString().equals(requisite)) {
+                    account = account1;
+                    break;
+                }
+            }
+        }
+        List<Account> list = this.bankAccounts.get(findUser(passport));
+        return list.get(list.indexOf(account));
     }
 }
