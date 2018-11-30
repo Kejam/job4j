@@ -24,7 +24,7 @@ public class Bank {
             bankAccounts.get(user).remove(account);
         }
     }
-    private User findUser(String passport) {
+    public User findUser(String passport) {
         for (Map.Entry<User, List<Account>> desired : this.bankAccounts.entrySet()) {
             if (desired.getKey().getPassport().equals(passport)) {
                 return desired.getKey();
@@ -37,10 +37,10 @@ public class Bank {
         List<Account> accounts =  bankAccounts.get(user);
         return accounts;
     }
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
         boolean result = false;
         Account account = getActualAccount(srcPassport, srcRequisite);
-        Account account1 = getActualAccount(destPassport, dstRequisite);
+        Account account1 = getActualAccount(dstPassport, dstRequisite);
         if (account.getValue() >= amount) {
             account.setValue((int) (account.getValue() - amount));
             account1.setValue((int) (account.getValue() + amount));
@@ -48,7 +48,7 @@ public class Bank {
         }
         return result;
     }
-    private Account getActualAccount(String passport, String requisite) {
+    public Account getActualAccount(String passport, String requisite) {
         Account account = null;
         for (Map.Entry<User, List<Account>> desired : this.bankAccounts.entrySet()) {
             for (Account account1 : desired.getValue()) {
