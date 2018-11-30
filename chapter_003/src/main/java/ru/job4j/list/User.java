@@ -6,27 +6,17 @@ public class User implements Comparable<User> {
     private String name;
     private String id;
     private String city;
+    private int age;
 
     public String getId() {
         return id;
     }
 
-    public User(String name, String id, String city) {
+    public User(String name, String id, String city, int age) {
         this.name = name;
         this.id = id;
         this.city = city;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(id, user.id) && Objects.equals(city, user.city);
+        this.age = age;
     }
 
     public String getName() {
@@ -49,24 +39,34 @@ public class User implements Comparable<User> {
         this.city = city;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return age == user.age && Objects.equals(name, user.name) && Objects.equals(id, user.id) && Objects.equals(city, user.city);
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name, id, city);
+        return Objects.hash(name, id, city, age);
     }
 
     @Override
     public String toString() {
-        return "User{"
-                + "name='"
-                + name
-                + '\''
-                + ", age='"
-                + id
-                + '\''
-                + ", city='"
-                + city
-                + '\''
-                + '}';
+        return "User{" + "name='" + name + '\'' + ", id='" + id + '\'' + ", city='" + city + '\'' + ", age=" + age + '}';
     }
 
     @Override public int compareTo(User o) {

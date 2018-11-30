@@ -1,16 +1,10 @@
 package ru.job4j.list;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class UserSort {
     public Set<User> sort(List<User> list) {
-        TreeSet<User> userSet = new TreeSet<>();
-        for (User user : list) {
-            userSet.add(user);
-        }
+        TreeSet<User> userSet = new TreeSet<User>(list);
         return userSet;
     }
     public List<User> sortNameLength(List<User> list) {
