@@ -8,11 +8,10 @@ public class ListCompare implements Comparator<String> {
         int value = 0;
         char[] cL = left.toCharArray();
         char[] cR = right.toCharArray();
-        if (cL.length > cR.length) {
-            value = cL.length - cR.length;
-        }
-        if (cL.length < cR.length) {
-            value = cR.length - cL.length;
+        int max = Math.max(cL.length, cR.length);
+        int i = 0;
+        while (max < i) {
+           value = 1;
         }
         return value;
     }
