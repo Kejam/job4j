@@ -25,22 +25,20 @@ public class UserSort {
                 new Comparator<User>() {
                     @Override
                     public int compare(User o1, User o2) {
-                        return  o1.getName().compareTo(o2.getName());
-                    }
-                }
-        );
-        sort.sort(
-                new Comparator<User>() {
-                    @Override
-                    public int compare(User o1, User o2) {
-                        int id1 = Integer.valueOf(o1.getId());
-                        int id2 = Integer.valueOf(o2.getId());
                         int value = 0;
-                        if (id1 > id2) {
-                            value = 1;
+                        if (o1.getName().length() > o2.getName().length()) {
+                            if (o1.getAge() > o2.getAge()) {
+                                value = 1;
+                            } else {
+                                value = -1;
+                            }
                         }
-                        if (id1 < id2) {
-                            value = -1;
+                        if (o1.getName().length() < o2.getName().length()) {
+                            if (o1.getAge() < o2.getAge()) {
+                                value = 1;
+                            } else {
+                                value = -1;
+                            }
                         }
                         return value;
                     }
