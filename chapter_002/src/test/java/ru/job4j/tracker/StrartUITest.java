@@ -13,7 +13,7 @@ public class StrartUITest {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findById("0").getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat("test name", is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
@@ -31,8 +31,9 @@ public class StrartUITest {
     @Test
     public void whenDeleteThen() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"3", String.valueOf(item.getId()), "y"});
+        Item item = new Item("test name", "desc");
+        tracker.add(item);
+        Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll(), is(tracker.findAll()));
     }

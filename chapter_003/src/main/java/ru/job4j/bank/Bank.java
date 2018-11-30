@@ -32,12 +32,12 @@ public class Bank {
         }
         return null;
     }
-    public List<Account> getUserAccounts (String passport) {
+    public List<Account> getUserAccounts(String passport) {
         User user = findUser(passport);
         List<Account> accounts =  bankAccounts.get(user);
         return accounts;
     }
-    public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean result = false;
         Account account = getActualAccount(srcPassport, srcRequisite);
         Account account1 = getActualAccount(destPassport, dstRequisite);

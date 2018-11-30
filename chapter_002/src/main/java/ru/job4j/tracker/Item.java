@@ -13,6 +13,10 @@ public class Item {
     private String id;
     private long time;
 
+    public Item() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -22,18 +26,12 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return time == item.time
-                && Objects.equals(name, item.name)
-                && Objects.equals(desc, item.desc)
-                && Objects.equals(id, item.id)
-                && Arrays.equals(comments, item.comments);
+        return time == item.time && Objects.equals(name, item.name) && Objects.equals(desc, item.desc) && Objects.equals(id, item.id);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, desc, id, time);
-        result = 31 * result + Arrays.hashCode(comments);
-        return result;
+        return Objects.hash(name, desc, id, time);
     }
 
     /**
@@ -46,54 +44,45 @@ public class Item {
         this.desc = desc;
         this.time = System.currentTimeMillis();
     }
-    /**
-     *
-     */
-    private String[] comments;
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDesc() {
         return desc;
     }
+
     public void setDesc(String desc) {
         this.desc = desc;
     }
-    public long getTime() {
-        return time;
-    }
-    public void setTime(long time) {
-        this.time = time;
-    }
-    public String[] getComments() {
-        return comments;
-    }
-    public void setComments(String[] comments) {
-        this.comments = comments;
-    }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    /**
+     *
+     */
+
     @Override
     public String toString() {
-        return "Item{"
-                + "name='"
-                + name + '\''
-                + ", desc='"
-                + desc + '\''
-                + ", id='"
-                + id + '\''
-                + ", time="
-                + time
-                +
-                ", comments="
-                + Arrays.toString(comments)
-                + '}';
+        return "Item{" + "name='" + name + '\'' + ", desc='" + desc + '\'' + ", id='" + id + '\'' + ", time=" + time + '}';
     }
 }

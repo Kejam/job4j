@@ -10,7 +10,7 @@ public class EditItem extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         String name = input.answer("Please, provide item name:");
         String desc = input.answer("Please, provide item description:");
-        int id = Integer.valueOf(input.answer("Please, provide item id:"));
+        String id = input.answer("Please, provide item id:");
         tracker.replace(String.valueOf(id), new Item(name, desc));
 
     }

@@ -27,9 +27,13 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        if (!(items.get(Integer.valueOf(id)).equals(null))) {
-            items.set(Integer.valueOf(id), item);
-            result = true;
+        for (Item item1: items) {
+            if (item1.getId().equals(id)) {
+                item.setId(item1.getId());
+                items.set(items.indexOf(item1), item);
+                result = true;
+                break;
+            }
         }
         return result;
     }
@@ -39,9 +43,12 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        if (!(items.get(Integer.valueOf(id)).equals(null))) {
-            items.remove(id);
-            result = true;
+        for (Item item1: items) {
+            if (item1.getId().equals(id)) {
+                items.remove(item1);
+                result = true;
+                break;
+            }
         }
         return result;
     }
@@ -72,8 +79,14 @@ public class Tracker {
      * @return
      */
     public Item findById(String id) {
-        Item item = items.get(Integer.valueOf(id));
-        return item;
+        Item result = null;
+        for (Item item : items) {
+            if (item != null && item.getId().equals(id)) {
+                result = item;
+                break;
+            }
+        }
+        return result;
     }
     private String generateId() {
         Random random = new Random();
