@@ -13,7 +13,7 @@ public class UserSort {
                 new Comparator<User>() {
                     @Override
                     public int compare(User o1, User o2) {
-                        return  o1.getName().compareTo(o2.getName());
+                        return Integer.compare(o1.getName().length(), o2.getName().length());
                     }
                 }
         );
@@ -25,20 +25,9 @@ public class UserSort {
                 new Comparator<User>() {
                     @Override
                     public int compare(User o1, User o2) {
-                        int value = 0;
-                        if (o1.getName().length() > o2.getName().length()) {
-                            if (o1.getAge() > o2.getAge()) {
-                                value = 1;
-                            } else {
-                                value = -1;
-                            }
-                        }
-                        if (o1.getName().length() < o2.getName().length()) {
-                            if (o1.getAge() < o2.getAge()) {
-                                value = 1;
-                            } else {
-                                value = -1;
-                            }
+                        int value = o1.getName().compareTo(o2.getName());
+                        if (value == 0) {
+                            value = Integer.compare(o1.getAge(), o2.getAge());
                         }
                         return value;
                     }
