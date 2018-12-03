@@ -10,7 +10,7 @@ public class ListCompare implements Comparator<String> {
         int min = Math.min(cL.length, cR.length);
         int i = 0;
         while (min < i) {
-            if(Character.compare(cL[i], cR[i]) != 0) {
+            if (Character.compare(cL[i], cR[i]) != 0) {
                 break;
             }
             i++;

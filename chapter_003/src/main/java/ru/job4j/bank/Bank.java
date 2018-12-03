@@ -37,28 +37,28 @@ public class Bank {
         List<Account> accounts =  bankAccounts.get(user);
         return accounts;
     }
-    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, int amount) {
         boolean result = false;
-        Account account = getActualAccount(srcPassport, srcRequisite);
-        Account account1 = getActualAccount(dstPassport, dstRequisite);
-        if (account.getValue() >= amount) {
-            account.setValue((int) (account.getValue() - amount));
-            account1.setValue((int) (account.getValue() + amount));
+        if ((findUser(srcPassport)) != null && findUser(dstPassport) != null && getActualAccount(srcPassport,
+                srcRequisite).getValue() >= amount) {
+            getActualAccount(srcPassport, srcRequisite).setValue(getActualAccount(srcPassport, srcRequisite).getValue() - amount);
+            getActualAccount(dstPassport, dstRequisite).setValue(getActualAccount(dstPassport, dstRequisite).getValue() + amount);
             result = true;
         }
         return result;
     }
     public Account getActualAccount(String passport, String requisite) {
         Account account = null;
-        for (Map.Entry<User, List<Account>> desired : this.bankAccounts.entrySet()) {
-            for (Account account1 : desired.getValue()) {
-                if (account1.toString().equals(requisite)) {
-                    account = account1;
+        List<Account> accounts = getUserAccounts(passport);
+        if (accounts != null) {
+            for (Account a: accounts) {
+                String check = String.valueOf(a.getRequisites());
+                if (requisite.equals(check)) {
+                    account = a;
                     break;
                 }
             }
         }
-        List<Account> list = this.bankAccounts.get(findUser(passport));
-        return list.get(list.indexOf(account));
+        return account;
     }
 }
