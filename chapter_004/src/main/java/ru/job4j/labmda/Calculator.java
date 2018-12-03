@@ -17,7 +17,7 @@ public class Calculator {
                 0, 10, 2,
                 (value, index) -> {
                     double result = value * index;
-                    System.out.printf("Multiple %s * %s = %s  %n", value,index,result);
+                    System.out.printf("Multiple %s * %s = %s  %n", value, index, result);
                     return result;
                 },
                 result -> System.out.println(result)
