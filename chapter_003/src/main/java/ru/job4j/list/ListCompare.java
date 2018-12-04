@@ -8,18 +8,13 @@ public class ListCompare implements Comparator<String> {
         char[] cL = left.toCharArray();
         char[] cR = right.toCharArray();
         int min = Math.min(cL.length, cR.length);
-        int i = 0;
-        while (min < i) {
-            if (Character.compare(cL[i], cR[i]) != 0) {
+        int result = 0;
+        for (int i = 0; i < min; i++) {
+            result = Character.compare(cL[i], cR[i]);
+            if (result != 0) {
                 break;
             }
-            i++;
         }
-        if (i == 0) {
-            i = Integer.compare(cL.length, cR.length);
-        } else {
-            i = -1;
-        }
-        return i;
+        return result != 0 ? result : Integer.compare(left.length(), right.length());
     }
 }
