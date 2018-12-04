@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.Optional;
 
 public class Bank {
     private Map<User, List<Account>> bankAccounts = new HashMap<>();
@@ -39,10 +40,13 @@ public class Bank {
     }
     public boolean transferMoney(String srcPassport, String srcRequisite, String dstPassport, String dstRequisite, int amount) {
         boolean result = false;
-        if ((findUser(srcPassport)) != null && findUser(dstPassport) != null && getActualAccount(srcPassport,
-                srcRequisite).getValue() >= amount) {
-            getActualAccount(srcPassport, srcRequisite).setValue(getActualAccount(srcPassport, srcRequisite).getValue() - amount);
-            getActualAccount(dstPassport, dstRequisite).setValue(getActualAccount(dstPassport, dstRequisite).getValue() + amount);
+        Account account1 = getActualAccount(srcPassport, srcRequisite);
+        Account account2 = getActualAccount(dstPassport, dstRequisite);
+        Optional<Account> op1 = Optional.of(account1);
+        Optional<Account> op2 = Optional.of(account2);
+        if (op1.isPresent() && op2.isPresent() && op1.get().getValue() >= amount) {
+            getActualAccount(srcPassport, srcRequisite).setValue(account1.getValue() - amount);
+            getActualAccount(dstPassport, dstRequisite).setValue(account2.getValue() + amount);
             result = true;
         }
         return result;
