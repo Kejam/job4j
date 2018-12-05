@@ -45,7 +45,7 @@ public class Sort {
                         int min = Math.min(cL.length, cR.length);
                         int result = 0;
                            if (i == 0) {
-                               for (int i = 0; i < min; i++) {
+                               //for (int i = 0; i < min; i++) {
                                    result = Character.compare(cL[i], cR[i]);
                                    if (result != 0) {
                                        break;
