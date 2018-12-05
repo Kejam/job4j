@@ -3,13 +3,13 @@ package ru.job4j.list;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class UserConvert {
-    public HashMap<Integer, User> process(List<User> list) {
-        Map result = new HashMap<Integer, User>();
-        for (User user: list) {
-            result.put(user.getId(), user);
-        }
-        return (HashMap<Integer, User>) result;
+    public HashMap<String, User> process(List<User> list) {
+        Map<String, User> result = list.stream().collect(Collectors.toMap(User::getId, user -> user));
+        return (HashMap<String, User>) result;
     }
 }
