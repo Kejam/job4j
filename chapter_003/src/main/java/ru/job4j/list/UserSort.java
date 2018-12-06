@@ -1,38 +1,27 @@
 package ru.job4j.list;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserSort {
     public Set<User> sort(List<User> list) {
-        TreeSet<User> userSet = new TreeSet<User>(list);
+        Set<User> userSet = list.stream().collect(Collectors.toSet());
         return userSet;
     }
     public List<User> sortNameLength(List<User> list) {
-        List<User> sort = list;
-        sort.sort(
-                new Comparator<User>() {
-                    @Override
-                    public int compare(User o1, User o2) {
-                        return Integer.compare(o1.getName().length(), o2.getName().length());
-                    }
-                }
-        );
+        List<User> sort = list.stream()
+                .sorted()
+                .collect(Collectors.toList());
         return sort;
     }
     public List<User> sortByAllFields(List<User> list) {
-        List<User> sort = list;
-        sort.sort(
-                new Comparator<User>() {
-                    @Override
-                    public int compare(User o1, User o2) {
-                        int value = o1.getName().compareTo(o2.getName());
-                        if (value == 0) {
-                            value = Integer.compare(o1.getAge(), o2.getAge());
-                        }
-                        return value;
-                    }
-                }
-        );
+        List<User> sort = list.stream()
+                .sorted(
+                        (o1, o2) -> o1.getName() != o2.getName()
+                                ? o1.getName().compareTo(o2.getName())
+                                : Integer.compare(o1.getAge(), o2.getAge())
+                )
+                .collect(Collectors.toList());
         return sort;
     }
 }

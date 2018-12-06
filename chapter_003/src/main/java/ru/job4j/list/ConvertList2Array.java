@@ -1,13 +1,12 @@
 package ru.job4j.list;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ConvertList2Array {
-    public int[][] toArray(List<Integer> list, int rows) {
-        return list.stream().toArray();
+    public Integer[][] toArray(List<Integer> list, int rows) {
+        Integer[][] array = list.stream().toArray(size -> new Integer[rows][rows]); // Не совсем понял логику...
+        return array;
     }
     public List<Integer> convert(List<int[]> list) {
         return list.stream()

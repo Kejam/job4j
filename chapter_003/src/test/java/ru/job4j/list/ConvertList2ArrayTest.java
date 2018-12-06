@@ -13,7 +13,7 @@ public class ConvertList2ArrayTest {
     @Test
     public void when7ElementsThen9() {
         ConvertList2Array list = new ConvertList2Array();
-        int[][] result = list.toArray(
+        Integer[][] result = list.toArray(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7),
                 3
         );
@@ -27,7 +27,7 @@ public class ConvertList2ArrayTest {
     @Test
     public void when10ElementsThen16() {
         ConvertList2Array list = new ConvertList2Array();
-        int[][] result = list.toArray(
+        Integer[][] result = list.toArray(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
                 4
         );
