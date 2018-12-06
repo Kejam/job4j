@@ -1,28 +1,19 @@
 package ru.job4j.list;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
-        int cells = rows;
-        int index = 0;
-        int[][] array = new int[rows][cells];
-        for (int i = 0; i < rows; i++) {
-            for (int y = 0; y < cells; y++) {
-                if (list.size() - 1 >= index) {
-                    array[i][y] = list.get(index++);
-                }
-            }
-        }
-        return array;
+        return list.stream().toArray();
     }
     public List<Integer> convert(List<int[]> list) {
-        List<Integer> convert = new ArrayList<>();
-        for (int[] i: list) {
-            for (int i1: i) {
-                convert.add(i1);
-            }
-        }
-        return convert;
+        return list.stream()
+                .map(x -> Arrays.stream(x)
+                        .boxed().collect(Collectors.toCollection(ArrayList<Integer>::new))
+                ).collect(ArrayList<Integer>::new,
+                        ArrayList<Integer>::addAll, ArrayList<Integer>::addAll);
     }
 }
