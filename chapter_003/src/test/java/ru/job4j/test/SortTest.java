@@ -23,7 +23,7 @@ public class SortTest {
         sort.add("K2\\SK1\\SSK2");
         sort.sorter(0);
         ArrayList<String> actual = sort.getSort();
-        List<String> expect =  Arrays.asList(
+        List<String> expect =  List.of(
                 "K1",
                 "K1\\SK1",
                 "K1\\SK1\\SSK1",
@@ -48,7 +48,7 @@ public class SortTest {
         sort.add("K2\\SK1\\SSK2");
         sort.sorter(1);
         ArrayList<String> actual = sort.getSort();
-        List<String> expect =  Arrays.asList(
+        List<String> expect =  List.of(
                 "K2",
                 "K2\\SK1",
                 "K2\\SK1\\SSK2",
