@@ -32,9 +32,10 @@ public class UserTest {
         UserSort us = new UserSort();
         List<User> actual = us.sortNameLength(list);
         List<User> expect = (Arrays.asList(
+                new User("Alex", "45", "Moscow", 1),
                 new User("Ivan", "23", "London", 3),
-                new User("Katen", "25", "Moscow", 2),
-                new User("Alex", "45", "Moscow", 1)
+                new User("Katen", "25", "Moscow", 2)
+
         ));
         assertThat(actual.toString(), is(expect.toString()));
     }
