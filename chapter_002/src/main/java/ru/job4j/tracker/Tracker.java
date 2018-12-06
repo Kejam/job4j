@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 /** @author Aleksey Prozorov (kejamkwork@mail.ru)
  * @version $Id$
  * @since 0.1
@@ -65,12 +67,12 @@ public class Tracker {
      * @return
      */
     public List<Item> findByName(String key) {
-        List<Item> copyItem =  new ArrayList<Item>();
-        for (Item item1: items) {
-            if (item1.getName().contains(key)) {
-                copyItem.add(item1);
-            }
-        }
+        List<Item> copyItem =  items
+                .stream()
+                .filter(
+                        item -> item.toString().equals(key)
+                )
+                .collect(Collectors.toList());
         return copyItem;
     }
     /**
@@ -80,12 +82,11 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
-            }
-        }
+        List<Item> items1 = items
+                .stream()
+                .filter(item -> item.getId().equals(id))
+                .collect(Collectors.toList());
+        result = items1.get(0);
         return result;
     }
     private String generateId() {
