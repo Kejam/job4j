@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDirectory phones = new PhoneDirectory();
+        var phones = new PhoneDirectory();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
 
@@ -23,7 +23,7 @@ public class PhoneDictionaryTest {
                 new Person("sdfsdf", "Arsentev", "534872", "Bryansk")
 
         );
-        List<Person> persons = phones.find("Petr");
+        var persons = phones.find("Petr");
         assertThat(persons.iterator().next().getSurname(), is("Arsentev"));
     }
 }

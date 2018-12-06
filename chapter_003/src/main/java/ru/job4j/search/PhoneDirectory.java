@@ -23,10 +23,10 @@ public class PhoneDirectory {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        String temp;
+
         List<Person> result = new ArrayList<>();
-        for (Person person: persons) {
-            temp = String.format("%s%s%s%s", person.getAddress(), person.getName(), person.getPhone(), person.getSurname());
+        for (var person: persons) {
+            var temp = String.format("%s%s%s%s", person.getAddress(), person.getName(), person.getPhone(), person.getSurname());
             if (temp.contains(key)) {
                 result.add(person);
             }
