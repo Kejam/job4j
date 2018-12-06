@@ -2,6 +2,7 @@ package ru.job4j.bank;
 
 import java.util.*;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, List<Account>> bankAccounts = new HashMap<>();
@@ -26,12 +27,16 @@ public class Bank {
         }
     }
     public User findUser(String passport) {
-        for (Map.Entry<User, List<Account>> desired : this.bankAccounts.entrySet()) {
-            if (desired.getKey().getPassport().equals(passport)) {
-                return desired.getKey();
-            }
+        if (bankAccounts.isEmpty()) {
+            return null;
         }
-        return null;
+        List<User> users = bankAccounts
+                .keySet()
+                .stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .collect(Collectors.toList());
+        User user1 = users.get(0);
+        return user1;
     }
     public List<Account> getUserAccounts(String passport) {
         User user = findUser(passport);
@@ -52,17 +57,15 @@ public class Bank {
         return result;
     }
     public Account getActualAccount(String passport, String requisite) {
-        Account account = null;
+        Account account1 = null;
         List<Account> accounts = getUserAccounts(passport);
-        if (accounts != null) {
-            for (Account a: accounts) {
-                String check = String.valueOf(a.getRequisites());
-                if (requisite.equals(check)) {
-                    account = a;
-                    break;
-                }
-            }
-        }
-        return account;
+        accounts
+                .stream()
+                .filter(
+                        account -> String.valueOf(account.getRequisites()).equals(requisite)
+                )
+                .collect(Collectors.toList());
+        account1 = accounts.get(0);
+        return account1;
     }
 }
