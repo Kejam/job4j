@@ -20,7 +20,8 @@ public class EvenIt implements Iterator {
         Object object = null;
         while (index <= array.length) {
             if (hasNext()) {
-                object = array[index];
+                object = array[index++];
+                break;
             }
             index++;
         }
