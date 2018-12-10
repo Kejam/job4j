@@ -17,9 +17,6 @@ public class IteratorConvert {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                Integer integer1 =  it.forEachRemaining(
-                        i -> i.next()
-                );
                 return integer;
             }
         };
