@@ -81,13 +81,11 @@ public class Tracker {
      * @return
      */
     public Item findById(String id) {
-        Item result = null;
-        List<Item> items1 = items
+        return items
                 .stream()
                 .filter(item -> item.getId().equals(id))
-                .collect(Collectors.toList());
-        result = items1.get(0);
-        return result;
+                .findFirst()
+                .orElse(null);
     }
     private String generateId() {
         Random random = new Random();

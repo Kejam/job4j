@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
+import java.util.List;
 
 public class ValidateInput implements Input {
 

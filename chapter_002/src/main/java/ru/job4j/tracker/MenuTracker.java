@@ -1,67 +1,74 @@
 package ru.job4j.tracker;
 
 import ru.job4j.tracker.action.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MenuTracker {
     /**
-     * @param хранит ссылку на объект .
+     * Получение данных от пользователя.
      */
-    private Input input;
+    private final Input input;
+
     /**
-     * @param хранит ссылку на объект .
+     * Хранилище заявок.
      */
-    private Tracker tracker;
+    private final Tracker tracker;
+
     /**
-     * @param хранит ссылку на массив типа UserAction.
+     * Хранилище меню.
      */
-    private List<UserAction> actions = new ArrayList<>();
-    /**
-     * Конструктор.
-     *
-     * @param input   объект типа Input
-     * @param tracker объект типа Tracker
-     */
+    private final List<UserAction> actions = new ArrayList<>();
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
+
     /**
-     * Метод для получения массива меню.
+     * Метод для получения длины массива меню.
      *
      * @return длину массива
      */
-    public int getActionsLentgh() {
+    public int getActionsLength() {
         return this.actions.size();
+    }
+    public int getActionsKey(int index) {
+        return actions.get(index).key();
     }
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
-        this.actions.add(new AddItem(0, " Adding new item"));
-        this.actions.add(new ShowAllItem(1, " Show all item"));
-        this.actions.add(new EditItem(2, " Edit item"));
-        this.actions.add(new DeleteItem(3, " Delete item"));
-        this.actions.add(new FindByID(4, " Find by id item"));
-        this.actions.add(new FindByName(5, " Find by name items"));
-        this.actions.add(new ExitProgram(6, " Close program"));
+    public void fillActions(StartUI ui) {
+        this.actions.add(new AddItem(0, "Add new Item"));
+        this.actions.add(new ShowAllItem(1, "Show all items"));
+        this.actions.add(new EditItem(2, "Edit item"));
+        this.actions.add(new DeleteItem(3, "Delete item"));
+        this.actions.add(new FindByID(4, "Find item by Id"));
+        this.actions.add(new FindByName(5, "Find items by name"));
+        this.actions.add(new ExitProgram(6, "Exit Program"));
     }
+
     /**
      * Метод в зависимости от указанного ключа, выполняет соотвествующие действие.
      *
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(input, tracker);
     }
+
     /**
      * Метод выводит на экран меню.
      */
-    public void show() {
+
+    public void show(Consumer<String> consumer) {
+        consumer.accept("Menu.");
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                consumer.accept(action.info());
             }
         }
     }

@@ -1,4 +1,7 @@
 package ru.job4j.tracker;
+
+import java.util.List;
+
 /** @author Aleksey Prozorov (kejamkwork@mail.ru)
  * @version $Id$
  * @since 0.1
@@ -38,6 +41,18 @@ public class StubInput implements Input {
 
     @Override
     public int answer(String question, int[] range) {
-        return Integer.parseInt(this.answer(question));
+        int key = Integer.valueOf(this.answer(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 }
