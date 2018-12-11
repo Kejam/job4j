@@ -1,5 +1,6 @@
 package ru.job4j.iterator;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -17,7 +18,12 @@ public class IteratorConvert {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+
                 return integer;
+            }
+            Iterator it1() {
+                Iterator iterator  = it.next();
+                return iterator  = it.next();
             }
         };
     }
