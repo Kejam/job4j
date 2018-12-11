@@ -23,6 +23,14 @@ public class DynContListS<E> implements Iterable<E>{
         this.size++;
     }
 
+    public E delete() {
+        E deleted = null;
+        for (int i = 0; i < size; i++) {
+            deleted = (E) first.next;
+        }
+        size--;
+        return deleted;
+    }
     /**
      * Return element by index from linked list.
      * @param index
