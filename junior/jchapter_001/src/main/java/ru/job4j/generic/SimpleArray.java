@@ -28,20 +28,5 @@ public class SimpleArray<T> {
         return (T) objects[index];
     }
 
-    Iterable<T> iterable() {
-        return new Iterator<T>() {
-            @Override
-            public boolean hasNext() {
-                return (index < objects.length);
-            }
-            @Override
-            public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                T t = (T) objects[index];
-                return t;
-            }
-        }
-    }
+
 }
