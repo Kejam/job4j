@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 /**
  * @author Aleksey Prozorov (kejamwork@mail.ru)
- * This class implemets dymamic container for list.
+ * This class implemets dymamic container for array.
  */
 public class DynContList<E> implements Iterable<E>{
 
