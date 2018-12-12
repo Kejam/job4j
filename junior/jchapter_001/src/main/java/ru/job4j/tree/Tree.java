@@ -34,6 +34,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
+    public boolean isBinary() {
+        boolean result = false;
+        int count = 0;
+        while(iterator().hasNext()) {
+            iterator().next();
+            count++;
+        }
+        if (count > 1) {
+            result = true;
+        }
+        return false;
+    }
+
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
