@@ -37,7 +37,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean isBinary() {
         boolean result = false;
         int count = 0;
-        while(iterator().hasNext()) {
+        while (iterator().hasNext()) {
             iterator().next();
             count++;
         }

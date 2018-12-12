@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * This class sequentially return values.
  * This class implements Iterator for 2D array.
  */
-public class IteratorFor2DArray implements Iterator<Integer>{
+public class IteratorFor2DArray implements Iterator<Integer> {
     private final int[][] array;
     private int iV = 0;
     private int iH = 0;

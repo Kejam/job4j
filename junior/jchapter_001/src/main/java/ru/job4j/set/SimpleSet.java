@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @author Aleksey Prozorov (kejamwork@mail.ru)
  * This class implements set.
  */
-public class SimpleSet<E> implements Iterable<E>{
+public class SimpleSet<E> implements Iterable<E> {
 
     private int indexIt = 0;
     private int size = 10;

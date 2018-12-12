@@ -11,7 +11,7 @@ public class AssociativeArray<K, V> {
     public boolean insert(K key, V value) {
         boolean result = false;
         if (checkKey(key)) {
-            for(java.lang.Object o1: ar[searchIndex(key)].getValue()) {
+            for (java.lang.Object o1: ar[searchIndex(key)].getValue()) {
                 if (o1.equals(value)) {
                     o1 = value;
                     break;
@@ -40,7 +40,7 @@ public class AssociativeArray<K, V> {
 
     private boolean checkKey(K key) {
         boolean result = false;
-        for(ObjectAr o: ar) {
+        for (ObjectAr o: ar) {
             if (o.getKey().equals(key)) {
                 result = true;
                 break;
@@ -51,7 +51,7 @@ public class AssociativeArray<K, V> {
 
     private int searchIndex(K key) {
         int result = -1;
-        for(int i = 0; i < ar.length; i++) {
+        for (int i = 0; i < ar.length; i++) {
             if (ar[i].getKey().equals(key)) {
                 result = i;
             }

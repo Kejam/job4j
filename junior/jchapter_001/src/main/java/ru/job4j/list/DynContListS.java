@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
  * @author Aleksey Prozorov (kejamwork@mail.ru)
  * This class implemets dymamic container for linked list.
  */
-public class DynContListS<E> implements Iterable<E>{
+public class DynContListS<E> implements Iterable<E> {
 
     private int size;
     private int indexIr = 0;

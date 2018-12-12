@@ -39,17 +39,17 @@ public class SimpleArray<T> {
         boolean result = false;
         size *= 2;
         objects = Arrays.copyOf(objects, size);
-        if(size == objects.length) {
+        if (size == objects.length) {
             result = true;
         }
         return result;
     }
 
-    public void delete(int index){
+    public void delete(int index) {
         System.arraycopy(objects, index, objects, index - 1, objects.length - 1);
     }
 
-    public T get(int index){
+    public T get(int index) {
         return (T) objects[index];
     }
 

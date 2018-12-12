@@ -24,7 +24,7 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
-        simpleArray.set(1,10);
+        simpleArray.set(1, 10);
         assertThat(simpleArray.get(1), is(10));
     }
     @Test

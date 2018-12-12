@@ -1,6 +1,6 @@
 package ru.job4j.map;
 
-public class ObjectAr<K,V> {
+public class ObjectAr<K, V> {
     private K key;
     private V[] value = (V[]) new java.lang.Object[100]; // Не вовсем понял как сделать корректо, реализовавывать рост пока не буду, оставлю просто 100.
     private int index = 0;

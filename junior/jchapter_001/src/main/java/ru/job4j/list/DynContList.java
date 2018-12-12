@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @author Aleksey Prozorov (kejamwork@mail.ru)
  * This class implemets dymamic container for array.
  */
-public class DynContList<E> implements Iterable<E>{
+public class DynContList<E> implements Iterable<E> {
 
     private Object[] list = new Object[10];
     private int index = 0;

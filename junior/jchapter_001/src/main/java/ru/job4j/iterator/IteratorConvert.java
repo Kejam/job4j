@@ -22,8 +22,7 @@ public class IteratorConvert {
                 return integer;
             }
             Iterator it1() {
-                Iterator iterator  = it.next();
-                return iterator  = it.next();
+                return it.next();
             }
         };
     }

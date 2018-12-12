@@ -1,6 +1,6 @@
 package ru.job4j.list;
 
-public class SimpleStack<T>{
+public class SimpleStack<T> {
 
     private DynContListS<T> stack;
 
@@ -8,7 +8,7 @@ public class SimpleStack<T>{
         this.stack = new DynContListS<>();
     }
 
-    public <T>Object poll() {
+    public <T> Object poll() {
         return stack.delete();
     }
 
