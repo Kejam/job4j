@@ -14,7 +14,8 @@ public class MapTest {
         User user1 = new User("Alex", 21, new GregorianCalendar(2000, 12, 12));
         Map<User, String> map = new HashMap<>();
         map.put(user, "hoho");
-        map.put(user1, "hehe");
+        map.put(user1, "hoho");
         System.out.println(map);
+        System.out.println(user1.hashCode());
     }
 }
