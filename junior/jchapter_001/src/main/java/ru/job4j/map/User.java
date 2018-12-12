@@ -3,10 +3,6 @@ package ru.job4j.map;
 import java.util.Calendar;
 import java.util.Objects;
 
-/**
- * @author Aleksey Prozorov (kejamwork@mail.ru)
- * This class implements user.
- */
 public class User {
     private String name;
     private int children;

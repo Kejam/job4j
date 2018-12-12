@@ -15,7 +15,5 @@ public class MapTest {
         Map<User, String> map = new HashMap<>();
         map.put(user, "hoho");
         map.put(user1, "hoho");
-        System.out.println(map);
-        System.out.println(user1.hashCode());
     }
 }

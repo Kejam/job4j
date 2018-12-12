@@ -2,10 +2,10 @@ package ru.job4j.map;
 
 public class AssociativeArray<K, V> {
     private int index = 0;
-    private Object[] ar;
+    private ObjectAr[] ar;
 
     public AssociativeArray(int size) {
-        ar = new Object[size];
+        ar = new ObjectAr[size];
     }
 
     public boolean insert(K key, V value) {
@@ -20,7 +20,7 @@ public class AssociativeArray<K, V> {
             ar[searchIndex(key)].addValue(value);
         }
         if (!checkKey(key)) {
-            ar[index++] = new Object(key, value);
+            ar[index++] = new ObjectAr(key, value);
         }
         return result;
     }
@@ -40,7 +40,7 @@ public class AssociativeArray<K, V> {
 
     private boolean checkKey(K key) {
         boolean result = false;
-        for(Object o: ar) {
+        for(ObjectAr o: ar) {
             if (o.getKey().equals(key)) {
                 result = true;
                 break;
