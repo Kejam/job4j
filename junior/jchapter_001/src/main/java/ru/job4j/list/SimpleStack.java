@@ -1,6 +1,6 @@
 package ru.job4j.list;
 
-public class SimpleStack<E> extends SimpleArrayList<E>{
+public class SimpleStack<E> extends SimpleArrayList<E> {
 
     public SimpleStack() {
         super();
