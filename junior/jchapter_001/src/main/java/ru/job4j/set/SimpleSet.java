@@ -24,16 +24,12 @@ public class SimpleSet<E> implements Iterable<E> {
      */
     public boolean add(E e) {
         boolean result = false;
-        if (checkRepeat(e)) {
-            return false;
-        }
-        if (set.size() < size) {
+        if(!checkRepeat(e)) {
             set.add(e);
             result = true;
-        } else {
-            set.grow();
-            set.add(e);
-            result = true;
+            if(set.size() == size) {
+                set.grow();
+            }
         }
         return result;
     }
@@ -48,6 +44,7 @@ public class SimpleSet<E> implements Iterable<E> {
         for (Object o : set.getObjects()) {
             if (e.equals(o)) {
                 result = true;
+                break;
             }
         }
         return result;
@@ -70,7 +67,7 @@ public class SimpleSet<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return next();
+                return set.get(indexIt++);
             }
         };
     }
