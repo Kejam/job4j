@@ -1,6 +1,7 @@
 package ru.job4j.list;
 
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 /**
@@ -11,7 +12,6 @@ public class DynContList<E> implements Iterable<E> {
 
     private Object[] list = new Object[10];
     private int index = 0;
-    private int indexIr = 0;
     private int modCount = 0;
 
     /**
@@ -59,17 +59,22 @@ public class DynContList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
+            int expectedModCount = modCount;
+            int counter = 0;
             @Override
             public boolean hasNext() {
-                return (indexIr < list.length);
+                return counter < list.length;
             }
 
             @Override
             public E next() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (E) list[indexIr++];
+                return (E) list[counter++];
             }
         };
     }
