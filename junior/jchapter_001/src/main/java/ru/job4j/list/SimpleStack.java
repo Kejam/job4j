@@ -1,14 +1,13 @@
 package ru.job4j.list;
 
 public class SimpleStack<E> extends SimpleArrayList<E> {
-
-    public SimpleStack() {
-        super();
-    }
+    DynContListS<E> list = new DynContListS<>();
     public E poll() {
-        return super.delete();
+        E result = list.get(getSize()-1);
+        list.delete();
+        return result;
     }
     public void push(E value) {
-        super.add(value);
+        list.add(value);
     }
 }

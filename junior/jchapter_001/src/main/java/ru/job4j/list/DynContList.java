@@ -63,7 +63,7 @@ public class DynContList<E> implements Iterable<E> {
             int counter = 0;
             @Override
             public boolean hasNext() {
-                return counter < list.length;
+                return counter < index;
             }
 
             @Override
