@@ -6,6 +6,7 @@ package ru.job4j.list;
  */
 public class SimpleQuery<T> {
     private SimpleStack<T> stack = new SimpleStack<>();
+    private SimpleStack<T> result = new SimpleStack<>();
     private int size;
 
     /**
@@ -22,11 +23,7 @@ public class SimpleQuery<T> {
      * @return
      */
     public T poll() {
-        SimpleStack<T> queue = convert(this.stack);
-        T result = queue.poll();
-        this.size--;
-        this.stack = convert(queue);
-        return result;
+        return result.poll();
     }
 
     /**
@@ -35,9 +32,8 @@ public class SimpleQuery<T> {
      * @return
      */
     private SimpleStack<T> convert(SimpleStack<T> list) {
-        SimpleStack<T> result = new SimpleStack<>();
         for (int i = 0; i < this.size; i++) {
-            result.push(list.poll());
+            result.push(stack.poll());
         }
         return result;
     }

@@ -29,6 +29,7 @@ public class SimpleSet<E> implements Iterable<E> {
             result = true;
             if(set.size() == size) {
                 set.grow();
+                size++;
             }
         }
         return result;
