@@ -20,7 +20,16 @@ public class EvenIt implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        return (index < array.length - 1 && array[index + 1] % 2 == 0);
+        boolean result = false;
+        while (index < array.length) {
+            if (array[index] % 2 == 0) {
+                result = true;
+                break;
+            } else {
+                index++;
+            }
+        }
+        return result;
     }
 
     /**
@@ -29,17 +38,9 @@ public class EvenIt implements Iterator<Integer> {
      */
     @Override
     public Integer next() {
-        Integer int1 = null;
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        while (index <= array.length) {
-            if (array[index] % 2 == 0) {
-                int1 = array[index++];
-                break;
-            }
-            index++;
-        }
-        return int1;
+        return array[index++];
     }
 }

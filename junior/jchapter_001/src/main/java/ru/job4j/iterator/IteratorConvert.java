@@ -1,28 +1,27 @@
 package ru.job4j.iterator;
-
-import javax.swing.text.html.HTMLDocument;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 public class IteratorConvert {
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
+            Iterator iterator = it.next();
             @Override
             public boolean hasNext() {
-                return it.hasNext();
+                this.check();
+                return iterator.hasNext();
             }
-
             @Override
-            public Integer next() {
-                Integer integer = null;
-                if (!hasNext()) {
+            public Integer next() throws NoSuchElementException {
+                this.check();
+                if (!iterator.hasNext()) {
                     throw new NoSuchElementException();
                 }
-
-                return integer;
+                return (Integer) iterator.next();
             }
-            Iterator it1() {
-                return it.next();
+            private void check() {
+                while (!iterator.hasNext() && it.hasNext()) {
+                    iterator = it.next();
+                }
             }
         };
     }
