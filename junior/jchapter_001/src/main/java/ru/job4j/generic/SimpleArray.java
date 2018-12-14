@@ -87,6 +87,10 @@ public class SimpleArray<T> {
         System.arraycopy(objects, index, objects, index - 1, objects.length - 1);
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Return element by index.
      * @param index

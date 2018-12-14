@@ -12,8 +12,7 @@ public class IteratorConvert {
             }
             @Override
             public Integer next() throws NoSuchElementException {
-                this.check();
-                if (!iterator.hasNext()) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 return (Integer) iterator.next();
