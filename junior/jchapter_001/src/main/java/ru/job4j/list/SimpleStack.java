@@ -1,18 +1,14 @@
 package ru.job4j.list;
 
-public class SimpleStack<T> {
-
-    private DynContListS<T> stack;
+public class SimpleStack<E> extends SimpleArrayList<E>{
 
     public SimpleStack() {
-        this.stack = new DynContListS<>();
+        super();
     }
-
-    public <T> Object poll() {
-        return stack.delete();
+    public E poll() {
+        return super.delete();
     }
-
-    public void push(T value) {
-        stack.add(value);
+    public void push(E value) {
+        super.add(value);
     }
 }
