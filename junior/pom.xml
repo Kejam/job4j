@@ -10,5 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>jchapter_001</module>
+        <module>jchapter_002</module>
     </modules>
 </project>
