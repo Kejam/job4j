@@ -10,10 +10,6 @@ public class Class {
     public int index = 0;
 
     public static void main(String[] args) {
-        thread1.start;
-        thread2.start;
-        for (int i: ar) {
-            System.out.println(i);
-        }
+
     }
 }
