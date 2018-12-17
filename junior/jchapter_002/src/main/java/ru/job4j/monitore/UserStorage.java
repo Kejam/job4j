@@ -28,7 +28,7 @@ public class UserStorage {
         return result;
     }
 
-    public User get(int id) {
+    public synchronized User get(int id) {
         User result = null;
         for (User user1: list) {
             if (user1.getId() == id) {
