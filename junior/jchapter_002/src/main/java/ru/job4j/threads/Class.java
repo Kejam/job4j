@@ -12,7 +12,7 @@ public class Class {
     public static void main(String[] args) {
         thread1.start;
         thread2.start;
-        for(int i: ar) {
+        for (int i: ar) {
             System.out.println(i);
         }
     }

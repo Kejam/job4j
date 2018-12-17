@@ -24,10 +24,10 @@ public class SimpleSet<E> implements Iterable<E> {
      */
     public boolean add(E e) {
         boolean result = false;
-        if(!checkRepeat(e)) {
+        if (!checkRepeat(e)) {
             set.add(e);
             result = true;
-            if(set.size() == size) {
+            if (set.size() == size) {
                 set.grow();
                 size++;
             }
