@@ -28,7 +28,7 @@ public class RectangleMove implements Runnable {
                     deltaY = -deltaY;
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
