@@ -26,7 +26,7 @@ public class ParallelSearch {
         new Thread(
                 () -> {
                     for (int index = 0; index != 3; index++) {
-                        queue.offer(index);
+                        //queue.offer(index);
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {

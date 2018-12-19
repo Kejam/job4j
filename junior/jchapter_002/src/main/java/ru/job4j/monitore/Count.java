@@ -5,7 +5,7 @@ import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public class Count {
-    @GuardedBy("value")
+    @GuardedBy("this")
     private int value;
 
     public synchronized void increment() {

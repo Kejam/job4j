@@ -9,7 +9,7 @@ import java.util.Iterator;
 @ThreadSafe
 public class Wrapper<E> implements Iterable<E>{
     @GuardedBy("this")
-    DynContListS<E> list = new DynContListS<E>();
+    private DynContListS<E> list = new DynContListS<E>();
 
     public synchronized void add(E value) {
         list.add(value);
@@ -33,7 +33,7 @@ public class Wrapper<E> implements Iterable<E>{
     }
 
     private DynContListS<E> copy(DynContListS<E> from){
-        DynContListS<E> copy = new DynContListS<E>();
+         DynContListS<E> copy = new DynContListS<E>();
         for (int i = 0; i < from.getSize(); i++) {
             copy.add(from.get(i));
         }
