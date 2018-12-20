@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 public class SimpleBlockingQueueTest {
     @Test
     public void when() throws InterruptedException {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);
         Thread a = new Thread() {
             @Override
             public void run() {

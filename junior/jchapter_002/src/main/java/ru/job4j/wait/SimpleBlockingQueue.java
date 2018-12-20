@@ -6,26 +6,35 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
+
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
+    private final int size;
 
 
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
+    public SimpleBlockingQueue(int size) {
+        this.size = size;
+    }
+
     public synchronized void offer(T value) throws InterruptedException {
-        while (queue.isEmpty()) {
+        while (queue.size() == size) {
             queue.offer(value);
+            notify();
         }
     }
 
 
 
     public T poll() throws InterruptedException {
-        Object result = null;
-        while (!queue.isEmpty()) {
-            result = queue.poll();
+        while (queue.size() == 0) {
+            wait();
         }
-        return (T) result;
+        T result = queue.poll();
+        notify();
+        return result;
     }
 }
