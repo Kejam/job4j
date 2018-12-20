@@ -37,4 +37,8 @@ public class SimpleBlockingQueue<T> {
         notify();
         return result;
     }
+
+    public int getSize() {
+        return size;
+    }
 }
