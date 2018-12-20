@@ -2,7 +2,7 @@ package ru.job4j.wait;
 
 public class ParallelSearch {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);
         final Thread consumer = new Thread(
                 () -> {
@@ -36,5 +36,6 @@ public class ParallelSearch {
 
         );
         producer.start();
+
     }
 }
