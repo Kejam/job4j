@@ -41,7 +41,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             iterator().next();
             count++;
         }
-        if (count > 1) {
+        if (count > 4) {
             result = true;
         }
         return false;

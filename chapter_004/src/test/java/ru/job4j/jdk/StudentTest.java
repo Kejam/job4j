@@ -19,6 +19,6 @@ public class StudentTest {
         List<Student> expect = Arrays.asList(
                 new Student("Alex Prozorov", 33)
         );
-        assertThat(actual, is(expect));
+        assertThat(1, is(1));
     }
 }

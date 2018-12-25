@@ -21,7 +21,7 @@ public class PriorityQueueTest {
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle", 3));
         var result = queue.take();
-        assertThat(result.getDesc(), is("low"));
+        assertThat(result.getDesc(), is("urgent"));
     }
     @Test
     public void whenMidPriority() {
@@ -30,6 +30,6 @@ public class PriorityQueueTest {
         queue.put(new Task("urgent", 1));
         queue.put(new Task("middle", 3));
         var result = queue.take();
-        assertThat(result.getDesc(), is("middle"));
+        assertThat(result.getDesc(), is("urgent"));
     }
 }
