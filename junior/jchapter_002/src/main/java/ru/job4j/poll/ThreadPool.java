@@ -12,11 +12,15 @@ public class ThreadPool {
     private final SimpleBlockingQueue<Runnable> tasks = new SimpleBlockingQueue<>(10);
     private int size = Runtime.getRuntime().availableProcessors();
 
-    public void work(Runnable job) {
+    public void work(Runnable job) throws InterruptedException {
+        if(tasks.getSize() < 1) {
+            job.wait();
+        }
+        tasks.offer(job);
+    }
+
+    public void shutdown() throws InterruptedException {
 
     }
 
-    public void shutdown() {
-
-    }
 }
