@@ -27,7 +27,7 @@ public class BaseStorage {
         if (list.size() == 0) {
             wait();
         }
-        if(list.containsKey(model.getId())) {
+        if (list.containsKey(model.getId())) {
             list.remove(model.getId());
         }
     }

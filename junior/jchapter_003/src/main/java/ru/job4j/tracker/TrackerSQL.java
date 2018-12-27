@@ -17,6 +17,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                     config.getProperty("username"),
                     config.getProperty("password")
             );
+            if (!checkTable()) {
+                creatTable();
+            }
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -24,11 +27,8 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
     @Override
     public Item add(Item item)  {
-        if (!checkTable()) {
-            creatTable();
-        }
         Item item1 = item;
-        try (PreparedStatement ps  = this.connection.prepareStatement("select into tracker(name, description, timeCreate) values (?,?,?)")) {
+        try (PreparedStatement ps  = this.connection.prepareStatement("insert into tracker(name, description, timeCreate) values (?,?,?)")) {
             ps.setString(1, item.getName());
             ps.setString(2, item.getDesc());
             ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
@@ -102,7 +102,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public Item findById(String id) {
         Item item = null;
         int index = 0;
-        try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where id =?")) {
+        try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where id = ?")) {
             ps.setInt(1, Integer.parseInt(id));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -118,13 +118,8 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     private void creatTable() {
-         try (PreparedStatement ps = this.connection.prepareStatement("create table tracker (\n" +
-                "\tid serial primary key,\n" +
-                "\tname varchar(2000),\n" +
-                "\tdescription text,\n" +
-                "\ttimeCreate timestamp\n" +
-                ");")
-         ) {
+         try {
+             PreparedStatement ps = this.connection.prepareStatement("create table tracker (id serial primary key,name varchar(2000),description text,timeCreate timestamp);");
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -134,7 +129,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         boolean result = false;
         try {
             DatabaseMetaData dbm = this.connection.getMetaData();
-            ResultSet tables = dbm.getTables(null, null, "employee", null);
+            ResultSet tables = dbm.getTables(null, null, "tracker", null);
             if (tables.next()) {
                 result = true;
             }

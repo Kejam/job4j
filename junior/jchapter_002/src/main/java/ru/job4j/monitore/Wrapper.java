@@ -7,7 +7,7 @@ import ru.job4j.list.DynContListS;
 
 import java.util.Iterator;
 @ThreadSafe
-public class Wrapper<E> implements Iterable<E>{
+public class Wrapper<E> implements Iterable<E> {
     @GuardedBy("this")
     private DynContListS<E> list = new DynContListS<E>();
 
@@ -32,7 +32,7 @@ public class Wrapper<E> implements Iterable<E>{
         return copy(this.list).iterator();
     }
 
-    private DynContListS<E> copy(DynContListS<E> from){
+    private DynContListS<E> copy(DynContListS<E> from) {
          DynContListS<E> copy = new DynContListS<E>();
         for (int i = 0; i < from.getSize(); i++) {
             copy.add(from.get(i));

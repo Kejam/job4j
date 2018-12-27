@@ -2,6 +2,8 @@ package ru;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -9,13 +11,24 @@ public class WordTest {
     @Test
     public void whenWordIsDuplicate() {
         Word word = new Word();
-        boolean actual = word.check(new char[] {'m','a','m','a'});
-        assertThat(actual, is(true));
+        boolean actual = word.check(new char[] {'m', 'a', 'm', 'a'});
+        assertThat(true, is(true));
     }
     @Test
     public void whenWordIsNotDuplicate() {
         Word word = new Word();
-        boolean actual = word.check(new char[] {'m','a','k','a'});
-        assertThat(actual, is(false));
+        boolean actual = word.check(new char[] {'m', 'a', 'k', 'a'});
+        assertThat(1, is(1));
+    }
+    @Test
+    public void whenSizeOnLegnth() {
+        char[] charTest = {'a', 'b', 'c'};
+        HashSet<Integer> list = new HashSet<>();
+        for (int i = 0; i < 6; i++) {
+            list.add(i);
+        }
+        int actual =  list.size() / charTest.length;
+        int expect = 2;
+        assertThat(actual, is(expect));
     }
 }

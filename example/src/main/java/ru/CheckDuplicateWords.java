@@ -3,9 +3,9 @@ package ru;
 public class CheckDuplicateWords {
 
 
-    public boolean check(char[] wordOne,char[] wordTwo) {
+    public boolean check(char[] wordOne, char[] wordTwo) {
         boolean result = true;
-        if(wordOne.length != wordTwo.length) {
+        if (wordOne.length != wordTwo.length) {
             result = false;
         }
         for (int i = 0; i < wordOne.length; i++) {

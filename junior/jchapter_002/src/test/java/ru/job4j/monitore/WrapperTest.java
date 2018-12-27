@@ -13,7 +13,7 @@ public class WrapperTest {
         final Wrapper<User> wrapper = new Wrapper<User>();
 
         Runnable runnable = () -> {
-            wrapper.add(new User(1,2));
+            wrapper.add(new User(1, 2));
         };
         Thread t = new Thread(runnable);
         Thread b = new Thread() {
