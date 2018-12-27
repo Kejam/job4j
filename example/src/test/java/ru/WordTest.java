@@ -31,4 +31,19 @@ public class WordTest {
         int expect = 2;
         assertThat(actual, is(expect));
     }
+    @Test
+    public void whenContains() {
+        Word word = new Word();
+        assertThat(word.contain("mama", "ma"), is(true));
+    }
+    @Test
+    public void whenNotContains() {
+        Word word = new Word();
+        assertThat(word.contain("mama", "mt"), is(false));
+    }
+    @Test
+    public void whenStringIsLess() {
+        Word word = new Word();
+        assertThat(word.contain("ma", "mtsd"), is(false));
+    }
 }

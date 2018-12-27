@@ -15,4 +15,24 @@ public class Word {
         }
         return result;
     }
+    public boolean contain(String wordIn, String containIn) {
+        boolean result = false;
+        char[] word = wordIn.toCharArray();
+        char[] contain = containIn.toCharArray();
+        int count = 0;
+        if (word.length > contain.length) {
+            for (int i = 0; i < word.length; i++) {
+                if (word[i] == contain[count] && i + contain.length <= word.length ) {
+                    count++;
+                } else {
+                    count = 0;
+                }
+                if (count == contain.length) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 }
