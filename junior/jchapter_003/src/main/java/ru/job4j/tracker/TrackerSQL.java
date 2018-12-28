@@ -7,6 +7,10 @@ import java.util.Properties;
 public class TrackerSQL implements ITracker, AutoCloseable {
     private Connection connection;
 
+    public TrackerSQL() {
+        this.init();
+    }
+
     public boolean init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -69,6 +73,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 items[index++] = new Item(
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3)
                 );
@@ -83,11 +88,12 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     public Item[] findByName(String key) {
         Item[] items = new Item[100];
         int index = 0;
-        try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where like ='%?%'")) {
+        try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where name = ?")) {
             ps.setString(1, key);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 items[index++] = new Item(
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3)
                 );
@@ -107,6 +113,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 item = new Item(
+                        rs.getString(1),
                         rs.getString(2),
                         rs.getString(3)
                 );
@@ -120,6 +127,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     private void creatTable() {
          try {
              PreparedStatement ps = this.connection.prepareStatement("create table tracker (id serial primary key,name varchar(2000),description text,timeCreate timestamp);");
+             ps.execute();
          } catch (SQLException e) {
              e.printStackTrace();
          }

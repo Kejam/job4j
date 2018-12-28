@@ -34,6 +34,13 @@ public class Item {
      * @param name
      * @param desc
      */
+    public Item(String id, String name, String desc) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.time = System.currentTimeMillis();
+    }
+
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
