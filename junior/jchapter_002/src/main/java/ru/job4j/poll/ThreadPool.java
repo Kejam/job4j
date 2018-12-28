@@ -13,7 +13,7 @@ public class ThreadPool {
     private int size = Runtime.getRuntime().availableProcessors();
 
     public void work(Runnable job) throws InterruptedException {
-        if(tasks.getSize() < 1) {
+        if (tasks.getSize() < 1) {
             job.wait();
         }
         tasks.offer(job);

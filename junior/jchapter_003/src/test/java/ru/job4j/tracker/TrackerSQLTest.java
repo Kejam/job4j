@@ -17,7 +17,7 @@ public class TrackerSQLTest {
     public void whenAddInTracker() {
         TrackerSQL sql = new TrackerSQL();
         sql.init();
-        Item item = new Item("Alex","Can help you?");
+        Item item = new Item("Alex", "Can help you?");
         sql.add(item);
         assertThat(sql.findById("5").getName(), is(item.getName()));
     }

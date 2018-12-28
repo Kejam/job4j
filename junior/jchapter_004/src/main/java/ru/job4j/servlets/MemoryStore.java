@@ -4,7 +4,7 @@ import ru.job4j.logic.User;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MemoryStore implements Store{
+public class MemoryStore implements Store {
     private static  MemoryStore instance;
 
     private CopyOnWriteArrayList<User> list;

@@ -7,8 +7,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ValidateService extends Validate {
     private static ValidateService instance = new ValidateService();
-    private ValidateService(){};
-    public static Validate getInstance(){
+    private ValidateService() {
+
+    };
+    public static Validate getInstance() {
         return instance;
     }
     private static Store logic = MemoryStore.getInstance();
