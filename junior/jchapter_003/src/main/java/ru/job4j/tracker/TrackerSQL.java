@@ -86,7 +86,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item[] findByName(String key) {
-        Item[] items = new Item[100];
+        Item[] items = new Item[countTable()];
         int index = 0;
         try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where name = ?")) {
             ps.setString(1, key);
@@ -107,7 +107,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item findById(String id) {
         Item item = null;
-        int index = 0;
         try (PreparedStatement ps = this.connection.prepareStatement("select * from tracker where id = ?")) {
             ps.setInt(1, Integer.parseInt(id));
             ResultSet rs = ps.executeQuery();
@@ -155,4 +154,18 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             e.printStackTrace();
         }
     }
+
+    private int countTable() {
+        int count = 0;
+        try (PreparedStatement ps = this.connection.prepareStatement("select count(*) from tracker;")) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 }
