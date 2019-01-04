@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public interface Store {
     boolean add(User user);
-    boolean update(User user, int id);
+    boolean update(int id, String name);
     boolean delete(int id);
     CopyOnWriteArrayList<User> findAll();
     User findById(int id);

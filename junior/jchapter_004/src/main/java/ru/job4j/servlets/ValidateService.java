@@ -7,18 +7,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ValidateService extends Validate {
     private static ValidateService instance = new ValidateService();
+    private static Store logic;
     private ValidateService() {
-
+        logic = MemoryStore.getInstance();
     };
     public static Validate getInstance() {
         return instance;
     }
-    private static Store logic = MemoryStore.getInstance();
     public boolean add(User user) {
         return logic.add(user);
     }
-    public boolean update(User user, int id) {
-        return  logic.update(user, id);
+    public boolean update(int id, String name) {
+        return  logic.update(id, name);
     }
     public boolean delete(int id) {
         boolean result = false;

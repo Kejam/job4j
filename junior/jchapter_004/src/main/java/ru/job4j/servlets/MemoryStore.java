@@ -32,10 +32,10 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean update(User user, int id) {
+    public boolean update(int id, String name) {
         boolean result = false;
-        list.set(id, user);
-        if (list.contains(user)) {
+        list.get(id).setName(name);
+        if (list.get(id).equals(name)) {
             result = true;
         }
         return result;
