@@ -9,7 +9,7 @@ public class User {
     private String login;
     private String email;
     private long createDat;
-    public User(int id, String name, String login, String email) {
+    public User(String name, String login, String email) {
         this.id = id;
         this.name = name;
         this.login = login;

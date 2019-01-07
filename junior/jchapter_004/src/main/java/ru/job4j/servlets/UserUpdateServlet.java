@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserUpdateServlet extends HttpServlet {
-    private final MemoryStore storage = MemoryStore.getInstance();
+    private final ValidateService storage = ValidateService.getInstance();
     private String getHtml(String message, String method, String form) {
         return "<!DOCTYPE html>"
                 + "<html lang=\"en\">"
@@ -28,12 +28,14 @@ public class UserUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        int id = Integer.parseInt(req.getParameter("id")) - 1;
+        int id = Integer.parseInt(req.getParameter("id"));
         User user = storage.findById(id);
+        if (user == null) {
+            var html = this.getHtml("","Users not found","");
+        }
         var html = this.getHtml(
                 "",
                 "<form action='" + req.getContextPath() + "/list' method='post'>"
-                        + "Id : <input type='text' value='" + user.getId() + "' name='id'/>"
                         + "Name : <input type='text' value='" + user.getName() + "' name='name'/>"
                         + "<input type='submit' value='update'>"
                         + "</form>",

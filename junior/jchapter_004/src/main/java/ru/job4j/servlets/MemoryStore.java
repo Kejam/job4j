@@ -2,6 +2,7 @@ package ru.job4j.servlets;
 
 import ru.job4j.logic.User;
 
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MemoryStore implements Store {
@@ -24,6 +25,7 @@ public class MemoryStore implements Store {
     @Override
     public boolean add(User user) {
         boolean result = false;
+        user.setId(generateID());
         list.add(user);
         if (list.contains(user)) {
             result = true;
@@ -62,7 +64,31 @@ public class MemoryStore implements Store {
 
     @Override
     public User findById(int id) {
-        User user = list.get(id);
+        User user = null;
+        for(User user1: list) {
+            if (user1.getId() == id) {
+                user = user1;
+            }
+        }
         return user;
+    }
+
+    private int generateID() {
+        Random random = new Random();
+        int id = 1;
+        while (checkID(id)) {
+            id = random.nextInt(10000);
+        }
+        return id;
+    }
+
+    private boolean checkID(int ID) {
+        boolean result = false;
+        for (User user: list) {
+            if (user.getId() == ID) {
+                result = true;
+            }
+        }
+        return result;
     }
 }

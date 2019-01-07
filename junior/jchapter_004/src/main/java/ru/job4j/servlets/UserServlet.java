@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class UserServlet extends HttpServlet {
-    private final MemoryStore storage = MemoryStore.getInstance();
+    private final ValidateService storage = ValidateService.getInstance();
     private final Map<CRUD, Function<HttpServletRequest, Boolean>> dispatcher = new HashMap<>();
 
     @Override
@@ -23,7 +23,6 @@ public class UserServlet extends HttpServlet {
                 CRUD.ADD,
                 request -> storage.add(
                         new User(
-                                Integer.parseInt(request.getParameter("id")),
                                 request.getParameter("name"),
                                 request.getParameter("login"),
                                 request.getParameter("email")

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserCreateServlet extends HttpServlet {
-    private final MemoryStore storage = MemoryStore.getInstance();
+    private final ValidateService storage = ValidateService.getInstance();
     private String getHtml(String message, String method, String form) {
         return "<!DOCTYPE html>"
                 + "<html lang=\"en\">"
@@ -30,8 +30,7 @@ public class UserCreateServlet extends HttpServlet {
         final PrintWriter writer = new PrintWriter(resp.getOutputStream());
         var html = this.getHtml(
                 "",
-                "<form action='" + req.getContextPath() + "/create' method='post'>"
-                        + "Id : <input type='text' name='id'/>"
+                "<form action='" + req.getContextPath() + "/list' method='post'>"
                         + "Name : <input type='text' name='name'/>"
                         + "Login : <input type='text' name='login'/>"
                         + "Email : <input type='text' name='email'/>"
@@ -48,7 +47,6 @@ public class UserCreateServlet extends HttpServlet {
         try {
             storage.add(
                     new User(
-                            Integer.parseInt(req.getParameter("id")),
                             req.getParameter("name"),
                             req.getParameter("login"),
                             req.getParameter("email")

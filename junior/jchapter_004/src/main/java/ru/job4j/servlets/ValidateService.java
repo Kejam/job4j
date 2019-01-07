@@ -11,7 +11,7 @@ public class ValidateService extends Validate {
     private ValidateService() {
         logic = MemoryStore.getInstance();
     };
-    public static Validate getInstance() {
+    public static ValidateService getInstance() {
         return instance;
     }
     public boolean add(User user) {
@@ -21,8 +21,7 @@ public class ValidateService extends Validate {
         return  logic.update(id, name);
     }
     public boolean delete(int id) {
-        boolean result = false;
-        return result;
+        return logic.delete(id);
     }
     public CopyOnWriteArrayList<User> findAll() {
         return logic.findAll();
