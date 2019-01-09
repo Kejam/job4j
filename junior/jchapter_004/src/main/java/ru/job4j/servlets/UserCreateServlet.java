@@ -30,7 +30,7 @@ public class UserCreateServlet extends HttpServlet {
         final PrintWriter writer = new PrintWriter(resp.getOutputStream());
         var html = this.getHtml(
                 "",
-                "<form action='" + req.getContextPath() + "/list' method='post'>"
+                "<form action='" + req.getContextPath() + "/create' method='post'>"
                         + "Name : <input type='text' name='name'/>"
                         + "Login : <input type='text' name='login'/>"
                         + "Email : <input type='text' name='email'/>"
@@ -52,6 +52,7 @@ public class UserCreateServlet extends HttpServlet {
                             req.getParameter("email")
                     )
             );
+            resp.sendRedirect("/list");
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

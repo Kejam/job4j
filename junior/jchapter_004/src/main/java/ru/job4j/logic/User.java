@@ -17,6 +17,14 @@ public class User {
         this.createDat = System.currentTimeMillis();
     }
 
+    public String getID() {
+        return String.valueOf(this.id);
+    }
+
+    public String getDate() {
+        return String.valueOf(this.createDat);
+    }
+
     public int getId() {
         return id;
     }

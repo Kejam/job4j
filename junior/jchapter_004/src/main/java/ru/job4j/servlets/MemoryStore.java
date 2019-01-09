@@ -68,6 +68,7 @@ public class MemoryStore implements Store {
         for(User user1: list) {
             if (user1.getId() == id) {
                 user = user1;
+                break;
             }
         }
         return user;
@@ -87,6 +88,7 @@ public class MemoryStore implements Store {
         for (User user: list) {
             if (user.getId() == ID) {
                 result = true;
+                break;
             }
         }
         return result;

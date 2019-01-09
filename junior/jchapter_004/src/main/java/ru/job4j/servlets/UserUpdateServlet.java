@@ -35,7 +35,7 @@ public class UserUpdateServlet extends HttpServlet {
         }
         var html = this.getHtml(
                 "",
-                "<form action='" + req.getContextPath() + "/list' method='post'>"
+                "<form action='" + req.getContextPath() + "/update' method='post'>"
                         + "Name : <input type='text' value='" + user.getName() + "' name='name'/>"
                         + "<input type='submit' value='update'>"
                         + "</form>",
@@ -52,6 +52,7 @@ public class UserUpdateServlet extends HttpServlet {
                     Integer.parseInt(req.getParameter("id")),
                     req.getParameter("name")
             );
+            resp.sendRedirect("/list");
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
