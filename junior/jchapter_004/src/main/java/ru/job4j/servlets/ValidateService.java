@@ -17,8 +17,11 @@ public class ValidateService extends Validate {
     public boolean add(User user) {
         return logic.add(user);
     }
-    public boolean update(int id, String name) {
-        return  logic.update(id, name);
+    public boolean update(int id, User user) {
+        if (logic.findById(id) == null) {
+            new Exception("User not found");
+        }
+        return logic.update(id, user);
     }
     public boolean delete(int id) {
         return logic.delete(id);

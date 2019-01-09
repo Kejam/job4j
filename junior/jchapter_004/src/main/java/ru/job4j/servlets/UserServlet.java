@@ -33,7 +33,11 @@ public class UserServlet extends HttpServlet {
                 CRUD.UPDATE,
                 request -> storage.update(
                         Integer.parseInt(request.getParameter("id")),
-                        request.getParameter("name")
+                        new User(
+                                request.getParameter("name"),
+                                request.getParameter("email"),
+                                request.getParameter("login")
+                        )
                 )
         );
         this.dispatcher.put(

@@ -34,11 +34,14 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean update(int id, String name) {
+    public boolean update(int id, User user) {
         boolean result = false;
-        list.get(id).setName(name);
-        if (list.get(id).equals(name)) {
-            result = true;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(id).getId() == id) {
+                list.add(i, user);
+                result = true;
+                break;
+            }
         }
         return result;
     }
