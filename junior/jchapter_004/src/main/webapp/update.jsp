@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="/update" method="post">
-    ID: <input type="text" name="id" value="1"><br>
+    ID: <input type="text" name="id" value="${param.id}"><br>
     Name: <input type="text" name="name" value="name"><br>
     Email: <input type="text" name="email" value="email"><br>
     Login: <input type="text" name="login" value="login"><br>

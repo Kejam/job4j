@@ -22,22 +22,12 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final PrintWriter writer = resp.getWriter();
-        final String action = req.getParameter("action").toUpperCase();
-        for (CRUD predict: this.dispatcher.keySet()) {
-            if (predict.equals(action)) {
-                dispatcher.get(predict);
-            }
-        }
-        writer.flush();
+        resp.sendRedirect("/index.jsp");
     }
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.dispatcher.put(
-                CRUD.UPDATE,
-                request -> df
         this.dispatcher.put(
                 CRUD.DELETE,
                 request -> storage.delete(Integer.parseInt(request.getParameter("id")))

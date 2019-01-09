@@ -37,7 +37,7 @@ public class MemoryStore implements Store {
     public boolean update(int id, User user) {
         boolean result = false;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(id).getId() == id) {
+            if (list.get(i).getId() == id) {
                 list.add(i, user);
                 result = true;
                 break;
@@ -49,9 +49,12 @@ public class MemoryStore implements Store {
     @Override
     public boolean delete(int id) {
         boolean result = false;
-        list.remove(id);
-        if (!list.contains(list.get(id))) {
-            result = true;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == id) {
+                list.remove(i);
+                result = true;
+                break;
+            }
         }
         return result;
     }

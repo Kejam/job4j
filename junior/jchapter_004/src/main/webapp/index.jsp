@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="ru.job4j.servlets.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>List users</title>
@@ -40,32 +41,26 @@ List users
     </tr>
     <c:forEach var="User" items="${ValidateService.getInstance().findAll()}">
         <tr>
-            <th>
+            <td>
                 ${User.getName()}
-            </th>
-            <th>
+            </td>
+            <td>
                     ${User.getID()}
-            </th>
-            <th>
+            </td>
+            <td>
                     ${User.getEmail()}
-            </th>
-            <th>
+            </td>
+            <td>
                     ${User.getLogin()}
-            </th>
-            <th>
+            </td>
+            <td>
                     ${User.getDate()}
+            </td>
+            <td>
+                <a href="/update.jsp?id=${User.getID()}">edit</a>
             </th>
             <th>
-                <form action="/list" method="post">
-                    <input type="submit" name="action" value="update">
-                    <input type="text" name="id" value="${User.getID()}">
-                </form>
-            </th>
-            <th>
-                <form action="/list" method="post">
-                    <input type="submit" name="action" value="delete">
-                    <input type="text" name="id" value="${User.getID()}>
-                </form>
+                <a href="/delete?id=${User.getID()}">delete</a>
             </th>
         </tr>
     </c:forEach>
