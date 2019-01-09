@@ -12,8 +12,9 @@ public class DBStore implements Store<User> {
 
     public DBStore() {
         SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/postgres");
-        SOURCE.setUsername("kejam");
+        SOURCE.setUsername("postgres");
         SOURCE.setPassword("fghrty212vyt");
+        SOURCE.setDriverClassName("org.postgresql.Driver");
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
