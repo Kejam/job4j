@@ -5,11 +5,11 @@ import ru.job4j.logic.User;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ValidateService extends Validate {
+public class ValidateService<User> extends Validate {
     private static ValidateService instance = new ValidateService();
     private static Store logic;
     private ValidateService() {
-        logic = MemoryStore.getInstance();
+        logic = DBStore.getInstance();
     };
     public static ValidateService getInstance() {
         return instance;
@@ -30,6 +30,6 @@ public class ValidateService extends Validate {
         return logic.findAll();
     }
     public User findById(int id) {
-        return logic.findById(id);
+        return (User) logic.findById(id);
     }
 }

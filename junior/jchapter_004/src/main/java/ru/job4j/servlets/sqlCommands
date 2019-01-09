@@ -1,0 +1,7 @@
+create table DBSTORE(
+	id serial primary key,
+	name character(2000),
+	login character(2000),
+	email character(2000),
+	createDate timestamp
+);

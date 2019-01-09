@@ -1,6 +1,6 @@
 package ru.job4j.logic;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class User {
@@ -8,13 +8,21 @@ public class User {
     private String name;
     private String login;
     private String email;
-    private long createDat;
+    private Timestamp createDat;
     public User(String name, String login, String email) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDat = System.currentTimeMillis();
+        this.createDat = new Timestamp(System.currentTimeMillis());
+    }
+
+    public User(String id, String name, String login, String email, String createDate) {
+        this.id = Integer.parseInt(id);
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDat = Timestamp.valueOf(createDate);
     }
 
     public String getID() {
@@ -57,7 +65,7 @@ public class User {
         this.email = email;
     }
 
-    public long getCreateDat() {
+    public Timestamp getCreateDat() {
         return createDat;
     }
 
