@@ -12,6 +12,7 @@ public class UserUpdateServlet extends HttpServlet {
     private final ValidateService storage = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("WEB-INF/views/update.jsp").forward(req, resp);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class UserUpdateServlet extends HttpServlet {
                             req.getParameter("email")
                     )
             );
-            resp.sendRedirect("/index.jsp");
+            resp.sendRedirect("/");
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

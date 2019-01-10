@@ -7,13 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class UserCreateServlet extends HttpServlet {
     private final ValidateService storage = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.getRequestDispatcher("WEB-INF/views/create.jsp").forward(req, resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +24,7 @@ public class UserCreateServlet extends HttpServlet {
                             req.getParameter("email")
                     )
             );
-            resp.sendRedirect("/index.jsp");
+            resp.sendRedirect("/");
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

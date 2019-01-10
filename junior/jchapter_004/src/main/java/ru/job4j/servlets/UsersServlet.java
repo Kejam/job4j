@@ -17,12 +17,13 @@ public class UsersServlet extends HttpServlet {
     private final ValidateService storage = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setAttribute("Users", storage.findAll());
+        req.getRequestDispatcher("WEB-INF/views/list.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/index.jsp");
+        resp.sendRedirect("/");
     }
 
     @Override

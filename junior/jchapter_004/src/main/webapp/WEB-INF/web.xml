@@ -14,23 +14,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>ru.job4j.servlets.UserServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>UsersServlet</servlet-name>
         <servlet-class>ru.job4j.servlets.UsersServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/list</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet>

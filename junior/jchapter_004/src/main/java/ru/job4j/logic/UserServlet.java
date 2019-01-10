@@ -1,6 +1,8 @@
-package ru.job4j.servlets;
+package ru.job4j.logic;
 
 import ru.job4j.logic.User;
+import ru.job4j.servlets.CRUD;
+import ru.job4j.servlets.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

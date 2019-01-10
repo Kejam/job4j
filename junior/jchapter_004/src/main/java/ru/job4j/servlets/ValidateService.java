@@ -6,7 +6,7 @@ import ru.job4j.logic.User;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ValidateService<User> extends Validate {
-    private static ValidateService instance = new ValidateService();
+    private static final ValidateService instance = new ValidateService();
     private static Store logic;
     private ValidateService() {
         logic = DBStore.getInstance();

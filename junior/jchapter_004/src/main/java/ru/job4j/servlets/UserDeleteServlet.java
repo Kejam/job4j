@@ -12,10 +12,6 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         storage.delete(Integer.parseInt(req.getParameter("id")));
-        resp.sendRedirect("/index.jsp");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/");
     }
 }

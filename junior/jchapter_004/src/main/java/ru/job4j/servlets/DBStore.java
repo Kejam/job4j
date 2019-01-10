@@ -8,7 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DBStore implements Store<User> {
     private static final BasicDataSource SOURCE = new BasicDataSource();
-    private static DBStore INSTANCE = new DBStore();
+    private static final DBStore INSTANCE = new DBStore();
 
     public DBStore() {
         SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/postgres");

@@ -39,28 +39,28 @@ List users
             Delete
         </th>
     </tr>
-    <c:forEach var="User" items="${ValidateService.getInstance().findAll()}">
+    <c:forEach items="${Users}" var="user">
         <tr>
             <td>
-                ${User.getName()}
+                    <c:out value="${user.name}"></c:out>
             </td>
             <td>
-                    ${User.getID()}
+                    <c:out value="${user.getID()}"></c:out>
             </td>
             <td>
-                    ${User.getEmail()}
+                    <c:out value="${user.email}"></c:out>
             </td>
             <td>
-                    ${User.getLogin()}
+                    <c:out value="${user.login}"></c:out>
             </td>
             <td>
-                    ${User.getDate()}
+                    <c:out value="${user.createDate}"></c:out>
             </td>
             <td>
-                <a href="/update.jsp?id=${User.getID()}">edit</a>
+                <a href="/WEB-INF/views/update.jspews/update.jsp?id=${user.getID()}">edit</a>
             </th>
             <th>
-                <a href="/delete?id=${User.getID()}">delete</a>
+                <a href="/delete?id=${user.getID()}">delete</a>
             </th>
         </tr>
     </c:forEach>
