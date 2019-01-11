@@ -1,4 +1,4 @@
-package ru.job4j.servlets;
+package ru.job4j.other;
 
 import ru.job4j.logic.User;
 

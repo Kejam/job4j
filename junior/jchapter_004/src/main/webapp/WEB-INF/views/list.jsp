@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="ru.job4j.servlets.ValidateService" %>
+<%@ page import="ru.job4j.validate.ValidateService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -33,11 +33,15 @@ List users
             Date
         </th>
         <th>
+            Password
+        </th>
+        <th>
             Update
         </th>
         <th>
             Delete
         </th>
+
     </tr>
     <c:forEach items="${Users}" var="user">
         <tr>
@@ -55,6 +59,9 @@ List users
             </td>
             <td>
                     <c:out value="${user.createDate}"></c:out>
+            </td>
+            <td>
+                <c:out value="${user.password}"></c:out>
             </td>
             <td>
                 <a href="/WEB-INF/views/update.jspews/update.jsp?id=${user.getID()}">edit</a>

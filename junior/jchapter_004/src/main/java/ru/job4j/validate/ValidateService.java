@@ -1,7 +1,8 @@
-package ru.job4j.servlets;
+package ru.job4j.validate;
 
 import org.apache.commons.lang.Validate;
-import ru.job4j.logic.User;
+import ru.job4j.logic.DBStore;
+import ru.job4j.logic.Store;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 

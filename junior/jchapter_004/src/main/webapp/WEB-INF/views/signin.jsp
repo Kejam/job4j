@@ -1,23 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Kejam
-  Date: 1/9/2019
-  Time: 1:57 PM
+  User: aprozorov
+  Date: 11.01.2019
+  Time: 11:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Update user</title>
+    <title>Sign In</title>
 </head>
 <body>
-<form action="/update" method="post">
-    ID: <input type="text" name="id" value="${param.id}"><br>
-    Name: <input type="text" name="name" value="name"><br>
-    Email: <input type="text" name="email" value="email"><br>
+<form action="/signin" method="post">
     Login: <input type="text" name="login" value="login"><br>
     Password: <input type="text" name="password" value="password"><br>
-    <input type="submit" value="update">
+    <input type="submit" value="Sign In">
 </form>
 </body>
 </html>

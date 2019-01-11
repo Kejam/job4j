@@ -1,6 +1,7 @@
 package ru.job4j.servlets;
 
 import ru.job4j.logic.User;
+import ru.job4j.validate.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,8 @@ public class UserUpdateServlet extends HttpServlet {
                     new User(
                             req.getParameter("name"),
                             req.getParameter("login"),
-                            req.getParameter("email")
+                            req.getParameter("email"),
+                            req.getParameter("password")
                     )
             );
             resp.sendRedirect("/");

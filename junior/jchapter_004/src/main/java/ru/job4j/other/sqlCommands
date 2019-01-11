@@ -3,5 +3,6 @@ create table DBSTORE(
 	name character(2000),
 	login character(2000),
 	email character(2000),
-	createDate timestamp
+	createDate timestamp,
+	password character(2000)
 );

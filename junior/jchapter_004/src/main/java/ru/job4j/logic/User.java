@@ -9,20 +9,42 @@ public class User {
     private String login;
     private String email;
     private Timestamp createDat;
-    public User(String name, String login, String email) {
+    private String date;
+    private String password;
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public void setCreateDat(Timestamp createDat) {
+        this.createDat = createDat;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String name, String login, String email, String password) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDat = new Timestamp(System.currentTimeMillis());
+        this.password = password;
     }
 
-    public User(String id, String name, String login, String email, String createDate) {
+    public User(String id, String name, String login, String email, String createDate, String password) {
         this.id = Integer.parseInt(id);
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDat = Timestamp.valueOf(createDate);
+        this.createDat = Timestamp.valueOf(createDate.replace("T"," ").replace("Z",""));
+        this.password = password;
     }
 
     public String getID() {
@@ -80,11 +102,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(createDat, user.createDat);
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(login, user.login) && Objects.equals(email, user.email) && Objects.equals(createDat, user.createDat);
     }
 
     @Override

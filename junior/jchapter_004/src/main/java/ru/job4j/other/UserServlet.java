@@ -1,8 +1,8 @@
-package ru.job4j.logic;
+package ru.job4j.other;
 
 import ru.job4j.logic.User;
-import ru.job4j.servlets.CRUD;
-import ru.job4j.servlets.ValidateService;
+import ru.job4j.other.CRUD;
+import ru.job4j.validate.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +27,8 @@ public class UserServlet extends HttpServlet {
                         new User(
                                 request.getParameter("name"),
                                 request.getParameter("login"),
-                                request.getParameter("email")
+                                request.getParameter("email"),
+                                request.getParameter("password")
                         )
                 )
         );
@@ -38,7 +39,8 @@ public class UserServlet extends HttpServlet {
                         new User(
                                 request.getParameter("name"),
                                 request.getParameter("email"),
-                                request.getParameter("login")
+                                request.getParameter("login"),
+                                request.getParameter("password")
                         )
                 )
         );
