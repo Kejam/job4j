@@ -4,7 +4,7 @@ import ru.job4j.logic.User;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public interface Validate<User> {
+public interface Validate {
     boolean add(User user);
     boolean update(int id, User user);
     boolean delete(int id);

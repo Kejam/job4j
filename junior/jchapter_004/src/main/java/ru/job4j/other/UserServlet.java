@@ -62,7 +62,7 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final PrintWriter writer = resp.getWriter();
         final String action = req.getParameter("action").toUpperCase();
         for (CRUD predict: this.dispatcher.keySet()) {
