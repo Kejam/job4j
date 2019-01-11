@@ -21,7 +21,12 @@ public class AuthFilter implements Filter {
         } else {
             HttpSession session = request.getSession();
             if (session.getAttribute("login") == null) {
-                ((HttpServletResponse) resp).sendRedirect("/signin");
+                ((HttpServletResponse) resp).sendRedirect(String.format("%/signin", ((HttpServletRequest) req).getContextPath()));
+                return;
+            }
+            if (req.getParameter("exit") != null) {
+                session.invalidate();
+                ((HttpServletResponse) resp).sendRedirect(String.format("%/signin", ((HttpServletRequest) req).getContextPath()));
                 return;
             }
         }
