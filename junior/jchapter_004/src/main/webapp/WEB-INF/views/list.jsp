@@ -36,12 +36,14 @@ List users
             Password
         </th>
         <th>
+            Role
+        </th>
+        <th>
             Update
         </th>
         <th>
             Delete
         </th>
-
     </tr>
     <c:forEach items="${Users}" var="user">
         <tr>
@@ -62,6 +64,9 @@ List users
             </td>
             <td>
                 <c:out value="${user.password}"></c:out>
+            </td>
+            <td>
+                <c:out value="${user.role}"></c:out>
             </td>
             <td>
                 <c:if test="${user.role < 2}">

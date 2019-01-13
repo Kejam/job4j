@@ -19,6 +19,12 @@
     Email: <input type="text" name="email" value="email"><br>
     Login: <input type="text" name="login" value="login"><br>
     Password: <input type="text" name="password" value="password"><br>
+    <select name="roles">
+        <option value="0">Administrator</option>
+        <option value="1">Manager</option>
+        <option value="2">User</option>
+    </select>
+    <input type="text" name="role" value="${roles}">
     <input type="submit" value="create">
 </form>
 </c:if>
