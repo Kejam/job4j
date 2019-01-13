@@ -13,8 +13,8 @@
 </head>
 <body>
 <form action="${pageContext.servletContext.contextPath}/signin" method="post">
-    Login: <input type="text" name="login" value="login"><br>
-    Password: <input type="text" name="password" value="password"><br>
+    Login: <input type="text" name="login"><br>
+    Password: <input type="text" name="password"><br>
     <input type="submit" value="Sign In">
 </form>
 </body>

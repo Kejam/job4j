@@ -19,11 +19,44 @@ public class DBStore implements Store<User> {
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
         createTable();
+        if (isEmpty()) {
+            addRootUser();
+        }
     }
 
     public static DBStore getInstance() {
         return INSTANCE;
     }
+
+    private void addRootUser() {
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password) values (?, ?, ?, ?, ?)");
+        ) {
+            ps.setString(1, "root");
+            ps.setString(2,"root");
+            ps.setString(3, "root");
+            ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            ps.setString(5,"root");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean isEmpty() {
+        int count = 0;
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement("Select count(*) dbstore");
+        ) {
+          ResultSet rs = ps.executeQuery();
+          while (rs.next()) {
+              count += rs.getInt(1);
+          }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count == 0;
+    }
+
 
     private void createTable() {
         try (Connection connection = SOURCE.getConnection()){
@@ -40,7 +73,7 @@ public class DBStore implements Store<User> {
     public boolean add(User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE ('name','login','email','createDate', 'password') values (?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password) values (?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
