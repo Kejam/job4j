@@ -23,7 +23,8 @@ public class UserCreateServlet extends HttpServlet {
                             req.getParameter("name"),
                             req.getParameter("login"),
                             req.getParameter("email"),
-                            req.getParameter("password")
+                            req.getParameter("password"),
+                            Integer.parseInt(req.getParameter("role"))
                     )
             );
             resp.sendRedirect("/");

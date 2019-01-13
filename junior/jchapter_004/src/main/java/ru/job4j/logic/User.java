@@ -9,8 +9,8 @@ public class User {
     private String login;
     private String email;
     private Timestamp createDat;
-    private String date;
     private String password;
+    private int role;
 
     public User(String login, String password) {
         this.login = login;
@@ -29,22 +29,32 @@ public class User {
         this.password = password;
     }
 
-    public User(String name, String login, String email, String password) {
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public User(String name, String login, String email, String password, int role) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDat = new Timestamp(System.currentTimeMillis());
         this.password = password;
+        this.role = role;
     }
 
-    public User(String id, String name, String login, String email, String createDate, String password) {
+    public User(String id, String name, String login, String email, String createDate, String password, int role) {
         this.id = Integer.parseInt(id);
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDat = Timestamp.valueOf(createDate.replace("T"," ").replace("Z",""));
         this.password = password;
+        this.role = role;
     }
 
     public String getID() {

@@ -22,6 +22,7 @@ public class UserSignIn extends HttpServlet {
         if (DBStore.getInstance().isCredential(login, password)) {
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
+            session.setAttribute("role", DBStore.getInstance().role(login, password));
             resp.sendRedirect(String.format("%s/",  req.getContextPath()));
         } else {
             req.setAttribute("error", "error sign in");

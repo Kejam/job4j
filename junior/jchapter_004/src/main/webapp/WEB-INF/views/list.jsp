@@ -64,10 +64,22 @@ List users
                 <c:out value="${user.password}"></c:out>
             </td>
             <td>
-                <a href="/WEB-INF/views/update.jspews/update.jsp?id=${user.getID()}">edit</a>
+                <c:if test="${user.role < 2}">
+                    <c:if test="${sessionScope.get(role) <= user.role}">
+                    <a href="/WEB-INF/views/update.jspews/update.jsp?id=${user.getID()}">edit</a>
+                    </c:if>
+                </c:if>
+                    <c:if test="${user.role == 2}">
+                    <a>You haven't enough rights</a>
+                    </c:if>
             </th>
             <th>
+                <c:if test="${user.role == 0}">
                 <a href="/delete?id=${user.getID()}">delete</a>
+                </c:if>
+                <c:if test="${user.role > 0}">
+                    <a>You haven't enough rights</a>
+                </c:if>
             </th>
         </tr>
     </c:forEach>

@@ -30,13 +30,14 @@ public class DBStore implements Store<User> {
 
     private void addRootUser() {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password) values (?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, "root");
             ps.setString(2,"root");
             ps.setString(3, "root");
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             ps.setString(5,"root");
+            ps.setInt(6, 0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,7 +62,7 @@ public class DBStore implements Store<User> {
     private void createTable() {
         try (Connection connection = SOURCE.getConnection()){
             final PreparedStatement ps = connection.prepareStatement(
-                    "create table if not exists DBSTORE(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000))"
+                    "create table if not exists DBSTORE(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
             );
             ps.execute();
         } catch (SQLException e) {
@@ -73,13 +74,14 @@ public class DBStore implements Store<User> {
     public boolean add(User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password) values (?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             ps.setString(5, user.getPassword());
+            ps.setInt(6, user.getRole());
             result = ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,12 +93,13 @@ public class DBStore implements Store<User> {
     public boolean update(int id, User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("update DBSTORE set name = ?, login = ?, email = ? password = ? where id = ?");
+             PreparedStatement ps = connection.prepareStatement("update DBSTORE set name = ?, login = ?, email = ? password = ? role = ? where id = ?");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
+            ps.setInt(6, user.getRole());
             ps.setInt(5, id);
             ps.executeUpdate();
             result = true;
@@ -135,7 +138,8 @@ public class DBStore implements Store<User> {
                         rs.getString("login"),
                         rs.getString("email"),
                         rs.getString("date"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getInt("role")
                         )
                 );
             }
@@ -160,13 +164,32 @@ public class DBStore implements Store<User> {
                         rs.getString("login"),
                         rs.getString("email"),
                         rs.getString("date"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getInt("role")
                 );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public int role(String login, String password) {
+       int result = -1;
+        User user;
+        try (Connection connection = SOURCE.getConnection()) {
+            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM DBSTORE WHERE login = ? AND password = ?")) {
+                st.setString(1, login);
+                st.setString(2, password);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    result = (int) rs.getInt("role");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       return result;
     }
 
     public boolean isCredential(String login, String password) {

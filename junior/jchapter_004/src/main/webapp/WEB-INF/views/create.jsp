@@ -12,6 +12,8 @@
     <title>Create new user</title>
 </head>
 <body>
+<c:set var="role" scope="session" value="${sessionScope.get(role)}"/>
+<c:if test="${role = 0}">
 <form action="${pageContext.servletContext.contextPath}/create" method="post">
     Name: <input type="text" name="name" value="name"><br>
     Email: <input type="text" name="email" value="email"><br>
@@ -19,5 +21,6 @@
     Password: <input type="text" name="password" value="password"><br>
     <input type="submit" value="create">
 </form>
+</c:if>
 </body>
 </html>
