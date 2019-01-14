@@ -28,7 +28,8 @@ public class UserServlet extends HttpServlet {
                                 request.getParameter("name"),
                                 request.getParameter("login"),
                                 request.getParameter("email"),
-                                request.getParameter("password")
+                                request.getParameter("password"),
+                                Integer.valueOf(request.getParameter("role"))
                         )
                 )
         );
@@ -40,7 +41,8 @@ public class UserServlet extends HttpServlet {
                                 request.getParameter("name"),
                                 request.getParameter("email"),
                                 request.getParameter("login"),
-                                request.getParameter("password")
+                                request.getParameter("password"),
+                                Integer.valueOf(request.getParameter("role"))
                         )
                 )
         );

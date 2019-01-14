@@ -196,16 +196,11 @@ public class DBStore implements Store<User> {
         boolean result = false;
         User user;
         try (Connection connection = SOURCE.getConnection()) {
-            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM DBSTORE WHERE login = ? AND password = ?")) {
+            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM DBSTORE WHERE login = ?")) {
                 st.setString(1, login);
-                st.setString(2, password);
                 ResultSet rs = st.executeQuery();
-                if (rs.next()) {
-                    user = new User(
-                            rs.getString("login"),
-                            rs.getString("password")
-                    );
-                    if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                while (rs.next()) {
+                    if (password.equals(rs.getString("password"))) {
                         result = true;
                     }
                 }
