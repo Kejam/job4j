@@ -11,7 +11,7 @@
     <title>Update user</title>
 </head>
 <body>
-<c:set var="role" scope="session" value="${sessionScope.get(role)}"/>
+<c:set var="roleIn" scope="session" value="${sessionScope.role}"/>
 <c:if test="${role < 2}">
     <form action="/update" method="post">
         ID: <input type="text" name="id" value="${param.id}"><br>
@@ -19,13 +19,12 @@
         Email: <input type="text" name="email" value="email"><br>
         Login: <input type="text" name="login" value="login"><br>
         Password: <input type="text" name="password" value="password"><br>
-        <c:if test="${role = 0}">
-            <select name="roles">
+        <c:if test="${roleIn == 0}">
+            <select name="role">
                 <option value="0">Administrator</option>
                 <option value="1">Manager</option>
                 <option value="2">User</option>
             </select>
-            <input type="text" name="role" value="${roles}">
         </c:if>
         <input type="submit" value="update">
     </form>

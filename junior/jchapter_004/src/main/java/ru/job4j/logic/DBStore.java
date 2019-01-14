@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.SortedMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class DBStore implements Store<User> {
+public class DBStore implements Store<User>, AutoCloseable{
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBStore INSTANCE = new DBStore();
 
@@ -30,7 +30,7 @@ public class DBStore implements Store<User> {
 
     private void addRootUser() {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into dbstore (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, "root");
             ps.setString(2,"root");
@@ -62,7 +62,7 @@ public class DBStore implements Store<User> {
     private void createTable() {
         try (Connection connection = SOURCE.getConnection()){
             final PreparedStatement ps = connection.prepareStatement(
-                    "create table if not exists DBSTORE(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
+                    "create table if not exists dbstore(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
             );
             ps.execute();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class DBStore implements Store<User> {
     public boolean add(User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into DBSTORE (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into dbstore (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
@@ -93,14 +93,15 @@ public class DBStore implements Store<User> {
     public boolean update(int id, User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("update DBSTORE set name = ?, login = ?, email = ? password = ? role = ? where id = ?");
+             PreparedStatement ps = connection.prepareStatement("update dbstore set name = ?, login = ?, email = ?, password = ?, role = ?, createDate = ? where id = ?");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
-            ps.setInt(6, user.getRole());
-            ps.setInt(5, id);
+            ps.setInt(5, user.getRole());
+            ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+            ps.setInt(7, id);
             ps.executeUpdate();
             result = true;
         } catch (SQLException e) {
@@ -113,7 +114,7 @@ public class DBStore implements Store<User> {
     public boolean delete(int id) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("delete from DBSTORE where id = ?");
+             PreparedStatement ps = connection.prepareStatement("delete from dbstore where id = ?");
         ) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -128,7 +129,7 @@ public class DBStore implements Store<User> {
     public CopyOnWriteArrayList<User> findAll() {
         CopyOnWriteArrayList<User> list = null;
         try (Connection connection = SOURCE.getConnection();
-        PreparedStatement ps = connection.prepareStatement("select * from DBSTORE");
+        PreparedStatement ps = connection.prepareStatement("select * from dbstore");
         ) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -137,7 +138,7 @@ public class DBStore implements Store<User> {
                         rs.getString("name"),
                         rs.getString("login"),
                         rs.getString("email"),
-                        rs.getString("date"),
+                        rs.getString("createDate"),
                         rs.getString("password"),
                         rs.getInt("role")
                         )
@@ -153,7 +154,7 @@ public class DBStore implements Store<User> {
     public User findById(int id) {
         User user = null;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("select * from DBSTORE where id = ?");
+             PreparedStatement ps = connection.prepareStatement("select * from dbstore where id = ?");
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -163,7 +164,7 @@ public class DBStore implements Store<User> {
                         rs.getString("name"),
                         rs.getString("login"),
                         rs.getString("email"),
-                        rs.getString("date"),
+                        rs.getString("createDate"),
                         rs.getString("password"),
                         rs.getInt("role")
                 );
@@ -178,12 +179,13 @@ public class DBStore implements Store<User> {
        int result = -1;
         User user;
         try (Connection connection = SOURCE.getConnection()) {
-            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM DBSTORE WHERE login = ? AND password = ?")) {
+            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM dbstore WHERE login = ? AND password = ?")) {
                 st.setString(1, login);
                 st.setString(2, password);
                 ResultSet rs = st.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     result = (int) rs.getInt("role");
+                    break;
                 }
             }
         } catch (SQLException e) {
@@ -196,12 +198,17 @@ public class DBStore implements Store<User> {
         boolean result = false;
         User user;
         try (Connection connection = SOURCE.getConnection()) {
-            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM DBSTORE WHERE login = ?")) {
+            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM dbstore WHERE login = ?")) {
                 st.setString(1, login);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
-                    if (password.equals(rs.getString("password"))) {
+                    User user1 = new User(
+                            rs.getString("login"),
+                            rs.getString("password")
+                    );
+                    if (user1.getPassword().equals(password)) {
                         result = true;
+                        break;
                     }
                 }
             }
@@ -209,5 +216,10 @@ public class DBStore implements Store<User> {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void close() throws Exception {
+        SOURCE.close();
     }
 }
