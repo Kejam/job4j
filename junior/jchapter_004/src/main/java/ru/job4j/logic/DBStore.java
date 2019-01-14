@@ -1,12 +1,14 @@
 package ru.job4j.logic;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.SortedMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class DBStore implements Store<User>, AutoCloseable{
+public class DBStore implements Store, AutoCloseable{
+    private static final Logger LOG = LogManager.getLogger(DBStore.class.getName());
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBStore INSTANCE = new DBStore();
 
@@ -39,7 +41,7 @@ public class DBStore implements Store<User>, AutoCloseable{
             ps.setString(5,"root");
             ps.setInt(6, 0);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -53,7 +55,7 @@ public class DBStore implements Store<User>, AutoCloseable{
               count += rs.getInt(1);
           }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return count == 0;
     }
@@ -66,7 +68,7 @@ public class DBStore implements Store<User>, AutoCloseable{
             );
             ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -84,7 +86,7 @@ public class DBStore implements Store<User>, AutoCloseable{
             ps.setInt(6, user.getRole());
             result = ps.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -105,7 +107,7 @@ public class DBStore implements Store<User>, AutoCloseable{
             ps.executeUpdate();
             result = true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -120,7 +122,7 @@ public class DBStore implements Store<User>, AutoCloseable{
             ps.executeUpdate();
             result = true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }
@@ -145,7 +147,7 @@ public class DBStore implements Store<User>, AutoCloseable{
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return list;
     }
@@ -170,50 +172,43 @@ public class DBStore implements Store<User>, AutoCloseable{
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return user;
     }
 
     public int role(String login, String password) {
        int result = -1;
-        User user;
-        try (Connection connection = SOURCE.getConnection()) {
-            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM dbstore WHERE login = ? AND password = ?")) {
-                st.setString(1, login);
-                st.setString(2, password);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    result = (int) rs.getInt("role");
-                    break;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+       try (Connection connection = SOURCE.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from dbstore where login = ?");
+            ) {
+                ps.setString(1, login);
+             ResultSet rs = ps.executeQuery();
+             while (rs.next()) {
+                 result = (int) rs.getInt("role");
+                 break;
+             }
+       } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
        return result;
     }
 
     public boolean isCredential(String login, String password) {
         boolean result = false;
-        User user;
-        try (Connection connection = SOURCE.getConnection()) {
-            try (PreparedStatement st = connection.prepareStatement("SELECT * FROM dbstore WHERE login = ?")) {
-                st.setString(1, login);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    User user1 = new User(
-                            rs.getString("login"),
-                            rs.getString("password")
-                    );
-                    if (user1.getPassword().equals(password)) {
-                        result = true;
-                        break;
-                    }
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement("select * from dbstore where login = ?");
+        ) {
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("password").equals(password)) {
+                    result = true;
+                    break;
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }

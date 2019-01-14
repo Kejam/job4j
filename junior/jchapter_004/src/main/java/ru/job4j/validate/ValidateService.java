@@ -3,10 +3,11 @@ package ru.job4j.validate;
 import org.apache.commons.lang.Validate;
 import ru.job4j.logic.DBStore;
 import ru.job4j.logic.Store;
+import ru.job4j.logic.User;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ValidateService<User> extends Validate {
+public class ValidateService extends Validate {
     private static final ValidateService instance = new ValidateService();
     private static Store logic;
     private ValidateService() {
