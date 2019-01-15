@@ -7,14 +7,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate(form) {
+            el = form.elements;
+            if (!el.id.value) {
+                alert("Input id!")
+            }
+            if(!el.name.value) {
+                alert("Input name!")
+            }
+            if(!el.surname.value) {
+                alert("Input surname!")
+            }
+            if(!el.sex.value) {
+                alert("Input sex!")
+            }
+            if(!el.description.value) {
+                alert("Input description!")
+            }
+        }
+        function addRow() {
+            $('#table tr:last').after('<tr><td>' + id +'</td></tr>');
+        }
+    </script>
     <style type="text/css">
-
     </style>
 </head>
 <body>
 
 <div class="form-group" >
     <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="control-label col-sm-1" for="id">ID:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id" name="id">
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-sm-1" for="name">Name:</label>
             <div class="col-sm-10">
@@ -39,15 +67,18 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default" onclick="validate(this.form);">Submit</button>
             </div>
         </div>
     </form>
 </div>
 <div class="container">
     <h2>List users</h2>
-    <table class="table">
+    <table id="table" class="table">
     <tr>
+        <th>
+            ID
+        </th>
         <th>
             Name
         </th>
@@ -62,6 +93,7 @@
         </th>
     </tr>
     </table>
+    <input type="submit" onclick="addRow()">
 </div>
 
 </body>
