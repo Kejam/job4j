@@ -16,7 +16,6 @@ public class DBStore implements Store, AutoCloseable{
         SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/postgres");
         SOURCE.setUsername("postgres");
         SOURCE.setPassword("fghrty212vyt");
-        SOURCE.setDriverClassName("org.postgresql.Driver");
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
@@ -135,21 +134,24 @@ public class DBStore implements Store, AutoCloseable{
         ) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new User(
-                        rs.getString("id"),
-                        rs.getString("name"),
-                        rs.getString("login"),
-                        rs.getString("email"),
-                        rs.getString("createDate"),
-                        rs.getString("password"),
-                        rs.getInt("role")
-                        )
-                );
+                list.add(this.getByResultSet(rs));
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
         return list;
+    }
+
+    private User getByResultSet(ResultSet rs) throws SQLException {
+        return new User(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("login"),
+                rs.getString("email"),
+                rs.getString("createDate"),
+                rs.getString("password"),
+                rs.getInt("role")
+        );
     }
 
     @Override
@@ -161,15 +163,7 @@ public class DBStore implements Store, AutoCloseable{
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                user = new User(
-                        rs.getString("id"),
-                        rs.getString("name"),
-                        rs.getString("login"),
-                        rs.getString("email"),
-                        rs.getString("createDate"),
-                        rs.getString("password"),
-                        rs.getInt("role")
-                );
+                user = getByResultSet(rs);
             }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -196,19 +190,11 @@ public class DBStore implements Store, AutoCloseable{
 
     public boolean isCredential(String login, String password) {
         boolean result = false;
-        try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("select * from dbstore where login = ?");
-        ) {
-            ps.setString(1, login);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                if (rs.getString("password").equals(password)) {
-                    result = true;
-                    break;
-                }
+        for (User user: findAll()) {
+            if (user.getLogin().equals(login) && user.getID().equals(password)) {
+                result = true;
+                break;
             }
-        } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
         }
         return result;
     }
