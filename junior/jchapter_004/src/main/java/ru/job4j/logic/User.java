@@ -51,7 +51,7 @@ public class User {
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDat = Timestamp.valueOf(createDate.replace("T"," ").replace("Z",""));
+        this.createDat = Timestamp.valueOf(createDate.replace("T", " ").replace("Z", ""));
         this.password = password;
         this.role = role;
     }
@@ -103,16 +103,14 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return id == user.id &&
-                role == user.role &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(createDat, user.createDat) &&
-                Objects.equals(password, user.password);
+        return id == user.id && role == user.role && Objects.equals(name, user.name) && Objects.equals(login, user.login) && Objects.equals(email, user.email) && Objects.equals(createDat, user.createDat) && Objects.equals(password, user.password);
     }
 
     @Override
@@ -122,14 +120,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", login='" + login + '\'' +
-                ", email='" + email + '\'' +
-                ", createDat=" + createDat +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", login='" + login + '\''
+                + ", email='" + email + '\''
+                + ", createDat=" + createDat
+                + ", password='" + password
+                + '\''
+                + ", role=" + role
+                + '}';
     }
 }

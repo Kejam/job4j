@@ -22,7 +22,7 @@ public class Word {
         int count = 0;
         if (word.length > contain.length) {
             for (int i = 0; i < word.length; i++) {
-                if (word[i] == contain[count] && i + contain.length <= word.length ) {
+                if (word[i] == contain[count] && i + contain.length <= word.length) {
                     count++;
                 } else {
                     count = 0;

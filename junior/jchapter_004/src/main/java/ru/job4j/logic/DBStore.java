@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class DBStore implements Store, AutoCloseable{
+public class DBStore implements Store, AutoCloseable {
     private static final Logger LOG = LogManager.getLogger(DBStore.class.getName());
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DBStore INSTANCE = new DBStore();
@@ -34,10 +34,10 @@ public class DBStore implements Store, AutoCloseable{
              PreparedStatement ps = connection.prepareStatement("insert into dbstore (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, "root");
-            ps.setString(2,"root");
+            ps.setString(2, "root");
             ps.setString(3, "root");
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-            ps.setString(5,"root");
+            ps.setString(5, "root");
             ps.setInt(6, 0);
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -61,7 +61,7 @@ public class DBStore implements Store, AutoCloseable{
 
 
     private void createTable() {
-        try (Connection connection = SOURCE.getConnection()){
+        try (Connection connection = SOURCE.getConnection()) {
             final PreparedStatement ps = connection.prepareStatement(
                     "create table if not exists dbstore(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
             );
