@@ -8,38 +8,119 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        function validate(form) {
-            var el = form.elements;
-            if (!el.id.value) {
-                alert("Input id!")
-            }
-            if(!el.name.value) {
-                alert("Input name!")
-            }
-            if(!el.surname.value) {
-                alert("Input surname!")
-            }
-            if(!el.sex.value) {
-                alert("Input sex!")
-            }
-            if(!el.description.value) {
-                alert("Input description!")
-            }
+        function loadCounries() {
+            $.ajax('./json', {
+                    method : 'get',
+                    data : { type : 'countries'},
+                    complete: function (data) {
+                        var json = JSON.parse(data.responseText);
+                        var res = '<option style="display:none"></option>';
+                        for(var i in json) {
+                            res = res + '<option>'+json[i].name +'</option>';
+                        }
+                        document.getElementById("country").innerHTML = res;
+                    }
+                }
+            )
         }
-        function addRow() {
-            var id = $('#id').val();
-            var name = $('#name').value;
-            var surname = $('#surname').value;
-            var sex = $('#sex').value;
-            var description = $('#description').value;
-            $('#table tr:last').after('<tr>' +
-                '<td>' + id + '</td> ' +
-                '<td>' + name + '</td> ' +
-                '<td>' + surname + '</td>' +
-                '<td>' + sex + '</td>' +
-                '<td>' + description + '</td>' +
-                '</tr>');
-            return false;
+        $(document).ready(function () {
+            loadCounries();
+            loadUsers();
+            $('#country').change(function () {
+                $.ajax('./json', {
+                        method : 'get',
+                        data : {
+                            type : 'towns',
+                            country: $('#country').val()
+                        },
+                        complete: function (data) {
+                            var json = JSON.parse(data.responseText);
+                            var res = '<option style="display:none"></option>';
+                            for(var i in json) {
+                                res = res + '<option>'+json[i].name +'</option>';
+                            }
+                            document.getElementById("town").innerHTML = res;
+                        }
+                    }
+                )
+            })
+        });
+        function loadUsers() {
+            $(
+                $.ajax('./json', {
+                    method: 'get',
+                    data : { type : 'users'},
+                    complete: function (data) {
+                        var json = JSON.parse(data.responseText);
+                        var res =
+                            "<tr>" +
+                            "<th>id</th>" +
+                            "<th>name</th>" +
+                            "<th>surname</th>" +
+                            "<th>sex</th>" +
+                            "<th>description</th>" +
+                            "</tr>";
+                        document.getElementById("users").innerHTML = res;
+                        for (var i in json) {
+                            console.log(json[i].country, json[i]);
+                            $('#users tr:last').after(
+                                '<tr>' +
+                                '<td>' + json[i].id + '</td>' +
+                                '<td>' + json[i].name + '</td>' +
+                                '<td>' + json[i].surname + '</td>' +
+                                '<td>' + json[i].sex + '</td>' +
+                                '<td>' + json[i].description + '</td>' +
+                                '</tr>'
+                            );
+                        }
+                    }
+                })
+            );
+        }
+        function validate() {
+            var res = true;
+            if($('#usr').val() == '') {
+                res = false;
+                alert($('#id').attr('title'));
+            }
+            if($('#lastname').val() == '') {
+                res = false;
+                alert($('#name').attr('title'));
+            }
+            if($('#email').val() == '') {
+                res = false;
+                alert($('#surname').attr('title'));
+            }
+            if($('#town').val() == '') {
+                res = false;
+                alert($('#sex').attr('title'));
+            }
+            if($('#country').val() == '') {
+                res = false;
+                alert($('#description').attr('title'));
+            }
+            return res;
+        }
+        function createUser() {
+            if (!validate()) {
+                return false;
+            };
+            $(
+                $.ajax('./json', {
+                        method : 'post',
+                        data : {
+                            name : $('#id').val(),
+                            lastname : $('#name').val(),
+                            email : $('#surname').val(),
+                            country : $('#sex').val(),
+                            town : $('#description').val()
+                        },
+                        complete: function() {loadUsers()}
+                    }
+                )
+            );
+            loadUsers();
+            return true
         }
     </script>
     <style type="text/css">
@@ -79,7 +160,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
-                <button type="submit" class="btn btn-default" onclick="validate(this.form);">Submit</button>
+                <button type="submit" class="btn btn-default" onclick="validate();">Submit</button>
             </div>
         </div>
     </form>

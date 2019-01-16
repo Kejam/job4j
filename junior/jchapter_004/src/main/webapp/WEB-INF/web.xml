@@ -73,4 +73,13 @@
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>JSON</servlet-name>
+        <servlet-class>ru.job4j.servlets.UsersJSONSerlvet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JSON</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+
 </web-app>
