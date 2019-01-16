@@ -13,6 +13,7 @@ public class DBStore implements Store, AutoCloseable {
     private static final DBStore INSTANCE = new DBStore();
 
     public DBStore() {
+        SOURCE.setDriverClassName("org.postgresql.Driver");
         SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/postgres");
         SOURCE.setUsername("postgres");
         SOURCE.setPassword("fghrty212vyt");
@@ -39,6 +40,7 @@ public class DBStore implements Store, AutoCloseable {
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             ps.setString(5, "root");
             ps.setInt(6, 0);
+            ps.executeQuery();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -46,17 +48,22 @@ public class DBStore implements Store, AutoCloseable {
 
     private boolean isEmpty() {
         int count = 0;
+        boolean result = false;
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement ps = connection.prepareStatement("Select count(*) dbstore");
         ) {
           ResultSet rs = ps.executeQuery();
           while (rs.next()) {
-              count += rs.getInt(1);
+              count = rs.getInt(1);
+              if (count == 1) {
+                  result = true;
+                  break;
+              }
           }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
-        return count == 0;
+        return result;
     }
 
 

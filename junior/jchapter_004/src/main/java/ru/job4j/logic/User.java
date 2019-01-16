@@ -17,6 +17,13 @@ public class User {
         this.password = password;
     }
 
+    public User(String name, String login, String email) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+    }
+
+
     public void setCreateDat(Timestamp createDat) {
         this.createDat = createDat;
     }

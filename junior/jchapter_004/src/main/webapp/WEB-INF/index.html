@@ -27,7 +27,7 @@
             }
         }
         function addRow() {
-            var id = $('#id').value;
+            var id = $('#id').val();
             var name = $('#name').value;
             var surname = $('#surname').value;
             var sex = $('#sex').value;
@@ -39,6 +39,7 @@
                 '<td>' + sex + '</td>' +
                 '<td>' + description + '</td>' +
                 '</tr>');
+            return false;
         }
     </script>
     <style type="text/css">
