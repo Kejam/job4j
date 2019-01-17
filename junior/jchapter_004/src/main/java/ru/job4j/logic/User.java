@@ -23,6 +23,10 @@ public class User {
         this.email = email;
     }
 
+    public User() {
+
+    }
+
 
     public void setCreateDat(Timestamp createDat) {
         this.createDat = createDat;

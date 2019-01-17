@@ -41,6 +41,7 @@
         <module>chapter_004</module>
         <module>junior</module>
         <module>example</module>
+        <module>Cinema</module>
 
     </modules>
 <dependencies>

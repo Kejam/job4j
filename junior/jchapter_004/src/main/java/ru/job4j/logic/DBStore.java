@@ -32,7 +32,7 @@ public class DBStore implements Store, AutoCloseable {
 
     private void addRootUser() {
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into dbstore (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into clients (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, "root");
             ps.setString(2, "root");
@@ -50,12 +50,12 @@ public class DBStore implements Store, AutoCloseable {
         int count = 0;
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("Select count(*) dbstore");
+             PreparedStatement ps = connection.prepareStatement("Select count(*) clients");
         ) {
           ResultSet rs = ps.executeQuery();
           while (rs.next()) {
               count = rs.getInt(1);
-              if (count == 1) {
+              if (count == 0) {
                   result = true;
                   break;
               }
@@ -70,7 +70,7 @@ public class DBStore implements Store, AutoCloseable {
     private void createTable() {
         try (Connection connection = SOURCE.getConnection()) {
             final PreparedStatement ps = connection.prepareStatement(
-                    "create table if not exists dbstore(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
+                    "create table if not exists clients(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
             );
             ps.execute();
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class DBStore implements Store, AutoCloseable {
     public boolean add(User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("insert into dbstore (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
+             PreparedStatement ps = connection.prepareStatement("insert into clients (name, login, email, createDate, password, role) values (?, ?, ?, ?, ?, ?)");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
@@ -101,7 +101,7 @@ public class DBStore implements Store, AutoCloseable {
     public boolean update(int id, User user) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("update dbstore set name = ?, login = ?, email = ?, password = ?, role = ?, createDate = ? where id = ?");
+             PreparedStatement ps = connection.prepareStatement("update clients set name = ?, login = ?, email = ?, password = ?, role = ?, createDate = ? where id = ?");
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
@@ -122,7 +122,7 @@ public class DBStore implements Store, AutoCloseable {
     public boolean delete(int id) {
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("delete from dbstore where id = ?");
+             PreparedStatement ps = connection.prepareStatement("delete from clients where id = ?");
         ) {
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -135,9 +135,9 @@ public class DBStore implements Store, AutoCloseable {
 
     @Override
     public CopyOnWriteArrayList<User> findAll() {
-        CopyOnWriteArrayList<User> list = null;
+        CopyOnWriteArrayList<User> list = new CopyOnWriteArrayList<>();
         try (Connection connection = SOURCE.getConnection();
-        PreparedStatement ps = connection.prepareStatement("select * from dbstore");
+        PreparedStatement ps = connection.prepareStatement("select * from clients");
         ) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -155,7 +155,7 @@ public class DBStore implements Store, AutoCloseable {
                 rs.getString("name"),
                 rs.getString("login"),
                 rs.getString("email"),
-                rs.getString("createDate"),
+                rs.getString("createdate"),
                 rs.getString("password"),
                 rs.getInt("role")
         );
@@ -165,7 +165,7 @@ public class DBStore implements Store, AutoCloseable {
     public User findById(int id) {
         User user = null;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("select * from dbstore where id = ?");
+             PreparedStatement ps = connection.prepareStatement("select * from clients where id = ?");
         ) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -181,12 +181,12 @@ public class DBStore implements Store, AutoCloseable {
     public int role(String login, String password) {
        int result = -1;
        try (Connection connection = SOURCE.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from dbstore where login = ?");
+            PreparedStatement ps = connection.prepareStatement("select * from clients where login = ?");
             ) {
                 ps.setString(1, login);
              ResultSet rs = ps.executeQuery();
              while (rs.next()) {
-                 result = (int) rs.getInt("role");
+                 result = rs.getInt("role");
                  break;
              }
        } catch (SQLException e) {
@@ -197,11 +197,19 @@ public class DBStore implements Store, AutoCloseable {
 
     public boolean isCredential(String login, String password) {
         boolean result = false;
-        for (User user: findAll()) {
-            if (user.getLogin().equals(login) && user.getID().equals(password)) {
-                result = true;
-                break;
+        try (Connection connection = SOURCE.getConnection();
+            PreparedStatement ps = connection.prepareStatement("select * from clients where login = ?");
+        ) {
+            ps.setString(1, login);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("password").equals(password)) {
+                    result = true;
+                    break;
+                }
             }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
         }
         return result;
     }

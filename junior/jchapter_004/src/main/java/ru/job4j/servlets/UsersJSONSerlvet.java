@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,11 +28,11 @@ public class UsersJSONSerlvet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
-        String suranme = req.getParameter("suranme");
+        String surname = req.getParameter("surname");
         String sex = req.getParameter("sex");
         String description = req.getParameter("description");
         users.put(id, new Man(
-                id, name, suranme, sex, description
+                id, name, surname, sex, description
                 )
         );
     }
