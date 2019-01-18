@@ -45,13 +45,13 @@ List users
             Delete
         </th>
     </tr>
-    <c:forEach items="${Users}" var="user">
+    <c:forEach var="user" items="${Users}" >
         <tr>
             <td>
                     <c:out value="${user.name}"></c:out>
             </td>
             <td>
-                    <c:out value="${user.getID()}"></c:out>
+                    <c:out value="${user.id}"></c:out>
             </td>
             <td>
                     <c:out value="${user.email}"></c:out>
@@ -60,34 +60,35 @@ List users
                     <c:out value="${user.login}"></c:out>
             </td>
             <td>
-                    <c:out value="${user.createDate}"></c:out>
+                    <c:out value="${user.getCreateDat()}"></c:out>
             </td>
             <td>
-                <c:out value="${user.password}"></c:out>
+                    <c:out value="${user.password}"></c:out>
             </td>
             <td>
-                <c:out value="${user.role}"></c:out>
+                    <c:out value="${user.role}"></c:out>
             </td>
             <td>
-                <c:if test="${user.role < 2}">
-                    <c:if test="${sessionScope.get(role) <= user.role}">
-                    <a href="/WEB-INF/views/update.jspews/update.jsp?id=${user.getID()}">edit</a>
-                    </c:if>
+                <c:if test="${sessionScope.role <= user.role}">
+                    <a href="/update?id=${user.getID()}">edit</a>
                 </c:if>
-                    <c:if test="${user.role == 2}">
-                    <a>You haven't enough rights</a>
-                    </c:if>
-            </th>
-            <th>
-                <c:if test="${user.role == 0}">
-                <a href="/delete?id=${user.getID()}">delete</a>
-                </c:if>
-                <c:if test="${user.role > 0}">
+                <c:if test="${sessionScope.role == 2}">
                     <a>You haven't enough rights</a>
                 </c:if>
-            </th>
+            </td>
+            <td>
+                <c:if test="${sessionScope.role == 0}">
+                    <a href="/delete?id=${user.getID()}">delete</a>
+                </c:if>
+                <c:if test="${sessionScope.role > 0}">
+                    <a>You haven't enough rights</a>
+                </c:if>
+            </td>
         </tr>
     </c:forEach>
 </table>
+<form action="/create" method="get">
+     <input type="submit" value="Create User">
+</form>
 </body>
 </html>

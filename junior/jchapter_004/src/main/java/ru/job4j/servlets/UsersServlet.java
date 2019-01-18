@@ -1,6 +1,7 @@
 package ru.job4j.servlets;
 
 import ru.job4j.other.CRUD;
+import ru.job4j.validate.Validate;
 import ru.job4j.validate.ValidateService;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 
 public class UsersServlet extends HttpServlet {
     private final Map<CRUD, Function<HttpServletRequest, Boolean>> dispatcher = new HashMap<>();
-    private final ValidateService storage = ValidateService.getInstance();
+    private final Validate storage = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("Users", storage.findAll());

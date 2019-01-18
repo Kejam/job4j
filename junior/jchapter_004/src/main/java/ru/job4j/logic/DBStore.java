@@ -40,7 +40,7 @@ public class DBStore implements Store, AutoCloseable {
             ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
             ps.setString(5, "root");
             ps.setInt(6, 0);
-            ps.executeQuery();
+            ps.execute();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -50,7 +50,7 @@ public class DBStore implements Store, AutoCloseable {
         int count = 0;
         boolean result = false;
         try (Connection connection = SOURCE.getConnection();
-             PreparedStatement ps = connection.prepareStatement("Select count(*) clients");
+             PreparedStatement ps = connection.prepareStatement("Select count(*) from clients");
         ) {
           ResultSet rs = ps.executeQuery();
           while (rs.next()) {
@@ -70,12 +70,28 @@ public class DBStore implements Store, AutoCloseable {
     private void createTable() {
         try (Connection connection = SOURCE.getConnection()) {
             final PreparedStatement ps = connection.prepareStatement(
-                    "create table if not exists clients(id serial primary key, name character(2000), login character(2000), email character(2000), createDate timestamp, password character(2000), role integer)"
+                    "create table if not exists clients(id serial primary key, name varchar(2000), login varchar(2000), email varchar(2000), createDate timestamp, password varchar(2000), role integer)"
             );
             ps.execute();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    public User findByLogin(User user) {
+        User user1 = new User();
+        try (Connection connection = SOURCE.getConnection();
+             PreparedStatement ps = connection.prepareStatement("select * from clients where login = ?");
+        ) {
+            ps.setString(1, user.getLogin());
+            final ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                user1 = getByResultSet(rs);
+            }
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return user1;
     }
 
     @Override
@@ -178,12 +194,12 @@ public class DBStore implements Store, AutoCloseable {
         return user;
     }
 
-    public int role(String login, String password) {
+    public int role(User user) {
        int result = -1;
        try (Connection connection = SOURCE.getConnection();
             PreparedStatement ps = connection.prepareStatement("select * from clients where login = ?");
             ) {
-                ps.setString(1, login);
+                ps.setString(1, user.getLogin());
              ResultSet rs = ps.executeQuery();
              while (rs.next()) {
                  result = rs.getInt("role");

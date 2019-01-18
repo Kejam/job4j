@@ -29,8 +29,8 @@ public class AuthFilter implements Filter {
                 ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", ((HttpServletRequest) req).getContextPath()));
                 return;
             }
+            chain.doFilter(req, resp);
         }
-        chain.doFilter(req, resp);
     }
 
     @Override

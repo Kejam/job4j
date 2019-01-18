@@ -54,4 +54,14 @@ public class ValidateStub implements Validate {
     public User findById(int id) {
         return store.get(id);
     }
+
+    @Override
+    public boolean findByLogin(User user) {
+        return false;
+    }
+
+    @Override
+    public int role(User user) {
+        return 0;
+    }
 }

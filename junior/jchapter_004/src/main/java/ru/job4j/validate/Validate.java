@@ -10,4 +10,6 @@ public interface Validate {
     boolean delete(int id);
     CopyOnWriteArrayList<User> findAll();
     User findById(int id);
+    boolean findByLogin(User user);
+    int role(User user);
 }

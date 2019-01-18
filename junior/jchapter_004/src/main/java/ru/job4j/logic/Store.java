@@ -11,4 +11,6 @@ public interface Store {
     boolean delete(int id);
     CopyOnWriteArrayList<User> findAll();
     User findById(int id);
+    User findByLogin(User user);
+    int role(User user);
 }

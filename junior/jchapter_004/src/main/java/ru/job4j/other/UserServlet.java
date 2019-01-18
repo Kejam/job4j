@@ -2,6 +2,7 @@ package ru.job4j.other;
 
 import ru.job4j.logic.User;
 import ru.job4j.other.CRUD;
+import ru.job4j.validate.Validate;
 import ru.job4j.validate.ValidateService;
 
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class UserServlet extends HttpServlet {
-    private final ValidateService storage = ValidateService.getInstance();
+    private final Validate storage = ValidateService.getInstance();
     private final Map<CRUD, Function<HttpServletRequest, Boolean>> dispatcher = new HashMap<>();
 
     @Override
