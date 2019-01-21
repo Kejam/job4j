@@ -19,25 +19,19 @@ public class Man {
 
     @Override
     public String toString() {
-        return "Man{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Man{" + "id=" + id + ", name='" + name + '\'' + ", surname='" + surname + '\'' + ", sex='" + sex + '\'' + ", description='" + description + '\'' + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Man man = (Man) o;
-        return id == man.id &&
-                Objects.equals(name, man.name) &&
-                Objects.equals(surname, man.surname) &&
-                Objects.equals(sex, man.sex) &&
-                Objects.equals(description, man.description);
+        return id == man.id && Objects.equals(name, man.name) && Objects.equals(surname, man.surname) && Objects.equals(sex, man.sex) && Objects.equals(description, man.description);
     }
 
     @Override
