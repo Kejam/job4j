@@ -7,26 +7,7 @@
     <name>job4j</name>
     <url>http://job4j.ru/</url>
 
-    <profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
-                <db.username>postgres</db.username>
-                <db.password>fghrty212vyt</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
-            </properties>
-        </profile>
-        <profile>
-            <id>production</id>
-            <properties>
-                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
-                <db.username>postgres</db.username>
-                <db.password>fghrty212vyt</db.password>
-                <db.driver>org.postgresql.Driver</db.driver>
-            </properties>
-        </profile>
-    </profiles>
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -42,6 +23,7 @@
         <module>junior</module>
         <module>example</module>
         <module>Cinema</module>
+        <module>io</module>
 
     </modules>
 <dependencies>
