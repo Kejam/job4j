@@ -10,7 +10,7 @@ public class Number implements AutoCloseable {
                 BufferedReader br = new BufferedReader(new InputStreamReader(in));
         ) {
             String value = br.lines().collect(Collectors.joining("\n"));
-            if (Integer.parseInt(value) % 2 == 0) {
+            if (Integer.valueOf(value) % 2 == 0) {
                 result = true;
             }
         } catch (IOException e) {

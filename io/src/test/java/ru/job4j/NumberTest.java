@@ -19,17 +19,17 @@ public class NumberTest {
 
     @Test
     public void whenNumberIsEven() {
-        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_16.encode("12").array());
+        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("12").array());
         assertThat(number.isNumber(in), is(true));
     }
     @Test
     public void whenNumberIsoOdd() {
-        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_16.encode("11").array());
-        assertThat(number.isNumber(in), is(true));
+        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("11").array());
+        assertThat(number.isNumber(in), is(false));
     }
     @Test
     public void whenCatchException() {
-        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_16.encode("11").array());
-        assertThat(number.isNumber(in), is("NumberFormatException"));
+        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("11").array());
+        assertThat(number.isNumber(in), is(false));
     }
 }
