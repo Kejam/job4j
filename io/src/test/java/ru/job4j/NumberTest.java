@@ -5,8 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class NumberTest {
@@ -27,9 +26,14 @@ public class NumberTest {
         InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("11").array());
         assertThat(number.isNumber(in), is(false));
     }
+
     @Test
-    public void whenCatchException() {
-        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("11").array());
-        assertThat(number.isNumber(in), is(false));
+    public void whenInputDropAbuses() {
+        InputStream in = new ByteArrayInputStream(StandardCharsets.UTF_8.encode("11 22 33 33 33 22 33 14").array());
+        OutputStream out = new ByteArrayOutputStream(1000);
+        String[] abuses = {"22", "14"};
+        String result = number.dropAbuses(in, out, abuses).toString();
+        assertThat(result, is("11 33 33 33 33"));
     }
+
 }

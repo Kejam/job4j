@@ -15,11 +15,47 @@ public class Number implements AutoCloseable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public BufferedOutputStream dropAbuses(InputStream in, OutputStream out, String[] abuse) {
+        BufferedOutputStream bo = new BufferedOutputStream(out);
+        String value = "";
+        char c;
+        try (
+                BufferedInputStream bf = new BufferedInputStream(in);
+                ) {
+            while (bf.available() != 0) {
+                c = (char) bf.read();
+                if (c == ' ' && containInArray(abuse, value)) {
+                    bo.write(value.getBytes());
+                }
+                value += c;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return bo;
+    }
+
+    private boolean containInArray(String[] array, String checkValue) {
+        boolean result = false;
+        for (String s: array) {
+            if (s.equals(checkValue)) {
+                result = true;
+                break;
+            }
         }
         return result;
     }
 
     @Override
     public void close() throws Exception {
+
     }
 }
