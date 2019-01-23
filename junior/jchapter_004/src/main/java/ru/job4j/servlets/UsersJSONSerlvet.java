@@ -17,11 +17,10 @@ public class UsersJSONSerlvet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/json");
         String json = new ObjectMapper().writeValueAsString(users);
-        PrintWriter writer = resp.getWriter();
-        writer.append(json);
-        writer.flush();
+        resp.setContentType("text/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(json);
     }
 
     @Override
@@ -31,9 +30,6 @@ public class UsersJSONSerlvet extends HttpServlet {
         String surname = req.getParameter("surname");
         String sex = req.getParameter("sex");
         String description = req.getParameter("description");
-        users.put(id, new Man(
-                id, name, surname, sex, description
-                )
-        );
+        users.put(id, new Man(id, name, surname, sex, description));
     }
 }

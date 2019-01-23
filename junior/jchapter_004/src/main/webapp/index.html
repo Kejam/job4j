@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:clear="http://www.w3.org/1999/xhtml" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Bootstrap Example</title>
+    <title>List users</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,29 +12,16 @@
             $(
                 $.ajax('./json', {
                     method: 'get',
-                    data : { type : 'users'},
-                    complete: function (data) {
-                        var json = JSON.parse(data.responseText);
-                        var res =
-                            "<tr>" +
-                            "<th>id</th>" +
-                            "<th>name</th>" +
-                            "<th>surname</th>" +
-                            "<th>sex</th>" +
-                            "<th>description</th>" +
-                            "</tr>";
-                        document.getElementById("users").innerHTML = res;
-                        for (var i in json) {
-                            $('#users tr:last').after(
-                                '<tr>' +
-                                '<td>' + json[i].id + '</td>' +
-                                '<td>' + json[i].name + '</td>' +
-                                '<td>' + json[i].surname + '</td>' +
-                                '<td>' + json[i].sex + '</td>' +
-                                '<td>' + json[i].description + '</td>' +
-                                '</tr>'
-                            );
-                        }
+                    dataType: "json",
+                    data: {
+                        id : $ ('#id').val(),
+                        name : $('#name').val(),
+                        surname : $('#surname').val(),
+                        sex : $('#sex').val(),
+                        description : $('#description').val()},
+                    success: function (data) {
+                        $('#table tr:last').after('<tr><td>' + data.id +'</td><td>' + data.name + '</td><td>' + data.surname + '</td><td>'
+                            + data.sex + '</td><td>' + data.description + '</td></tr>');
                     }
                 })
             );

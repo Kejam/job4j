@@ -8,6 +8,7 @@ public class Bot implements BotAction {
     private BufferedReader reader;
     private List<String> list;
     private Random random = new Random();
+    private boolean flag;
     @Override
     public String say() {
         try (
@@ -22,15 +23,15 @@ public class Bot implements BotAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return list.get(random.nextInt(list.size()));
+        return flag ? list.get(random.nextInt(list.size())) : ("I'm waiting while flag will true");
     }
 
     public void stop() {
-
+        flag = false;
     }
 
     public void start() {
-
+        flag = true;
     }
 
 }
