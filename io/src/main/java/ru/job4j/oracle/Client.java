@@ -40,4 +40,8 @@ public class Client {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        new Client().start();
+    }
 }

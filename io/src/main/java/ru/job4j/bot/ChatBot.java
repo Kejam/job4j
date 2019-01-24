@@ -17,16 +17,16 @@ public class ChatBot {
 
 
     public void init() {
-        while (!message.equals("exit")) {
+        while (message.equals("stop")) {
             System.out.println("Input message");
-            message = sendMessage();
+            message = receiveMessage();
             if (message.equals("stop")) {
                 bot.stop();
             }
             if (message.equals("cont")) {
                 bot.start();
             }
-            System.out.println(receiveMessage());
+            System.out.println(sendMessage());
         }
     }
 

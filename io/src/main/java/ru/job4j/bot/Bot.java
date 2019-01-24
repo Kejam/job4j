@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static org.apache.commons.lang.math.RandomUtils.nextInt;
+
 public class Bot implements BotAction {
-    private BufferedReader reader;
     private List<String> list = new ArrayList<>();
-    private Random random = new Random();
     private boolean flag = true;
     @Override
     public String say() {
+        Random random = new Random();
         try (
-                FileInputStream fs = new FileInputStream("C:\\Projects\\file.txt");
+                FileInputStream fs = new FileInputStream(new File("io/src/main/resources/file.txt"));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(fs));
         ) {
            String read;

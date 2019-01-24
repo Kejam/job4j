@@ -35,4 +35,8 @@ public class Server {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        new Server().start();
+    }
 }
