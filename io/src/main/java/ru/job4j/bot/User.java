@@ -4,8 +4,19 @@ import java.util.Scanner;
 
 public class User {
     private Scanner scanner = new Scanner(System.in);
+    private String input;
 
     public String say() {
-        return scanner.nextLine();
+        input = scanner.nextLine();
+        return input;
+    }
+
+    public String say(String message) {
+        input = message;
+        return input;
+    }
+
+    public String getInput() {
+        return input;
     }
 }

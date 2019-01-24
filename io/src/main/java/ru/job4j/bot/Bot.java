@@ -28,12 +28,20 @@ public class Bot implements BotAction {
         return flag ? list.get(random.nextInt(list.size())) : ("I'm waiting while flag will true");
     }
 
-    public void stop() {
-        flag = false;
+    public List<String> getList() {
+        return list;
     }
 
-    public void start() {
-        flag = true;
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public boolean stop() {
+        return flag = false;
+    }
+
+    public boolean start() {
+        return flag = true;
     }
 
 }

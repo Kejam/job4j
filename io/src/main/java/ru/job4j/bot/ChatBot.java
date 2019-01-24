@@ -1,25 +1,32 @@
 package ru.job4j.bot;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+
 
 public class ChatBot {
+    private User user =  new User();
+    private Bot bot = new Bot();
+    private String message = "";
+
+    public String sendMessage() {
+        return bot.say();
+    }
+
+    public String receiveMessage() {
+        return user.say();
+    }
+
 
     public void init() {
-        User user =  new User();
-        Bot bot = new Bot();
-        String value = "";
-        while (!value.equals("exit")) {
+        while (!message.equals("exit")) {
             System.out.println("Input message");
-            value = user.say();
-            if (value.equals("stop")) {
+            message = sendMessage();
+            if (message.equals("stop")) {
                 bot.stop();
             }
-            if (value.equals("cont")) {
+            if (message.equals("cont")) {
                 bot.start();
             }
-            System.out.println(bot.say());
+            System.out.println(receiveMessage());
         }
     }
 
