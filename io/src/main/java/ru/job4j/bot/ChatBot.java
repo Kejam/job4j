@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ChatBot {
-    public static void main(String[] args) {
+
+    public void init() {
         User user =  new User();
         Bot bot = new Bot();
         String value = "";
@@ -18,7 +19,11 @@ public class ChatBot {
             if (value.equals("cont")) {
                 bot.start();
             }
-            bot.say();
+            System.out.println(bot.say());
         }
+    }
+
+    public static void main(String[] args) {
+        new ChatBot().init();
     }
 }
