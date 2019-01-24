@@ -1,5 +1,7 @@
 package ru.job4j.oracle;
 
+import ru.job4j.bot.User;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -7,33 +9,35 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    public static void main(String[] args) throws IOException {
-        int port = 5050;
-        String ip = "127.0.0.1";
+    private static final int port = 5050;
+    private static final String ip = "127.0.0.1";
+    private String message = "";
+    private User user = new User();
+
+    public boolean start() {
+        boolean result = false;
         try {
             InetAddress inetAddress = InetAddress.getByName(ip);
             Socket socket = new Socket(inetAddress, port);
-
+            if (socket.isConnected()) {
+                result = true;
+                System.out.println("Client is start");
+            }
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
-
             DataInputStream in = new DataInputStream(inputStream);
             DataOutputStream out = new DataOutputStream(outputStream);
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-            String string = null;
-
-            while (true) {
+            do {
                 System.out.println("Input value to server");
-                string = reader.readLine();
-                out.writeUTF(string);
+                message = user.say();
+                out.writeUTF(message);
                 out.flush();
-                string = in.readUTF();
-                System.out.println("Server reply :" + string);
-            }
+                message = in.readUTF();
+                System.out.println("Server reply :" + message);
+            } while (!message.equals("exit"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 }
