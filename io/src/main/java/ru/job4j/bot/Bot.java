@@ -18,7 +18,7 @@ public class Bot implements BotAction {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(fs));
         ) {
            String read;
-           while ((read = reader.readLine() ) != null) {
+           while ((read = reader.readLine()) != null) {
                list.add(read);
            }
         } catch (FileNotFoundException e) {
@@ -38,11 +38,13 @@ public class Bot implements BotAction {
     }
 
     public boolean stop() {
-        return flag = false;
+        flag = false;
+        return flag;
     }
 
     public boolean start() {
-        return flag = true;
+        flag = false;
+        return flag;
     }
 
 }

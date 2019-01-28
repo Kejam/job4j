@@ -15,11 +15,6 @@ public class Sort {
          */
     private ArrayList<String> sort = new ArrayList<>();
 
-    /**
-     *  Add element into collection.
-     * @param name
-     * @return
-     */
     public boolean add(String name) {
         boolean result = false;
         if (name != null) {
@@ -29,11 +24,6 @@ public class Sort {
         return result;
     }
 
-    /**
-     * String convert in array of char and equals by value.
-     * @param
-     * @return
-     */
     public boolean sorter(int i) {
         boolean result = false;
         sort.sort(
@@ -69,10 +59,6 @@ public class Sort {
         return result;
     }
 
-    /**
-     * Return all array.
-     * @return
-     */
     public ArrayList<String> getSort() {
         return sort;
     }

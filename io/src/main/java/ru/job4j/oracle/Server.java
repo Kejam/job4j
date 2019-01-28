@@ -8,14 +8,14 @@ import java.net.Socket;
 
 
 public class Server {
-    private static final int port = 5050;
+    private static final int PORT = 5050;
     private String message = "";
     private Bot bot = new Bot();
 
     public boolean start() {
         boolean result = false;
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(PORT);
             Socket socket = serverSocket.accept();
             if (socket.isConnected()) {
                 result = true;

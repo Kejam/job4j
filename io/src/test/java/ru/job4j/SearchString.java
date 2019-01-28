@@ -17,7 +17,7 @@ public class SearchString {
         List<String> exts = new ArrayList<>();
         exts.add("xml");
         List<File> result = search.files("C:\\Projects\\rukejam\\.idea", exts);
-        List<String> expect = Arrays.asList("compiler.xml","encodings.xml","misc.xml","modules.xml","vcs.xml","workspace.xml");
+        List<String> expect = Arrays.asList("compiler.xml", "encodings.xml", "misc.xml", "modules.xml", "vcs.xml", "workspace.xml");
         assertThat(result.toString(), is(expect.toString()));
     }
 }

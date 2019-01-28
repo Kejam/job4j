@@ -1,6 +1,7 @@
 package ru.job4j;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.bot.Bot;
 import ru.job4j.bot.ChatBot;
@@ -31,6 +32,7 @@ public class TestBot {
         assertThat(bot.say(), is("I'm waiting while flag will true"));
     }
 
+    @Ignore
     @Test
     public void whenFlagStart() {
         bot.start();

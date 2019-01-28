@@ -24,6 +24,7 @@
         <module>example</module>
         <module>Cinema</module>
         <module>io</module>
+        <module>solid</module>
 
     </modules>
 <dependencies>

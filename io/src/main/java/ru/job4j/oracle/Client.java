@@ -9,16 +9,16 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    private static final int port = 5050;
-    private static final String ip = "127.0.0.1";
+    private static final int PORT = 5050;
+    private static final String IP = "127.0.0.1";
     private String message = "";
     private User user = new User();
 
     public boolean start() {
         boolean result = false;
         try {
-            InetAddress inetAddress = InetAddress.getByName(ip);
-            Socket socket = new Socket(inetAddress, port);
+            InetAddress inetAddress = InetAddress.getByName(IP);
+            Socket socket = new Socket(inetAddress, PORT);
             if (socket.isConnected()) {
                 result = true;
                 System.out.println("Client is start");
