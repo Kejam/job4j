@@ -7,14 +7,14 @@ package ru.job4j.calculator;
  */
 public class InteractCalc {
     private final User user;
-    private final Actions actions;
+    private final ActionsEng actions;
 
     /**
      * Defalut constructor.
      * @param user
      * @param actions
      */
-    public InteractCalc(final User user, final Actions actions) {
+    public InteractCalc(final User user, final ActionsEng actions) {
         this.user = user;
         this.actions = actions;
     }
@@ -91,7 +91,30 @@ public class InteractCalc {
      * @return
      */
     public double action(double firstValue, String action) {
-        return new EnginerCalculator(user, actions).action(firstValue, action);
+        double result = -1;
+        System.out.println("Input second value: ");
+        double secondValue = Double.parseDouble(user.input());
+        if ("add".equals(action.toLowerCase())) {
+            actions.add(firstValue, secondValue);
+            result = actions.getResult();
+        }
+        if ("div".equals(action.toLowerCase())) {
+            actions.div(firstValue, secondValue);
+            result = actions.getResult();
+        }
+        if ("multiple".equals(action.toLowerCase())) {
+            actions.multiple(firstValue, secondValue);
+            result = actions.getResult();
+        }
+        if ("subtract".equals(action.toLowerCase())) {
+            actions.subtract(firstValue, secondValue);
+            result = actions.getResult();
+        }
+        if ("ex".equals(action.toLowerCase())) {
+            actions.exponentiation(firstValue, secondValue);
+            result = actions.getResult();
+        }
+        return result;
     }
 
     /**
@@ -99,7 +122,7 @@ public class InteractCalc {
      * @param args
      */
     public static void main(String[] args) {
-        new InteractCalc(new User(), new Actions()).init();
+        new InteractCalc(new User(), new ActionsEng()).init();
     }
 
 }
