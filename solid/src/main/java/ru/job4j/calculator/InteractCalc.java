@@ -19,6 +19,7 @@ public class InteractCalc {
         this.actions = actions;
     }
 
+
     /**
      *  This method init calculator.
      */
@@ -89,27 +90,8 @@ public class InteractCalc {
      * @param action
      * @return
      */
-    private double action(double firstValue, String action) {
-        double result = -1;
-        System.out.println("Input second value: ");
-        double secondValue = Double.parseDouble(user.input());
-        if ("add".equals(action.toLowerCase())) {
-            actions.add(firstValue, secondValue);
-            result = actions.getResult();
-        }
-        if ("div".equals(action.toLowerCase())) {
-            actions.div(firstValue, secondValue);
-            result = actions.getResult();
-        }
-        if ("multiple".equals(action.toLowerCase())) {
-            actions.multiple(firstValue, secondValue);
-            result = actions.getResult();
-        }
-        if ("subtract".equals(action.toLowerCase())) {
-            actions.subtract(firstValue, secondValue);
-            result = actions.getResult();
-        }
-        return result;
+    public double action(double firstValue, String action) {
+        return new EnginerCalculator(user, actions).action(firstValue, action);
     }
 
     /**
