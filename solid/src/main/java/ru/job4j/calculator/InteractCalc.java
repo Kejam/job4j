@@ -85,7 +85,7 @@ public class InteractCalc {
     }
 
     /**
-     *  This method check action and do it. Return result action, if action not founds than return -1;
+     *  This method check action and do it. Return result action, if action not founds then return -1;
      * @param firstValue
      * @param action
      * @return
