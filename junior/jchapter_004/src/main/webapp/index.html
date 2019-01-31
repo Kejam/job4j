@@ -8,20 +8,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
+        $(document).ready(function () {
+            loadUsers();
+        });
         function loadUsers() {
             $(
                 $.ajax('./json', {
                     method: 'get',
                     dataType: "json",
-                    data: {
-                        id : $ ('#id').val(),
-                        name : $('#name').val(),
-                        surname : $('#surname').val(),
-                        sex : $('#sex').val(),
-                        description : $('#description').val()},
                     success: function (data) {
-                        $('#table tr:last').after('<tr><td>' + data.id +'</td><td>' + data.name + '</td><td>' + data.surname + '</td><td>'
-                            + data.sex + '</td><td>' + data.description + '</td></tr>');
+                        var json = data;
+                        var res =
+                            "<tr>" +
+                            "<th>Id</th>" +
+                            "<th>Name</th>" +
+                            "<th>Surname</th>" +
+                            "<th>Sex</th>" +
+                            "<th>Description</th>" +
+                            "</tr>";
+                        document.getElementById("table").innerHTML = res;
+                        for (var i in json) {
+                            $('#table tr:last').after(
+                                "<tr>" +
+                                "<th> + json[i].id + </th>" +
+                                "<th> + json[i].name + </th>" +
+                                "<th> + json[i].surname + </th>" +
+                                "<th> + json[i].sex + </th>" +
+                                "<th> + json[i].description + </th>" +
+                                "</tr>"
+                            );
+                        }
                     }
                 })
             );

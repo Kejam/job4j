@@ -17,7 +17,7 @@ public class UsersJSONSerlvet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String json = new ObjectMapper().writeValueAsString(users);
+        String json = new ObjectMapper().writeValueAsString(users.values());
         resp.setContentType("text/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(json);
