@@ -26,18 +26,19 @@ public class User {
         int after = Math.toIntExact(Runtime.getRuntime().freeMemory() / kb);
         int object = before - after;
         System.out.println(String.format("Before: %d After: %d Object: %d",before, after, object ));
-
-
-        new Thread(
-                () -> test()
-        ).start();
     }
 
-    public static void test() {
+    public void test1() {
         int count = 0;
-        while (count < 1000000) {
+        while (count < 100000000) {
             User user = new User();
             count++;
         }
+    }
+
+    public static void test() {
+        new Thread(
+                () -> User.test()
+        ).start();
     }
 }
