@@ -25,6 +25,7 @@
         <module>Cinema</module>
         <module>io</module>
         <module>solid</module>
+        <module>gb</module>
 
     </modules>
 <dependencies>
