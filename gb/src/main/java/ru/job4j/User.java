@@ -18,21 +18,12 @@ public class User {
     }
 
     public static void main(String[] args) {
-        int kb = 1024;
-        System.out.println(Runtime.getRuntime().totalMemory() / kb);
-        int before = Math.toIntExact(Runtime.getRuntime().freeMemory() / kb);
-        User user = new User();
-        System.out.println(user);
-        int after = Math.toIntExact(Runtime.getRuntime().freeMemory() / kb);
-        int object = before - after;
-        System.out.println(String.format("Before: %d After: %d Object: %d",before, after, object ));
+        User.test();
     }
 
     public void test1() {
-        int count = 0;
-        while (count < 100000000) {
+        while (true) {
             User user = new User();
-            count++;
         }
     }
 
