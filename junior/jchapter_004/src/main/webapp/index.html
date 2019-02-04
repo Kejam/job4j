@@ -28,6 +28,7 @@
                             "</tr>";
                         document.getElementById("table").innerHTML = res;
                         for (var i in json) {
+                            console.log(i)
                             $('#table tr:last').after(
                                 "<tr>" +
                                 "<th> + json[i].id + </th>" +
