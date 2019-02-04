@@ -2,22 +2,19 @@ package ru.job4j.todolist.logic.storage;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.todolist.logic.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class HbnStorage implements Storage, AutoCloseable {
+public class HbnStorage implements Storage {
+    private final SessionFactory factory = new Configuration().configure().buildSessionFactory();
     private static final HbnStorage INSTANCE = new HbnStorage();
-    private final SessionFactory factory;
-    private final Session session;
-
-    public HbnStorage() {
-        this.factory = new Configuration().configure().buildSessionFactory();
-        this.session = factory.openSession();
-    }
 
     public static Storage getInstance() {
         return INSTANCE;
@@ -27,12 +24,9 @@ public class HbnStorage implements Storage, AutoCloseable {
     @Override
     public boolean add(Item item) {
         boolean result = false;
-        try  {
-            session.beginTransaction();
-            session.save(item);
+        this.tx(session -> session.save(item));
+        if (readAll().contains(item)) {
             result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return result;
     }
@@ -40,39 +34,28 @@ public class HbnStorage implements Storage, AutoCloseable {
     @Override
     public boolean update(Item item) {
         boolean result = false;
-        try  {
-            session.beginTransaction();
-            session.update(item);
+        this.wrapperMethodVoid(session -> session.update(item));
+        if (readAll().contains(item)) {
             result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return result;
     }
 
     @Override
     public boolean delete(int id) {
-        boolean result = false;
-        try  {
-            session.beginTransaction();
-            session.delete(id);
+        boolean result = true;
+        this.wrapperMethodVoid(session -> session.delete(id));
+        if (!readAll().contains(readById(id))) {
             result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return result;
     }
 
     @Override
     public List<Item> readAll() {
-        List<Item> result = new ArrayList<>();
-        try  {
-            session.beginTransaction();
-            result = session.createSQLQuery("select * from clients").list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
+        return this.tx(
+                session -> session.createQuery("from items").list()
+        );
     }
 
     @Override
@@ -82,9 +65,30 @@ public class HbnStorage implements Storage, AutoCloseable {
         return result.get(0);
     }
 
-    @Override
-    public void close() throws Exception {
-        session.close();
-        factory.close();
+    private void wrapperMethodVoid(Consumer<Session> command) {
+        Transaction transaction = null;
+        try {Session session = factory.openSession()
+            transaction = session.beginTransaction();
+            command.accept(session);
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            return command.apply(session);
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 }
