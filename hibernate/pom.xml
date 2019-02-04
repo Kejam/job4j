@@ -18,11 +18,13 @@
             <version>9.1-901-1.jdbc4</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.2.3.ga</version>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.0.Final</version>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

@@ -67,7 +67,7 @@ public class HbnStorage implements Storage {
 
     private void wrapperMethodVoid(Consumer<Session> command) {
         Transaction transaction = null;
-        try {Session session = factory.openSession()
+        try {Session session = factory.openSession();
             transaction = session.beginTransaction();
             command.accept(session);
         } catch (Exception e) {

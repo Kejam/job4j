@@ -1,6 +1,5 @@
 package ru.job4j.todolist.validate;
 
-import net.sf.ehcache.store.Store;
 import ru.job4j.todolist.logic.model.Item;
 import ru.job4j.todolist.logic.storage.HbnStorage;
 import ru.job4j.todolist.logic.storage.Storage;
