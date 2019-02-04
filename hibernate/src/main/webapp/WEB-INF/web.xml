@@ -14,4 +14,42 @@
         <url-pattern>/read</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CarStorageServlet</servlet-name>
+        <servlet-class>ru.job4j.carStrorage.Presentation.CarStorageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarStorageServlet</servlet-name>
+        <url-pattern>/cars</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarViewMachineServlet</servlet-name>
+        <servlet-class>ru.job4j.carStrorage.Presentation.CarViewMachineServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarViewMachineServlet</servlet-name>
+        <url-pattern>/view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarAddServlet</servlet-name>
+        <servlet-class>ru.job4j.carStrorage.Presentation.CarAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarAddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarEditServlet</servlet-name>
+        <servlet-class>ru.job4j.carStrorage.Presentation.CarEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarEditServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
