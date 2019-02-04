@@ -16,10 +16,14 @@ public class Item {
         this.done = done;
     }
 
-    public Item() {
+    public Item(String description, Timestamp date, boolean done) {
+        this.description = description;
+        this.date = date;
+        this.done = done;
     }
 
-
+    public Item() {
+    }
 
 
     @Override

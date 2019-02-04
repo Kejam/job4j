@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:clear="http://www.w3.org/1999/xhtml" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tasks</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadItems();
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <div>
+                Description:
+                <input type="description" name="description">
+            </div>
+            <div>
+                <button type="submit" onclick="createTask();">Create</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h2>Tasks list</h2>
+        <table id="table" class="table">
+            <tr>
+                <th >
+                    ID
+                </th>
+                <th >
+                    Description
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Done
+                </th>
+            </tr>
+        </table>
+    </div>
+</body>
