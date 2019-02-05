@@ -2,8 +2,6 @@ package job4j.carStrorage.logic;
 
 import job4j.carStrorage.logic.interfaces.StorageUser;
 import job4j.carStrorage.logic.items.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -11,7 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserStorage implements StorageUser, AutoCloseable {
+    private final static UserStorage INSTANCE = new UserStorage();
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
+
+    public static UserStorage getINSTANCE() {
+        return INSTANCE;
+    }
+
     @Override
     public boolean add(User user) {
         boolean result = false;
@@ -29,7 +33,7 @@ public class UserStorage implements StorageUser, AutoCloseable {
 
     @Override
     public User returnById(int id) {
-        return returnAll().stream().filter(car -> car.getId().equals(id)).collect(Collectors.toList()).get(0);
+        return returnAll().stream().filter(user -> user.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 
     @Override
@@ -39,5 +43,9 @@ public class UserStorage implements StorageUser, AutoCloseable {
 
     public static void main(String[] args) {
         new UserStorage().add(new User());
+    }
+
+    public User returnByLogin(String login) {
+        return returnAll().stream().filter(user -> user.getLogin().equals(login)).collect(Collectors.toList()).get(0);
     }
 }

@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.IOException;
 
-public class UpdateCarServlet extends HttpServlet {
+public class CreateCarServlet extends HttpServlet {
     private final AdStorage storage = AdStorage.getINSTANCE();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("id", req.getParameter("id"));
-        req.getRequestDispatcher("WEB-INF/views/update.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/views/create.jsp").forward(req, resp);
     }
 
     @Override
@@ -33,16 +34,15 @@ public class UpdateCarServlet extends HttpServlet {
                     req.getParameter("transmission"),
                     req.getParameter("color")
             );
-            storage.update(
+            storage.add(
                     new Ad(
-                            Integer.valueOf(req.getParameter("id")),
-                            req.getParameter("name"),
-                            user,
-                            req.getParameter("descrition"),
-                            Integer.valueOf(req.getParameter("sale")),
-                            status,
-                            image,
-                            car
+                        req.getParameter("name"),
+                        user,
+                        req.getParameter("descrition"),
+                        Integer.valueOf(req.getParameter("sale")),
+                        status,
+                        image,
+                        car
                     )
             );
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));

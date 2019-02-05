@@ -9,7 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CarStorage implements StorageCar, AutoCloseable {
+    private final static CarStorage INSTANCE = new CarStorage();
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
+
+    public static CarStorage getINSTANCE() {
+        return INSTANCE;
+    }
+
     @Override
     public boolean add(Car car) {
         boolean result = false;

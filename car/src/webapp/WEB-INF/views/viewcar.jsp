@@ -11,6 +11,17 @@
     <title>Title</title>
 </head>
 <body>
-
+    <c:set var="car" scope="session" value="${sessionScope.car}"/>
+    <c:set var="ad" scope="session" value="${sessionScope.ad}"/>
+    <h1>Car</h1>
+    Name: ${ad.name}
+    Name car: ${care.name}
+    Description: ${ad.description}
+    Color: ${car.colore}
+    Engine: ${car.engine}
+    Car body: ${car.carBody}
+    Transmission: ${car.transmission}
+    Status: ${ad.status}
+    Price: ${ad.sale}
 </body>
 </html>
