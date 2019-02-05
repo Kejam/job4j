@@ -41,10 +41,6 @@ public class UserStorage implements StorageUser, AutoCloseable {
         factory.close();
     }
 
-    public static void main(String[] args) {
-        new UserStorage().add(new User());
-    }
-
     public User returnByLogin(String login) {
         return returnAll().stream().filter(user -> user.getLogin().equals(login)).collect(Collectors.toList()).get(0);
     }

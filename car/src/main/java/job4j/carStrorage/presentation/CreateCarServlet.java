@@ -26,7 +26,6 @@ public class CreateCarServlet extends HttpServlet {
         try {
             User user = storage.findUserByLogin(req.getParameter("login"));
             Boolean status = false;
-            Image image = req.getParameter("image");
             Car car = new Car(
                     req.getParameter("namecar"),
                     req.getParameter("engine"),
@@ -41,7 +40,6 @@ public class CreateCarServlet extends HttpServlet {
                         req.getParameter("descrition"),
                         Integer.valueOf(req.getParameter("sale")),
                         status,
-                        image,
                         car
                     )
             );

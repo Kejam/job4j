@@ -10,30 +10,27 @@ public class Ad {
     private String description;
     private Integer sale;
     private boolean status;
-    private Image image;
     private Car car;
 
     public Ad() {
     }
 
-    public Ad(Integer id, String name, User user, String description, Integer sale, boolean status, Image image, Car car) {
+    public Ad(Integer id, String name, User user, String description, Integer sale, boolean status, Car car) {
         this.id = id;
         this.name = name;
         this.user = user;
         this.description = description;
         this.sale = sale;
         this.status = status;
-        this.image = image;
         this.car = car;
     }
 
-    public Ad(String name, User user, String description, Integer sale, boolean status, Image image, Car car) {
+    public Ad(String name, User user, String description, Integer sale, boolean status, Car car) {
         this.name = name;
         this.user = user;
         this.description = description;
         this.sale = sale;
         this.status = status;
-        this.image = image;
         this.car = car;
     }
 
@@ -93,14 +90,6 @@ public class Ad {
         this.status = status;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)  {
@@ -110,16 +99,16 @@ public class Ad {
             return false;
         }
         Ad ad = (Ad) o;
-        return status == ad.status && Objects.equals(id, ad.id) && Objects.equals(name, ad.name) && Objects.equals(user, ad.user) && Objects.equals(description, ad.description) && Objects.equals(sale, ad.sale) && Objects.equals(image, ad.image) && Objects.equals(car, ad.car);
+        return status == ad.status && Objects.equals(id, ad.id) && Objects.equals(name, ad.name) && Objects.equals(user, ad.user) && Objects.equals(description, ad.description) && Objects.equals(sale, ad.sale)  && Objects.equals(car, ad.car);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, user, description, sale, status, image, car);
+        return Objects.hash(id, name, user, description, sale, status, car);
     }
 
     @Override
     public String toString() {
-        return "Ad{" + "id=" + id + ", name='" + name + '\'' + ", user=" + user + ", description='" + description + '\'' + ", sale=" + sale + ", status=" + status + ", image=" + image + ", car=" + car + '}';
+        return "Ad{" + "id=" + id + ", name='" + name + '\'' + ", user=" + user + ", description='" + description + '\'' + ", sale=" + sale + ", status=" + status + ", car=" + car + '}';
     }
 }

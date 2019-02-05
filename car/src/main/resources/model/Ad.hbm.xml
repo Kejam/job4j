@@ -7,7 +7,6 @@
         <many-to-one name="user" column="users" class="job4j.carStrorage.logic.items.User" lazy="false"/>
         <property name="description" column="description"/>
         <property name="status" column="status"/>
-        <property name="image" column="image"/>
         <many-to-one name="car" column="cars" class="job4j.carStrorage.logic.items.Car" lazy="false"/>
     </class>
 </hibernate-mapping>

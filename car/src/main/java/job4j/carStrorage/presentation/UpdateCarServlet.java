@@ -24,8 +24,10 @@ public class UpdateCarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             User user = storage.findUserByLogin(req.getParameter("login"));
-            Boolean status = false;
-            Image image = req.getParameter("image");
+            boolean status = false;
+            if (req.getParameter("status").equals("false")) {
+                status = false;
+            }
             Car car = new Car(
                     req.getParameter("namecar"),
                     req.getParameter("engine"),
@@ -41,7 +43,6 @@ public class UpdateCarServlet extends HttpServlet {
                             req.getParameter("descrition"),
                             Integer.valueOf(req.getParameter("sale")),
                             status,
-                            image,
                             car
                     )
             );

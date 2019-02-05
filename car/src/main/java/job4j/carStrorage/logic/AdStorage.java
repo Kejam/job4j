@@ -2,6 +2,7 @@ package job4j.carStrorage.logic;
 
 import job4j.carStrorage.logic.interfaces.StorageAd;
 import job4j.carStrorage.logic.items.Ad;
+import job4j.carStrorage.logic.items.Car;
 import job4j.carStrorage.logic.items.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -77,5 +78,13 @@ public class AdStorage implements StorageAd, AutoCloseable {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Ad ad = new Ad();
+        ad.setCar(new Car());
+        ad.setUser(new User());
+        ad.setDescription("asdfasdf");
+        new AdStorage().add(ad);
     }
 }
