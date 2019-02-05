@@ -1,0 +1,13 @@
+<hibernate-mapping>
+    <class name="job4j.carStrorage.logic.items.Ad" table="adStorage">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <many-to-one name="user" column="users" class="job4j.carStrorage.logic.items.User" lazy="false"/>
+        <property name="description" column="description"/>
+        <property name="status" column="status"/>
+        <property name="image" column="image"/>
+        <many-to-one name="car" column="cars" class="job4j.carStrorage.logic.items.Car" lazy="false"/>
+    </class>
+</hibernate-mapping>
