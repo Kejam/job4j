@@ -1,37 +1,31 @@
 package job4j.carStrorage.logic.items;
 
+import javax.persistence.*;
 import java.awt.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "adstorage")
 public class Ad {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Column(name = "users")
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
     private User user;
     private String description;
     private Integer sale;
     private boolean status;
+    @Column(name = "cars")
+    @OneToOne(fetch = FetchType.LAZY,
+    cascade = CascadeType.ALL)
     private Car car;
 
     public Ad() {
-    }
-
-    public Ad(Integer id, String name, User user, String description, Integer sale, boolean status, Car car) {
-        this.id = id;
-        this.name = name;
-        this.user = user;
-        this.description = description;
-        this.sale = sale;
-        this.status = status;
-        this.car = car;
-    }
-
-    public Ad(String name, User user, String description, Integer sale, boolean status, Car car) {
-        this.name = name;
-        this.user = user;
-        this.description = description;
-        this.sale = sale;
-        this.status = status;
-        this.car = car;
     }
 
     public Car getCar() {
