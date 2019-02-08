@@ -28,24 +28,9 @@ public class UpdateCarServlet extends HttpServlet {
             if (req.getParameter("status").equals("false")) {
                 status = false;
             }
-            Car car = new Car(
-                    req.getParameter("namecar"),
-                    req.getParameter("engine"),
-                    req.getParameter("carBody"),
-                    req.getParameter("transmission"),
-                    req.getParameter("color")
-            );
-            storage.update(
-                    new Ad(
-                            Integer.valueOf(req.getParameter("id")),
-                            req.getParameter("name"),
-                            user,
-                            req.getParameter("descrition"),
-                            Integer.valueOf(req.getParameter("sale")),
-                            status,
-                            car
-                    )
-            );
+            Car car = new Car();
+            Ad ad = new Ad();
+            storage.update(ad);
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));
         } catch (NullPointerException e) {
             e.printStackTrace();

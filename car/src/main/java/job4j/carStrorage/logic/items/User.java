@@ -1,8 +1,14 @@
 package job4j.carStrorage.logic.items;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table (name = "userstorage")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String login;
@@ -12,24 +18,6 @@ public class User {
 
     public User() {
     }
-
-    public User(Integer id, String name, String login, String password, String phone, String email) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-    }
-
-    public User(String name, String login, String password, String phone, String email) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.phone = phone;
-        this.email = email;
-    }
-
 
     public Integer getId() {
         return id;

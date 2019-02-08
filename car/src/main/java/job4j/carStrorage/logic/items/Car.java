@@ -1,8 +1,14 @@
 package job4j.carStrorage.logic.items;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "carstorage")
 public class Car {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String engine;
@@ -13,22 +19,6 @@ public class Car {
     public Car() {
     }
 
-    public Car(Integer id, String name, String engine, String carBody, String transmission, String color) {
-        this.id = id;
-        this.name = name;
-        this.engine = engine;
-        this.carBody = carBody;
-        this.transmission = transmission;
-        this.color = color;
-    }
-
-    public Car(String name, String engine, String carBody, String transmission, String color) {
-        this.name = name;
-        this.engine = engine;
-        this.carBody = carBody;
-        this.transmission = transmission;
-        this.color = color;
-    }
 
     public Integer getId() {
         return id;

@@ -12,6 +12,9 @@ public class CarStorage implements StorageCar, AutoCloseable {
     private final static CarStorage INSTANCE = new CarStorage();
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
+    public CarStorage() {
+    }
+
     public static CarStorage getINSTANCE() {
         return INSTANCE;
     }

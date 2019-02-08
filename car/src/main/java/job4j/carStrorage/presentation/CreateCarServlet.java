@@ -26,23 +26,9 @@ public class CreateCarServlet extends HttpServlet {
         try {
             User user = storage.findUserByLogin(req.getParameter("login"));
             Boolean status = false;
-            Car car = new Car(
-                    req.getParameter("namecar"),
-                    req.getParameter("engine"),
-                    req.getParameter("carBody"),
-                    req.getParameter("transmission"),
-                    req.getParameter("color")
-            );
-            storage.add(
-                    new Ad(
-                        req.getParameter("name"),
-                        user,
-                        req.getParameter("descrition"),
-                        Integer.valueOf(req.getParameter("sale")),
-                        status,
-                        car
-                    )
-            );
+            Car car = new Car();
+            Ad ad = new Ad();
+            storage.add(ad);
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));
         } catch (NullPointerException e) {
             e.printStackTrace();

@@ -7,6 +7,7 @@ import job4j.carStrorage.logic.items.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.transaction.UserTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,10 +82,16 @@ public class AdStorage implements StorageAd, AutoCloseable {
     }
 
     public static void main(String[] args) {
-        Ad ad = new Ad();
-        ad.setCar(new Car());
-        ad.setUser(new User());
-        ad.setDescription("asdfasdf");
-        new AdStorage().add(ad);
+        User user = new User();
+        Car car = new Car();
+        user.setName("sdfg");
+        car.setName("bmw");
+        new UserStorage().add(user);
+        //new CarStorage().add(car);
+//        Ad ad = new Ad();
+//        ad.setCar(car);
+//        ad.setUser(user);
+//        ad.setDescription("bmw is okay");
+        //new AdStorage().add(ad);
     }
 }

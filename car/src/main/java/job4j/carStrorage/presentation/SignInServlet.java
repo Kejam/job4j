@@ -1,8 +1,6 @@
 package job4j.carStrorage.presentation;
 
 import job4j.carStrorage.logic.AdStorage;
-import job4j.carStrorage.logic.interfaces.StorageAd;
-import job4j.carStrorage.logic.items.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +14,7 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("WEB-INF/views/signin.jsp").forward(req, resp);
-        if (req.getParameter("quest").equals("true")) {
-            HttpSession session = req.getSession();
-            session.setAttribute("login", "quest");
-            resp.sendRedirect(String.format("%s/", req.getContextPath()));
-        }
+
     }
 
     @Override
@@ -34,6 +28,11 @@ public class SignInServlet extends HttpServlet {
         } else {
             req.setAttribute("error", "error sign in");
             doGet(req, resp);
+        }
+        if (req.getParameter("quest").equals("true")) {
+            HttpSession session = req.getSession();
+            session.setAttribute("login", "quest");
+            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         }
     }
 }

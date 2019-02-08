@@ -1,6 +1,7 @@
 package job4j.carStrorage.logic;
 
 import job4j.carStrorage.logic.interfaces.StorageUser;
+import job4j.carStrorage.logic.items.Car;
 import job4j.carStrorage.logic.items.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -44,4 +45,5 @@ public class UserStorage implements StorageUser, AutoCloseable {
     public User returnByLogin(String login) {
         return returnAll().stream().filter(user -> user.getLogin().equals(login)).collect(Collectors.toList()).get(0);
     }
+
 }

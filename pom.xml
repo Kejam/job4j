@@ -27,6 +27,7 @@
         <module>solid</module>
         <module>gb</module>
         <module>hibernate</module>
+        <module>spring</module>
 
     </modules>
 <dependencies>

@@ -16,7 +16,7 @@
         Password: <input type="text" name="password"><br>
         <input type="submit" value="Sign In">
     </form>
-    <form action="${pageContext.servletContext.contextPath}/signin" method="get">
+    <form action="${pageContext.servletContext.contextPath}/signin" method="post">
         <input type="submit" value="Sign in as guest" name="guest" value="true" >
     </form>
 </body>
