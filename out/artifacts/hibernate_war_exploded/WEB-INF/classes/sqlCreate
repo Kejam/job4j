@@ -1,0 +1,6 @@
+create table items(
+	id serial primary key,
+	description varchar(2000),
+	date varchar(2000),
+	done boolean
+)
