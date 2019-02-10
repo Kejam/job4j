@@ -19,10 +19,10 @@ create table carStorage (
 create table adStorage (
     id serial primary key,
     name varchar(2000),
-    users integer references userStorage(id),
+    user_id integer references userStorage(id),
     description varchar(2000),
     sale integer,
     status boolean,
     image bytea,
-    cars integer references carStorage(id)
+    car_id integer references carStorage(id)
 )

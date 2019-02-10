@@ -24,6 +24,7 @@ public class SignInServlet extends HttpServlet {
         if (storage.findByLogin(login, password)) {
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
+            session.setAttribute("user", storage.findUserByLogin(login));
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "error sign in");

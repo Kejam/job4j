@@ -23,13 +23,15 @@ public class UpdateCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            User user = storage.findUserByLogin(req.getParameter("login"));
+            User user = (User) req.getSession().getAttribute("user");
             boolean status = false;
             if (req.getParameter("status").equals("false")) {
                 status = false;
             }
             Car car = new Car();
             Ad ad = new Ad();
+            ad.setUser(user);
+            ad.setCar(car);
             storage.update(ad);
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));
         } catch (NullPointerException e) {

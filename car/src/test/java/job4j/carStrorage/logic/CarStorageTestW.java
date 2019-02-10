@@ -46,7 +46,7 @@ public class CarStorageTestW {
         storage.add(car);
         storage.add(car);
 
-        Assert.assertThat(list, is(storage.returnAll()));
+        Assert.assertThat(storage.returnAll().contains(car), is(true));
     }
 
 }

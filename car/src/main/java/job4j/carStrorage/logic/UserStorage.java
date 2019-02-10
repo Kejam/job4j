@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class UserStorage implements StorageUser, AutoCloseable {
     private final static UserStorage INSTANCE = new UserStorage();
     private SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    private final Wrapper wrapper = new Wrapper();
 
     public static UserStorage getINSTANCE() {
         return INSTANCE;
@@ -20,7 +21,7 @@ public class UserStorage implements StorageUser, AutoCloseable {
     @Override
     public boolean add(User user) {
         boolean result = false;
-        new Wrapper().wrapperMethodT(session -> session.save(user), factory);
+        wrapper.wrapperMethodT(session -> session.save(user), factory);
         if (returnAll().contains(user)) {
             result = true;
         }
@@ -29,7 +30,7 @@ public class UserStorage implements StorageUser, AutoCloseable {
 
     @Override
     public List<User> returnAll() {
-        return new Wrapper().wrapperMethodT(session -> session.createQuery("from userStorage"), factory).list();
+        return wrapper.wrapperMethodT(session -> session.createQuery("from userStorage"), factory).list();
     }
 
     @Override

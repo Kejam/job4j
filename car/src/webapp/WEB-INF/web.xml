@@ -34,15 +34,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>RemoveCarServlet</servlet-name>
-        <servlet-class>job4j.carStrorage.presentation.RemoveCarServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RemoveCarServlet</servlet-name>
-        <url-pattern>/remove</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>UpdateCarServlet</servlet-name>
         <servlet-class>job4j.carStrorage.presentation.UpdateCarServlet</servlet-class>
     </servlet>
@@ -68,8 +59,5 @@
         <servlet-name>SignInServlet</servlet-name>
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
-
-
-
 
 </web-app>

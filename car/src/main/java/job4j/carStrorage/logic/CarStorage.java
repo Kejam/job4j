@@ -31,7 +31,7 @@ public class CarStorage implements StorageCar, AutoCloseable {
 
     @Override
     public List<Car> returnAll() {
-        return new Wrapper().wrapperMethodT(session -> session.createQuery("from carStorage"), factory).list();
+        return new Wrapper().wrapperMethodT(session -> session.createSQLQuery("select * from carstorage").list(), factory);
     }
 
     @Override

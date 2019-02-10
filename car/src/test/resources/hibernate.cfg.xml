@@ -5,12 +5,11 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:hsqldb:mem:clinic;sql.enforce_size=false</property>
-        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.username">sa</property>
-        <property name="connection.password"></property>
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/postgres</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">fghrty212vyt</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="show_sql">true</property>
 
 
@@ -19,3 +18,20 @@
         <mapping class="job4j.carStrorage.logic.items.Car"/>
     </session-factory>
 </hibernate-configuration>
+
+<!--<hibernate-configuration>-->
+    <!--<session-factory>-->
+        <!--<property name="connection.url">jdbc:hsqldb:mem:clinic;sql.enforce_size=false</property>-->
+        <!--<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>-->
+        <!--<property name="connection.username">sa</property>-->
+        <!--<property name="connection.password"></property>-->
+        <!--<property name="dialect">org.hibernate.dialect.HSQLDialect</property>-->
+        <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
+        <!--<property name="show_sql">true</property>-->
+
+
+        <!--<mapping class="job4j.carStrorage.logic.items.Ad"/>-->
+        <!--<mapping class="job4j.carStrorage.logic.items.User"/>-->
+        <!--<mapping class="job4j.carStrorage.logic.items.Car"/>-->
+    <!--</session-factory>-->
+<!--</hibernate-configuration>-->

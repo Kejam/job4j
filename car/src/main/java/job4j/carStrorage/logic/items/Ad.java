@@ -12,14 +12,12 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @Column(name = "users")
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private User user;
     private String description;
     private Integer sale;
     private boolean status;
-    @Column(name = "cars")
     @ManyToOne(fetch = FetchType.LAZY,
     cascade = CascadeType.ALL)
     private Car car;

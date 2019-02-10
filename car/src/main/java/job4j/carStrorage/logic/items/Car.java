@@ -10,10 +10,15 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "engine")
     private String engine;
+    @Column(name = "carBody")
     private String carBody;
+    @Column(name = "transmission")
     private String transmission;
+    @Column(name = "color")
     private String color;
 
     public Car() {

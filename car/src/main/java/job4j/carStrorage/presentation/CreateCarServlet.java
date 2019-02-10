@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
@@ -24,10 +25,12 @@ public class CreateCarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            User user = storage.findUserByLogin(req.getParameter("login"));
+            User user = (User) req.getSession().getAttribute("user");
             Boolean status = false;
             Car car = new Car();
             Ad ad = new Ad();
+            ad.setCar(car);
+            ad.setUser(user);
             storage.add(ad);
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));
         } catch (NullPointerException e) {
