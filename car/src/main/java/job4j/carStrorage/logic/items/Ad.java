@@ -1,7 +1,6 @@
 package job4j.carStrorage.logic.items;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.util.Objects;
 
 @Entity
@@ -12,14 +11,16 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private User user;
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    private User users;
     private String description;
     private Integer sale;
     private boolean status;
-    @ManyToOne(fetch = FetchType.LAZY,
-    cascade = CascadeType.ALL)
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     private Car car;
 
     public Ad() {
@@ -50,11 +51,11 @@ public class Ad {
     }
 
     public User getUser() {
-        return user;
+        return users;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.users = user;
     }
 
     public String getDescription() {
@@ -90,16 +91,16 @@ public class Ad {
             return false;
         }
         Ad ad = (Ad) o;
-        return status == ad.status && Objects.equals(id, ad.id) && Objects.equals(name, ad.name) && Objects.equals(user, ad.user) && Objects.equals(description, ad.description) && Objects.equals(sale, ad.sale)  && Objects.equals(car, ad.car);
+        return status == ad.status && Objects.equals(id, ad.id) && Objects.equals(name, ad.name) && Objects.equals(users, ad.users) && Objects.equals(description, ad.description) && Objects.equals(sale, ad.sale)  && Objects.equals(car, ad.car);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, user, description, sale, status, car);
+        return Objects.hash(id, name, users, description, sale, status, car);
     }
 
     @Override
     public String toString() {
-        return "Ad{" + "id=" + id + ", name='" + name + '\'' + ", user=" + user + ", description='" + description + '\'' + ", sale=" + sale + ", status=" + status + ", car=" + car + '}';
+        return "Ad{" + "id=" + id + ", name='" + name + '\'' + ", user=" + users + ", description='" + description + '\'' + ", sale=" + sale + ", status=" + status + ", car=" + car + '}';
     }
 }

@@ -13,8 +13,8 @@
         <property name="show_sql">true</property>
 
 
-        <mapping resource="model/Ad.hbm.xml"/>
-        <mapping resource="model/Car.hbm.xml"/>
-        <mapping resource="model/User.hbm.xml"/>
+        <mapping class="job4j.carStrorage.logic.items.Ad"/>
+        <mapping class="job4j.carStrorage.logic.items.User"/>
+        <mapping class="job4j.carStrorage.logic.items.Car"/>
     </session-factory>
 </hibernate-configuration>

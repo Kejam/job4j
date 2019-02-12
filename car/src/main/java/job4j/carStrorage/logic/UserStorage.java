@@ -30,12 +30,23 @@ public class UserStorage implements StorageUser, AutoCloseable {
 
     @Override
     public List<User> returnAll() {
-        return wrapper.wrapperMethodT(session -> session.createQuery("from userStorage"), factory).list();
+        return wrapper.wrapperMethodT(session -> session.createQuery("from User").list(), factory);
     }
 
     @Override
     public User returnById(int id) {
-        return returnAll().stream().filter(user -> user.getId().equals(id)).collect(Collectors.toList()).get(0);
+        return wrapper.wrapperMethodT(session -> session.get(User.class, id), factory);
+    }
+
+    public User returnByLogin(String login) {
+        User user = new User();
+        for (User s: returnAll()) {
+            if (s.getLogin().equals(login)) {
+                user = s;
+                break;
+            }
+        }
+        return user;
     }
 
     @Override
@@ -43,8 +54,6 @@ public class UserStorage implements StorageUser, AutoCloseable {
         factory.close();
     }
 
-    public User returnByLogin(String login) {
-        return returnAll().stream().filter(user -> user.getLogin().equals(login)).collect(Collectors.toList()).get(0);
-    }
+
 
 }

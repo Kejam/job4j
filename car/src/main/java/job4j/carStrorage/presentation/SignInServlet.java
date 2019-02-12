@@ -21,6 +21,10 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+        if (req.getParameter("guest").equals("true")) {
+            login = "guest";
+            password = "quest";
+        }
         if (storage.findByLogin(login, password)) {
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
@@ -29,11 +33,6 @@ public class SignInServlet extends HttpServlet {
         } else {
             req.setAttribute("error", "error sign in");
             doGet(req, resp);
-        }
-        if (req.getParameter("quest").equals("true")) {
-            HttpSession session = req.getSession();
-            session.setAttribute("login", "quest");
-            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         }
     }
 }
