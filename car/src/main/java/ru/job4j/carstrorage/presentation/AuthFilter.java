@@ -1,4 +1,4 @@
-package job4j.carStrorage.presentation;
+package ru.job4j.carstrorage.presentation;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

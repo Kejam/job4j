@@ -1,15 +1,12 @@
-package job4j.carStrorage.logic;
+package ru.job4j.carstrorage.logic;
 
-import job4j.carStrorage.logic.interfaces.StorageAd;
-import job4j.carStrorage.logic.items.Ad;
-import job4j.carStrorage.logic.items.Car;
-import job4j.carStrorage.logic.items.User;
+import ru.job4j.carstrorage.logic.interfaces.StorageAd;
+import ru.job4j.carstrorage.logic.items.Ad;
+import ru.job4j.carstrorage.logic.items.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.transaction.UserTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AdStorage implements StorageAd, AutoCloseable {
     private final Wrapper wrapper = new Wrapper();
@@ -25,7 +22,7 @@ public class AdStorage implements StorageAd, AutoCloseable {
     @Override
     public boolean add(Ad ad) {
         boolean result = false;
-        new Wrapper().wrapperMethodT(session -> session.save(ad), factory);
+        wrapper.wrapperMethodT(session -> session.save(ad), factory);
         if (returnAll().contains(ad)) {
             result = true;
         }
@@ -45,7 +42,7 @@ public class AdStorage implements StorageAd, AutoCloseable {
     @Override
     public boolean remove(int id) {
         boolean result = false;
-        wrapper.wrapperMethodVoid(session -> session.remove(id), factory);
+        wrapper.wrapperMethodVoid(session -> session.createQuery("delete from Ad where id = "), factory);
         if (returnById(id) == null) {
             result = true;
         }
@@ -54,7 +51,7 @@ public class AdStorage implements StorageAd, AutoCloseable {
 
     @Override
     public List<Ad> returnAll() {
-        return new Wrapper().wrapperMethodT(session -> session.createQuery("from Ad").list(), factory);
+        return wrapper.wrapperMethodT(session -> session.createQuery("from Ad").list(), factory);
     }
 
     @Override

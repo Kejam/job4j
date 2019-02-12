@@ -1,17 +1,16 @@
-package job4j.carStrorage.logic;
+package ru.job4j.carstrorage.logic;
 
 
-import job4j.carStrorage.logic.items.Car;
+import ru.job4j.carstrorage.logic.CarStorage;
+import ru.job4j.carstrorage.logic.items.Car;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 public class CarStorageTestW {
     private CarStorage storage;
@@ -31,7 +30,7 @@ public class CarStorageTestW {
 
         storage.add(car);
 
-        Assert.assertThat(expect, is(storage.returnById(1)));
+        Assert.assertThat(storage.returnAll().contains(car), is(true));
     }
 
 

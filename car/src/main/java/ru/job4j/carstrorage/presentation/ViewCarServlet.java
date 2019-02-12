@@ -1,8 +1,8 @@
-package job4j.carStrorage.presentation;
+package ru.job4j.carstrorage.presentation;
 
-import job4j.carStrorage.logic.AdStorage;
-import job4j.carStrorage.logic.items.Ad;
-import job4j.carStrorage.logic.items.Car;
+import ru.job4j.carstrorage.logic.AdStorage;
+import ru.job4j.carstrorage.logic.items.Ad;
+import ru.job4j.carstrorage.logic.items.Car;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

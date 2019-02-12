@@ -1,6 +1,6 @@
-package job4j.carStrorage.logic;
+package ru.job4j.carstrorage.logic;
 
-import job4j.carStrorage.logic.items.Ad;
+import ru.job4j.carstrorage.logic.items.Ad;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

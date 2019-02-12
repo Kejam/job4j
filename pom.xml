@@ -28,6 +28,7 @@
         <module>gb</module>
         <module>hibernate</module>
         <module>spring</module>
+        <module>car</module>
 
     </modules>
 <dependencies>

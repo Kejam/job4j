@@ -13,9 +13,9 @@
         <property name="show_sql">true</property>
 
 
-        <mapping class="job4j.carStrorage.logic.items.Ad"/>
-        <mapping class="job4j.carStrorage.logic.items.User"/>
-        <mapping class="job4j.carStrorage.logic.items.Car"/>
+        <mapping class="ru.job4j.carstrorage.logic.items.Ad"/>
+        <mapping class="ru.job4j.carstrorage.logic.items.User"/>
+        <mapping class="ru.job4j.carstrorage.logic.items.Car"/>
     </session-factory>
 </hibernate-configuration>
 
@@ -30,8 +30,8 @@
         <!--<property name="show_sql">true</property>-->
 
 
-        <!--<mapping class="job4j.carStrorage.logic.items.Ad"/>-->
-        <!--<mapping class="job4j.carStrorage.logic.items.User"/>-->
-        <!--<mapping class="job4j.carStrorage.logic.items.Car"/>-->
+        <!--<mapping class="Ad"/>-->
+        <!--<mapping class="User"/>-->
+        <!--<mapping class="Car"/>-->
     <!--</session-factory>-->
 <!--</hibernate-configuration>-->

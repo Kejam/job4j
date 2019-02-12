@@ -1,6 +1,4 @@
-package job4j.carStrorage.logic.items;
-
-import jdk.jfr.Name;
+package ru.job4j.carstrorage.logic.items;
 
 import javax.persistence.*;
 import java.util.Objects;

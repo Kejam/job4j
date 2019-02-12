@@ -1,13 +1,11 @@
-package job4j.carStrorage.logic;
+package ru.job4j.carstrorage.logic;
 
-import job4j.carStrorage.logic.interfaces.StorageUser;
-import job4j.carStrorage.logic.items.Car;
-import job4j.carStrorage.logic.items.User;
+import ru.job4j.carstrorage.logic.interfaces.StorageUser;
+import ru.job4j.carstrorage.logic.items.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserStorage implements StorageUser, AutoCloseable {
     private final static UserStorage INSTANCE = new UserStorage();

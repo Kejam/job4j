@@ -1,37 +1,37 @@
-package job4j.carStrorage.presentation;
+package ru.job4j.carstrorage.presentation;
 
-import job4j.carStrorage.logic.AdStorage;
-import job4j.carStrorage.logic.items.Ad;
-import job4j.carStrorage.logic.items.Car;
-import job4j.carStrorage.logic.items.User;
+import ru.job4j.carstrorage.logic.AdStorage;
+import ru.job4j.carstrorage.logic.items.Ad;
+import ru.job4j.carstrorage.logic.items.Car;
+import ru.job4j.carstrorage.logic.items.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.IOException;
 
-public class CreateCarServlet extends HttpServlet {
+public class UpdateCarServlet extends HttpServlet {
     private final AdStorage storage = AdStorage.getINSTANCE();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("WEB-INF/views/create.jsp").forward(req, resp);
+        req.setAttribute("id", req.getParameter("id"));
+        req.getRequestDispatcher("WEB-INF/views/update.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             User user = (User) req.getSession().getAttribute("user");
-            Boolean status = false;
+            boolean status = false;
+            if (req.getParameter("status").equals("false")) {
+                status = false;
+            }
             Car car = new Car();
             Ad ad = new Ad();
-            ad.setCar(car);
             ad.setUser(user);
-            storage.add(ad);
+            ad.setCar(car);
+            storage.update(ad);
             resp.sendRedirect(String.format("%s/list", req.getContextPath()));
         } catch (NullPointerException e) {
             e.printStackTrace();

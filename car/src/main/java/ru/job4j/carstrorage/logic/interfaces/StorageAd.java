@@ -1,6 +1,6 @@
-package job4j.carStrorage.logic.interfaces;
+package ru.job4j.carstrorage.logic.interfaces;
 
-import job4j.carStrorage.logic.items.Ad;
+import ru.job4j.carstrorage.logic.items.Ad;
 
 import java.util.List;
 

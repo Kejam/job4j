@@ -1,6 +1,7 @@
-package job4j.carStrorage.logic.interfaces;
+package ru.job4j.carstrorage.logic.interfaces;
 
-import job4j.carStrorage.logic.items.Car;
+import ru.job4j.carstrorage.logic.items.Car;
+
 import java.util.List;
 
 public interface StorageCar {
