@@ -42,7 +42,9 @@ public class AdStorage implements StorageAd, AutoCloseable {
     @Override
     public boolean remove(int id) {
         boolean result = false;
-        wrapper.wrapperMethodVoid(session -> session.createQuery("delete from Ad where id = "), factory);
+        Ad ad = new Ad();
+        ad.setId(id);
+        wrapper.wrapperMethodVoid(session -> session.remove(ad), factory);
         if (returnById(id) == null) {
             result = true;
         }

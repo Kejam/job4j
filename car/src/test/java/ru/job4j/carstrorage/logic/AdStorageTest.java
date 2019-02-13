@@ -35,27 +35,28 @@ public class AdStorageTest {
         //storage.add(ad);
     }
 
-    @Ignore
+
     @Test
     public void update() {
-        //ad.setDescription("update");
-        storage.add(ad);
+        ad.setDescription("update");
+        //storage.add(ad);
         ad.setDescription("up1");
+        ad.setId(9);
         storage.update(ad);
         Assert.assertThat(storage.returnAll().contains(ad), is(true));
     }
 
-    @Ignore
+
     @Test
     public void remove() {
         ad.setDescription("name");
-//        storage.add(ad);
-//        Assert.assertThat(storage.returnAll().contains(ad), is(true));
+        //storage.add(ad);
+        //Assert.assertThat(storage.returnAll().contains(ad), is(true));
         storage.remove(8);
         Assert.assertThat(storage.returnAll().contains(ad), is(false));
     }
 
-    @Ignore
+
     @Test
     public void returnAll() {
         Assert.assertThat(ad, is(storage.returnAll().contains(ad)));
@@ -63,6 +64,6 @@ public class AdStorageTest {
 
     @Test
     public void returnById() {
-        Assert.assertThat(storage.returnById(8).getName(), is(ad.getName()));
+        Assert.assertThat(storage.returnById(6).getName(), is(ad.getName()));
     }
 }
